@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Performance Switch Example</title>
+  <!-- Placeholder link, JS will replace href -->
+  <link id="themeCSS" rel="stylesheet" href="">
+</head>
+<body>
+  <div id="perfModal" class="modal-bg" style="display:none;">
+    <div class="modal">
+      <h2>Choose Performance Mode</h2>
+      <p>Would you like to enable Performance Mode (better for slow laptops)?</p>
+      <button onclick="setMode('default')">Normal Mode</button>
+      <button onclick="setMode('performance')">Performance Mode</button>
+    </div>
+  </div>
+
+  <h1>Welcome</h1>
+  <p>This page auto-loads CSS based on your saved mode.</p>
+
+  <!-- Debug button -->
+  <button id="debugBtn" onclick="clearMode()">🛠 Clear Saved Mode</button>
+
+  <script>
+    const cssMap = {
+      "default": "default.css",
+      "performance": "performance.css"
+    };
+
+    function setMode(mode) {
+      localStorage.setItem("siteMode", mode);
+      document.getElementById("themeCSS").href = cssMap[mode];
+      document.getElementById("perfModal").style.display = "none";
+    }
+
+    function clearMode() {
+      localStorage.removeItem("siteMode");
+      alert("LocalStorage cleared. Refreshing...");
+      location.reload();
+    }
+
+    window.onload = function() {
+      const savedMode = localStorage.getItem("siteMode");
+      if (!savedMode) {
+        // First visit → ask user
+        document.getElementById("perfModal").style.display = "flex";
+      } else {
+        // Load the saved stylesheet
+        document.getElementById("themeCSS").href = cssMap[savedMode];
+      }
+    };
+  </script>
+
+  <style>
+    /* Very basic modal style */
+    .modal-bg {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.6);
+      z-index: 999;
+    }
+    .modal {
+      background: #1b1f3a;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      color: white;
+    }
+    button {
+      margin: 8px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #debugBtn {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      background: crimson;
+      color: white;
+      font-size: 14px;
+    }
+  </style>
+</body>
+</html>

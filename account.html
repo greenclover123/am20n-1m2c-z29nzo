@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>skyless hub</title>
+  <link rel="icon" type="image/x-icon" href="/images/faviconyes.ico">
+  <link rel="stylesheet" href="/css/account.css">
+  
+  
+</head>
+<body>
+   
+  <header class="navbar">
+    <!-- Logo on left -->
+    <div class="logo">
+      <a href="/index.html"><img src="/images/skylesshub.png" alt="skyless"></a>
+    </div>
+
+    <!-- Centered nav buttons -->
+    <nav class="nav-links">
+      <a href="/g-mes.html" class="nav-btn">g-mes</a>
+      <a href="#services" class="nav-btn">apps</a>
+      <a href="#contact" class="nav-btn">about</a>
+      <a id="authNavBtn" class="nav-btn" href="account.html" class="nav-link">loading</a>
+    </nav>
+  </header>
+
+  <main>
+     <div id="auth-section">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="center-container">
+  <!-- Login/Register Panel -->
+  <div id="login-panel" class="panel">
+    <h2 class="panel-title">Skyless Hub</h2>
+    <p class="panel-subtitle">Login or Register</p>
+
+    <input id="email" type="email" placeholder="Email" class="glass-input">
+    <input id="password" type="password" placeholder="Password" class="glass-input">
+
+    <div class="button-group">
+      <button id="loginButton" class="glass-button">Sign In</button>
+      <button id="registerButton" class="glass-button">Register</button>
+    </div>
+
+    <p id="message" class="panel-message"></p>
+  </div>
+
+  <!-- Signed-in Panel -->
+  <div id="signed-panel" class="panel" style="display: none;">
+    <h2 class="panel-title">welcome!</h2>
+    <p class="panel-subtitle">logged in as: <span id="user-email"></span></p>
+    <p class="panel-subtitle">tokens: <span id="user-tokens">0</span></p>
+    <div class="button-group">
+    <button id="saveCloud">save to cloud</button>
+<button id="loadCloud">load from cloud</button>
+  <button id="disableCooldownBtn" class="glass-button">disable load cooldown</button>
+</div>
+<p id="dataMessage" class="panel-message"></p>
+
+
+    <div class="button-group">
+      <button id="logoutButton" class="glass-button">sign out</button>
+      <button id="addTokensBtn" class="glass-button">+5 tokens</button>
+    </div>
+  </div>
+</div>
+
+    
+
+  </main>
+  <script type="module" src="/script.js"></script>
+      <!-- Firebase SDKs - IMPORTANT: Use the actual versions from your Firebase Console -->
+    <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-firestore-compat.js"></script>
+
+<!-- CryptoJS for encryption -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+ <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { 
+  getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp, increment, onSnapshot 
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyBA_M_gT63cj23LuIpjEL4qbD8czugbFXQ", // Replace with your actual API Key from Firebase Console
+            authDomain: "skyless-84b51.firebaseapp.com",  
+            projectId: "skyless-84b51",
+            storageBucket: "skyless-84b51.appspot.com",
+            messagingSenderId: "990229888756", // Replace with your actual Sender ID
+            appId: "1:990229888756:web:ae7cc6a3f4bbbdb6c368a1" // Replace with your actual App ID
+        };
+  
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// --- Elements ---
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const loginButton = document.getElementById('loginButton');
+const registerButton = document.getElementById('registerButton');
+const logoutButton = document.getElementById('logoutButton');
+const addTokensBtn = document.getElementById('addTokensBtn');
+const messageDiv = document.getElementById('message');
+
+const loginPanel = document.getElementById('login-panel');
+const signedPanel = document.getElementById('signed-panel');
+const userEmailSpan = document.getElementById('user-email');
+const userTokensSpan = document.getElementById('user-tokens');
+
+const saveCloud = document.getElementById('saveCloud');
+const loadCloud = document.getElementById('loadCloud');
+const disableCooldownBtn = document.getElementById('disableCooldownBtn');
+const dataMessage = document.getElementById('dataMessage');
+
+let cooldownDisabled = false;
+
+// --- Helper Functions ---
+function showMessage(msg, isError=false) {
+  messageDiv.textContent = msg;
+  messageDiv.style.color = isError ? '#f88' : '#8f8';
+  messageDiv.style.display = 'block';
+  setTimeout(() => messageDiv.style.display = 'none', 4000);
+}
+
+function showDataMessage(msg) {
+  dataMessage.textContent = msg;
+  dataMessage.style.display = 'block';
+  setTimeout(() => dataMessage.style.display = 'none', 4000);
+}
+
+// UTF-8 Base64 helpers
+function utf8ToBase64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let binary = '';
+  bytes.forEach(b => binary += String.fromCharCode(b));
+  return btoa(binary);
+}
+function base64ToUtf8(base64) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+
+// --- Selenite Save / Load ---
+function getMainSaveForFirebase() {
+  try {
+    const data = {};
+    data.localStorage = utf8ToBase64(JSON.stringify(Object.entries(localStorage)));
+    data.cookies = utf8ToBase64(document.cookie);
+    return utf8ToBase64(JSON.stringify(data));
+  } catch (err) {
+    console.error("Error encoding save:", err);
+    return null;
+  }
+}
+
+function loadMainSaveFromFirebase(encoded) {
+  try {
+    const decoded = JSON.parse(base64ToUtf8(encoded));
+    const localStorageData = JSON.parse(base64ToUtf8(decoded.localStorage));
+    const cookiesData = base64ToUtf8(decoded.cookies);
+    for (const [key, value] of localStorageData) localStorage.setItem(key, value);
+    document.cookie = cookiesData;
+    showDataMessage("✅ Data loaded successfully!");
+  } catch (err) {
+    console.error("Error decoding save:", err);
+    showDataMessage("❌ Failed to load data!");
+  }
+}
+
+// --- Auth Functions ---
+registerButton.addEventListener('click', async () => {
+  const email = emailInput.value;
+  const password = passwordInput.value;
+  if (!email || !password) { showMessage("Enter email and password!", true); return; }
+
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    showMessage("Account created! Check your email.");
+
+    const userRef = doc(db, 'users', user.uid);
+    await setDoc(userRef, { email: user.email, tokens: 0, createdAt: serverTimestamp() });
+  } catch(e) {
+    showMessage("Registration failed: " + e.message, true);
+  }
+});
+
+loginButton.addEventListener('click', async () => {
+  const email = emailInput.value;
+  const password = passwordInput.value;
+  if (!email || !password) { showMessage("Enter email and password!", true); return; }
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    showMessage("Signed in successfully!");
+  } catch(e) {
+    showMessage("Login failed: " + e.message, true);
+  }
+});
+
+logoutButton.addEventListener('click', async () => {
+  try {
+    await signOut(auth);
+    showMessage("Signed out!");
+  } catch(e) {
+    showMessage("Logout failed: " + e.message, true);
+  }
+});
+
+addTokensBtn.addEventListener('click', async () => {
+  const user = auth.currentUser;
+  if (!user) { showMessage("Sign in first!", true); return; }
+
+  const userRef = doc(db, 'users', user.uid);
+  try {
+    await updateDoc(userRef, { tokens: increment(5) });
+    showMessage("+5 Tokens added!");
+  } catch(e) {
+    showMessage("Failed to add tokens: " + e.message, true);
+  }
+});
+
+// --- Save / Load ---
+saveCloud.addEventListener('click', async () => {
+  const user = auth.currentUser;
+  if (!user) { showDataMessage("Sign in first!"); return; }
+  const encoded = getMainSaveForFirebase();
+  if (!encoded) { showDataMessage("❌ Failed to encode data!"); return; }
+  try {
+    const userRef = doc(db, 'users', user.uid);
+    await updateDoc(userRef, { seleniteSave: encoded, lastSaved: serverTimestamp() });
+    showDataMessage("💾 Data saved to cloud!");
+  } catch(e) {
+    console.error(e);
+    showDataMessage("❌ Failed to save data!");
+  }
+});
+
+loadCloud.addEventListener('click', async () => {
+  const user = auth.currentUser;
+  if (!user) { showDataMessage("Sign in first!"); return; }
+
+  try {
+    const userRef = doc(db, 'users', user.uid);
+    const docSnap = await getDoc(userRef);
+    if (!docSnap.exists() || !docSnap.data().seleniteSave) { showDataMessage("No saved data!"); return; }
+
+    loadMainSaveFromFirebase(docSnap.data().seleniteSave);
+
+  } catch(e) {
+    console.error(e);
+    showDataMessage("❌ Failed to load data!");
+  }
+});
+
+disableCooldownBtn.addEventListener('click', () => {
+  cooldownDisabled = true;
+  showDataMessage("⚡ Load cooldown disabled!");
+});
+
+// --- Auth State Listener / Live Token Counter ---
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    loginPanel.style.display = 'none';
+    signedPanel.style.display = 'block';
+    userEmailSpan.textContent = user.email;
+
+    const userRef = doc(db, 'users', user.uid);
+
+    // live token counter
+    onSnapshot(userRef, (docSnap) => {
+      if (docSnap.exists()) {
+        userTokensSpan.textContent = docSnap.data().tokens ?? 0;
+      } else {
+        userTokensSpan.textContent = 0;
+      }
+    });
+
+  } else {
+    loginPanel.style.display = 'block';
+    signedPanel.style.display = 'none';
+    emailInput.value = '';
+    passwordInput.value = '';
+    userEmailSpan.textContent = '';
+    userTokensSpan.textContent = '0';
+  }
+});
+</script>
+</script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+</body>
+</html>

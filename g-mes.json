@@ -1,0 +1,52 @@
+{
+  "games": [
+    {
+      "title": "Tiny Fishing",
+      "genre": "action",
+      "icon": "/icons/death.png",
+      "dir": "/g-mes/tinyfishing/"
+    },
+    {
+      "title": "FNAF - Pizzera Simulator",
+      "genre": "horror",
+      "icon": "/icons/fnaf6.png",
+      "dir": "/g-mes/fnaf6/"
+    },
+    {
+      "title": "papasburg",
+      "genre": "action",
+      "icon": "/icons/death.png",
+      "dir": "/g-mes/papasburgeria/"
+    },
+    {
+      "title": "mayro",
+      "genre": "action",
+      "icon": "/icons/death.png",
+      "dir": "/g-mes/mayrokrattbuilt/"
+    },
+    {
+      "title": "Time Shooter 3",
+      "genre": "shooter",
+      "icon": "/images/timeshooter3.png",
+      "dir": "/g-me/timeshooter3"
+    },
+    {
+      "title": "Vex 7",
+      "genre": "platformer",
+      "icon": "/images/vex7.png",
+      "dir": "/g-me/vex7"
+    },
+    {
+      "title": "1v1 LOL",
+      "genre": "shooter",
+      "icon": "/images/1v1lol.png",
+      "dir": "/g-me/1v1lol"
+    },
+    {
+      "title": "Moto X3M",
+      "genre": "racing",
+      "icon": "/images/motox3m.png",
+      "dir": "/g-me/motox3m"
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>skyless hub</title>
+  <link rel="icon" type="image/x-icon" href="/images/faviconyes.ico">
+  <link rel="stylesheet" href="/css/g-me-temp.css">
+  
+  
+</head>
+  <header class="navbar">
+    <!-- Logo on left -->
+    <div class="logo">
+      <a href="/index.html"><img src="/images/skylesshub.png" alt="skyless"></a>
+    </div>
+
+    <!-- Centered nav buttons -->
+    <nav class="nav-links">
+      <a href="/g-mes.html" class="nav-btn">g-mes</a>
+      <a href="#services" class="nav-btn">apps</a>
+      <a href="#contact" class="nav-btn">about</a>
+      <a id="authNavBtn" class="nav-btn" href="account.html" class="nav-link">loading</a>
+    </nav>
+  </header>
+  <br>
+  <main>
+  <div class="game-frame">
+    <iframe id="gameIframe" frameborder="0" width="800px" height="450px" id="iframe"></iframe>
+      <div class="game-footer">
+    <span id="gameTitle">game title</span>
+    <button onclick="goFullscreen()">⛶</button>
+  </div>
+</div>
+
+
+<script>
+  
+  function loadGame(title, url) {
+    document.getElementById("gameTitle").innerText = title;
+    document.getElementById("gameIframe").src = dir + "/index.html";
+  }
+  Object.assign(gameTitle.style, {
+  fontSize: "1.5vw",
+  fontFamily: "'Damion', sans-serif",
+  src: "url('/resource/Damion-8gnD.ttf') format('truetype')",
+  color: "rgb(220, 228, 250)"
+});
+
+  function goFullscreen() {
+    const iframe = document.getElementById("gameIframe");
+    if (iframe.requestFullscreen) iframe.requestFullscreen();
+    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+    else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
+  }
+</script>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const dir = params.get("dir");
+  const title = params.get("title");
+
+  document.getElementById("gameTitle").innerText = title;
+  document.getElementById("gameIframe").src = dir + "/index.html";
+</script>
+<script type="module" src="/script.js"></script>
+</main>
+</body>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-firestore-compat.js"></script>
+<script>
+  const firebaseConfig = {
+            apiKey: "AIzaSyBA_M_gT63cj23LuIpjEL4qbD8czugbFXQ", // Replace with your actual API Key from Firebase Console
+            authDomain: "skyless-84b51.firebaseapp.com",  
+            projectId: "skyless-84b51",
+            storageBucket: "skyless-84b51.appspot.com",
+            messagingSenderId: "990229888756", // Replace with your actual Sender ID
+            appId: "1:990229888756:web:ae7cc6a3f4bbbdb6c368a1" // Replace with your actual App ID
+        };
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+</script>
+
+<script type="text/javascript">
+// --- Token display ---
+const tokenDisplay = document.createElement("div");
+Object.assign(tokenDisplay.style, {
+  position: "fixed",
+  fontSize: "1.6vw",
+  top: "2.5vw",
+  right: "1.5vw",
+  padding: "3px 14px",
+  borderRadius: "8px",
+  background: "rgba(166, 185, 238,0.15)",  /* semi-transparent */
+  border: "1px solid rgba(166, 185, 238,0.3)",
+  textDecoration: "none",
+  fontWeight: "500",
+  transition: "all 0.3s ease",
+  textShadow: "0 1px 2px rgba(0,0,0,0.6)",
+  color: "rgb(166, 185, 238)",
+  fontFamily: "'Damion', sans-serif",
+  src: "url('/resource/Damion-8gnD.ttf') format('truetype')",
+  visibility: "visible"
+});
+tokenDisplay.textContent = "0 tokens";
+document.body.appendChild(tokenDisplay);
+
+// --- Popup for rewards ---
+const popup = document.createElement("div");
+Object.assign(popup.style, {
+  position: "fixed",
+  top: "5vw",
+  right: "1.5vw",
+  padding: "12px 16px",
+  color: "white",
+  fontSize: "1.8vw",
+  opacity: "0",
+  transform: "translateX(12px)",
+  transition: "opacity 0.35s ease, transform 0.35s ease",
+  zIndex: 9999,
+  pointerEvents: "none",
+  color: "rgb(220, 228, 250)",
+  fontFamily: "'Damion', sans-serif",
+  src: "url('/resource/Damion-8gnD.ttf') format('truetype')"
+});
+document.body.appendChild(popup);
+
+function showPopup(text){
+  popup.textContent = text;
+  popup.style.opacity = "1";
+  popup.style.transform = "translateX(0)";
+  setTimeout(()=>{
+    popup.style.opacity = "0";
+    popup.style.transform = "translateX(12px)";
+  }, 3000);
+}
+
+// --- Token reward logic ---
+const REWARD_SECONDS = 5; // 5 minutes
+const REWARD_AMOUNT = 5;
+let tokenInterval = null;
+let secondsCounter = 0;
+
+function startTokenRewardTimer(user){
+  if(tokenInterval) return;
+  secondsCounter = 0;
+  tokenInterval = setInterval(async ()=>{
+    secondsCounter++;
+    if(secondsCounter >= REWARD_SECONDS){
+      secondsCounter = 0;
+      if(!user) return;
+
+      const userRef = firebase.firestore().collection("users").doc(user.uid);
+      try{
+        await userRef.update({ tokens: firebase.firestore.FieldValue.increment(REWARD_AMOUNT) });
+        showPopup(`${REWARD_AMOUNT} tokens earned !`);
+      }catch(err){
+        console.error("failed to give tokens", err);
+      }
+    }
+  }, 1000);
+}
+
+function stopTokenRewardTimer(){
+  if(tokenInterval){
+    clearInterval(tokenInterval);
+    tokenInterval = null;
+    secondsCounter = 0;
+  }
+}
+
+// --- Listen for auth changes ---
+firebase.auth().onAuthStateChanged(user=>{
+  stopTokenRewardTimer();
+  if(user){
+    startTokenRewardTimer(user);
+
+    const userRef = firebase.firestore().collection("users").doc(user.uid);
+    userRef.onSnapshot(doc=>{
+      if(doc.exists){
+        tokenDisplay.textContent = (doc.data().tokens || 0) + " tokens";
+      }else{
+        tokenDisplay.textContent = "0 tokens";
+        userRef.set({tokens:0,email:user.email},{merge:true});
+      }
+    }, err=>console.error(err));
+  }else{
+    tokenDisplay.style.visibility = "hidden";
+    tokenDisplay.textContent = "no account";
+    
+  }
+});
+</script>
+
