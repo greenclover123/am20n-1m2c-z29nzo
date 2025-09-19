@@ -1,27 +1,7 @@
 body {
-    background-color: #000226;
+    background-color: #190575;
 }
-
-body {
-	background: linear-gradient(20deg, #020b6e, #0c0668, #1f076d, #021c4b, #365168);
-	background-size: 200% 200%;
-	animation: gradient-animation 25s ease infinite;
-}
-
-
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-      @font-face {
+  @font-face {
   font-family: 'Damion';
   src: url('/resource/Damion-8gnD.ttf') format('truetype');
 }
@@ -48,6 +28,7 @@ body {
   z-index: 1000;
   font-family: 'Damion', sans-serif;
   font-size: 30px;
+
 }
 
 /* Logo */
@@ -82,7 +63,7 @@ body {
   font-weight: 500;
   transition: all 0.3s ease;
   text-shadow: 0 1px 2px rgba(0,0,0,0.6);
-  color: rgb(166, 185, 238)
+  color: rgb(166, 185, 238);
 }
 
 .nav-btn:hover {
