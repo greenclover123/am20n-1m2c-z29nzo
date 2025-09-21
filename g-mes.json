@@ -47,6 +47,18 @@
       "genre": "racing",
       "icon": "/images/motox3m.png",
       "dir": "/g-me/motox3m"
+    },
+    {
+      "title": "A Dark Room",
+      "genre": "idle",
+      "icon": "/icons/adr.png",
+      "dir": "/g-mes/adarkroom"
+    },
+    {
+      "title": "Don't Press The Button",
+      "genre": "puzzle",
+      "icon": "/icons/dont-press-the-button.jpg",
+      "dir": "/g-mes/don'tpressthebutton"
     }
   ]
 }

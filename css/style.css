@@ -5,9 +5,10 @@ body {
 }
 
 body {
-	background: linear-gradient(20deg, #020b6e, #0c0668, #1f076d, #021c4b, #365168);
-	background-size: 200% 200%;
+	background: linear-gradient(20deg, #051082, #270c92, #1f076d, #04024b, #365168);
+	background-size: 100% 100%;
 	animation: gradient-animation 25s ease infinite;
+  overflow: hidden;
 }
 
 
@@ -102,8 +103,8 @@ body {
 }
 
 .caption {
-  margin-top: -1vw;
-  font-size: 40px;
+  margin-top: -0.8vw;
+  font-size: 2vw;
   color: rgb(68, 90, 184);
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
   font-family: 'Damion', sans-serif;
@@ -112,9 +113,9 @@ body {
 }
 
 .top-logo {
-  margin-top: 2vw;
-  margin-bottom: -0.5vw;
-  font-size: 50px;
+  margin-top: 2.4vw;
+  margin-bottom: -0.6vw;
+  font-size: 3vw;
   color: rgba(166, 185, 238);
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
   font-family: 'Damion', sans-serif;
