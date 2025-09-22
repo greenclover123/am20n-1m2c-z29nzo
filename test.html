@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Token Box Explosion Over Page</title>
+<style>
+body {
+  background: linear-gradient(135deg, #1a0033, #2a2a72);
+  margin: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.panel {
+  position: relative;
+  z-index: 10; /* below explosion canvas */
+  width: 420px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(50, 0, 90, 0.7);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.4);
+  color: white;
+  text-align: center;
+  margin: 40px auto;
+}
+
+#tokenValue {
+  font-weight: bold;
+}
+
+/* Fullscreen Matter.js canvas over everything */
+#matterCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* clicks pass through */
+  z-index: 9999;       /* above all HTML */
+}
+</style>
+</head>
+<body>
+<canvas id="matterCanvas"></canvas>
+
+<div class="panel">
+  <h1>Welcome!</h1>
+  <p>Tokens: <span id="tokenValue">160</span></p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const totalTokens = 150;
+  const tokensPerCoin = 1;
+  const coinCount = Math.ceil(totalTokens / tokensPerCoin);
+  const coinLimit = 149;
+
+  const { Engine, Render, Runner, World, Bodies, Mouse, MouseConstraint, Events, Body } = Matter;
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  const engine = Engine.create();
+  const world = engine.world;
+  engine.gravity.y = 1;
+
+  // Fullscreen renderer
+  const canvas = document.getElementById('matterCanvas');
+  const render = Render.create({
+    canvas: canvas,
+    engine: engine,
+    options: {
+      width: width,
+      height: height,
+      wireframes: false,
+      background: 'transparent'
+    }
+  });
+  Render.run(render);
+  Runner.run(Runner.create(), engine);
+
+  const coins = [];
+
+  // Box position and size
+  const boxX = width/2;
+  const boxY = 200;
+  const boxW = 320;
+  const boxH = 240;
+
+  // Create segmented walls
+  function createWallSegments(x, y, w, h, pieces, horizontal=true) {
+    const segments = [];
+    for(let i=0; i<pieces; i++) {
+      const segWidth = horizontal ? w/pieces : w;
+      const segHeight = horizontal ? h : h/pieces;
+      const segX = horizontal ? x - w/2 + segWidth/2 + i*segWidth : x;
+      const segY = horizontal ? y : y - h/2 + segHeight/2 + i*segHeight;
+      const wall = Bodies.rectangle(segX, segY, segWidth, segHeight, {
+        isStatic: true,
+        render: { fillStyle: 'rgba(255,255,255,0.3)' }
+      });
+      segments.push(wall);
+    }
+    return segments;
+  }
+
+  let walls = [];
+  walls = walls.concat(createWallSegments(boxX, boxY - boxH/2, boxW, 20, 8, true)); // top
+  walls = walls.concat(createWallSegments(boxX, boxY + boxH/2, boxW, 20, 8, true)); // bottom
+  walls = walls.concat(createWallSegments(boxX - boxW/2, boxY, 20, boxH, 6, false)); // left
+  walls = walls.concat(createWallSegments(boxX + boxW/2, boxY, 20, boxH, 6, false)); // right
+  World.add(world, walls);
+
+  // Spawn coins inside box
+  for (let i = 0; i < coinCount; i++) {
+    const coin = Bodies.circle(
+      boxX - boxW/2 + 16 + Math.random() * (boxW - 32),
+      boxY - boxH/2 + 16 + Math.random() * (boxH - 32),
+      12,
+      {
+        restitution: 0.6,
+        friction: 0.1,
+        render: {
+          fillStyle: '#FFD700',
+          strokeStyle: '#DAA520',
+          lineWidth: 1
+        }
+      }
+    );
+    coin.tokenValue = tokensPerCoin;
+    coins.push(coin);
+    World.add(world, coin);
+  }
+
+  // Mouse drag
+  const mouse = Mouse.create(render.canvas);
+  const mouseConstraint = MouseConstraint.create(engine, {
+    mouse: mouse,
+    constraint: { stiffness: 0.2, render: { visible: false } }
+  });
+  World.add(world, mouseConstraint);
+  render.mouse = mouse;
+
+  // Draw coin values
+  Events.on(render, 'afterRender', () => {
+    const ctx = render.context;
+    ctx.font = "10px Arial";
+    ctx.fillStyle = "black";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    coins.forEach(c => ctx.fillText(c.tokenValue, c.position.x, c.position.y));
+  });
+
+  // Explosion function
+  function explodeBox() {
+    walls.forEach(w => Body.setStatic(w, false));
+
+    coins.forEach(c => {
+      const force = 0.05 + Math.random() * 0.05;
+      Body.applyForce(c, c.position, {
+        x: (Math.random() - 0.5) * force * 1,
+        y: (Math.random() - 0.5) * force * 1
+      });
+    });
+
+    walls.forEach(w => {
+      const force = 0.08 + Math.random() * 0.08;
+      Body.applyForce(w, w.position, {
+        x: (Math.random() - 0.5) * force * 1,
+        y: (Math.random() - 0.5) * force * 1
+      });
+    });
+  }
+
+  // Remove off-screen bodies
+  Events.on(engine, 'afterUpdate', () => {
+    for (let i = coins.length -1; i >= 0; i--) {
+      const c = coins[i];
+      if (c.position.x < -50 || c.position.x > width + 50 || c.position.y < -50 || c.position.y > height + 50) {
+        World.remove(world, c);
+        coins.splice(i, 1);
+      }
+    }
+    for (let i = walls.length -1; i >=0; i--) {
+      const w = walls[i];
+      if (w.position.x < -200 || w.position.x > width + 200 || w.position.y < -200 || w.position.y > height + 200) {
+        World.remove(world, w);
+        walls.splice(i, 1);
+      }
+    }
+  });
+
+  // Trigger explosion after 3s if over limit
+  if (totalTokens > coinLimit) {
+    setTimeout(explodeBox, 3000);
+  }
+
+});
+</script>
+</body>
+</html>

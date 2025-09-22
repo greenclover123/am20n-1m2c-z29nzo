@@ -79,7 +79,7 @@
     container.innerHTML = "";
     genres[genre].forEach(game => {
       const link = document.createElement("a");
-      link.href = `/g-metemp.html?dir=${game.dir}&title=${encodeURIComponent(game.title)}&genre=${encodeURIComponent(game.genre)}`;
+      link.href = `/apptemp.html?dir=${game.dir}&title=${encodeURIComponent(game.title)}&genre=${encodeURIComponent(game.genre)}`;
 
       const div = document.createElement("div");
       div.className = "game-card";

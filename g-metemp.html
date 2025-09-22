@@ -25,8 +25,9 @@
       <a id="authNavBtn" class="nav-btn" href="account.html" class="nav-link">loading</a>
     </nav>
   </header>
-  <br>
+  
   <main>
+    <section style="padding-top: 1.5vw; text-align:center;"></section>
   <div class="game-frame">
     <iframe id="gameIframe" frameborder="0" width="800px" height="450px" id="iframe"></iframe>
       <div class="game-footer">
@@ -92,6 +93,7 @@
 // --- Token display ---
 const tokenDisplay = document.createElement("div");
 Object.assign(tokenDisplay.style, {
+  marginTop: "0.9vw",
   position: "fixed",
   fontSize: "1.6vw",
   top: "2.5vw",
@@ -115,6 +117,7 @@ document.body.appendChild(tokenDisplay);
 // --- Popup for rewards ---
 const popup = document.createElement("div");
 Object.assign(popup.style, {
+  marginTop: "0.9vw",
   position: "fixed",
   top: "5vw",
   right: "1.5vw",

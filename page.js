@@ -23,7 +23,8 @@ var greeting = [
   "take my hand with virtue",
   "the more i come to know myself",
   "figure it figure it figure it out",
-  "baby blue, i know how things have changed for you"
+  "baby blue, i know how things have changed for you",
+  "everything is quiet"
 ];
 
 var randomGreeting = Math.floor(Math.random() * greeting.length);
