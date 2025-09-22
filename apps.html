@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>skyless hub</title>
+  <link rel="icon" type="image/x-icon" href="/images/faviconyes.ico">
+  <link rel="stylesheet" href="/css/apps.css">
+  
+  
+</head>
+<body>
+  <header class="navbar">
+    <!-- Logo on left -->
+    <div class="logo">
+      <a href="/index.html"><img src="/images/darklogo.png" alt="skyless"></a>
+    </div>
+
+    <!-- Centered nav buttons -->
+    <nav class="nav-links">
+      <a href="/g-mes.html" class="nav-btn">g-mes</a>
+      <a href="/apps.html" class="nav-btn">apps</a>
+      <a href="#contact" class="nav-btn">about</a>
+      <a id="authNavBtn" class="nav-btn" href="account.html" class="nav-link">loading</a>
+    </nav>
+  </header>
+
+  <main>
+
+    
+
+    <div style="padding-top: 4vw; text-align:center;" class="content">
+
+        <!-- Featured Game -->
+<div id="featured" class="featured"></div>
+<div class="content">
+<br>
+<br>
+  <!-- Genre scrolling container -->
+  <div class="genre-nav">
+    <button class="arrow left">&#10094;</button>
+    <div class="genre-list" id="genreList"></div>
+    <button class="arrow right">&#10095;</button>
+  </div>
+
+  <!-- Games container -->
+  <div id="games"></div>
+</div>
+ <script type="module" src="/script.js"></script>
+<script>
+  async function loadGames() {
+    const res = await fetch("/apps.json");
+    const data = await res.json();
+
+    // group games by genre
+    const genres = {};
+    data.games.forEach(game => {
+      if (!genres[game.genre]) genres[game.genre] = [];
+      genres[game.genre].push(game);
+    });
+
+    // add genre buttons
+    const genreList = document.getElementById("genreList");
+    Object.keys(genres).forEach((genre, i) => {
+      const btn = document.createElement("button");
+      btn.innerText = genre;
+      btn.className = "genre-btn";
+      if (i === 0) btn.classList.add("active");
+      btn.onclick = () => showGames(genre, genres);
+      genreList.appendChild(btn);
+    });
+
+    // show first genre by default
+    showGames(Object.keys(genres)[0], genres);
+  }
+
+  function showGames(genre, genres) {
+    const container = document.getElementById("games");
+    container.innerHTML = "";
+    genres[genre].forEach(game => {
+      const link = document.createElement("a");
+      link.href = `/g-metemp.html?dir=${game.dir}&title=${encodeURIComponent(game.title)}&genre=${encodeURIComponent(game.genre)}`;
+
+      const div = document.createElement("div");
+      div.className = "game-card";
+
+      div.innerHTML = `
+        <img src="${game.icon}" alt="${game.title}">
+        <div class="overlay">
+          <span class="title">${game.title}</span>
+          <span class="genre">${game.genre}</span>
+        </div>
+      `;
+
+      link.appendChild(div);
+      container.appendChild(link);
+    });
+
+    document.querySelectorAll(".genre-btn").forEach(b => b.classList.remove("active"));
+    [...document.querySelectorAll(".genre-btn")].find(b => b.innerText === genre).classList.add("active");
+  }
+
+  loadGames();
+</script>
+
+
+
+  </main>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script src="/page.js"></script>
+
+</body>
+</html>
