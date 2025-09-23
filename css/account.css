@@ -130,13 +130,14 @@ body {
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 5vw 20vw;
-  text-align: center;
   width: 22vw;
-  max-width: 1vw;
-  min-width: 280px;
+  max-width: 100vw;
+  min-width: 10vw;
   margin-top: 8vw;
   box-shadow: 0 8px 25px rgba(0,0,0,0.5);
   transition: transform 0.5s ease, opacity 0.5s ease;
+  flex-direction: column; 
+  
 }
 
 /* Titles */
@@ -189,12 +190,13 @@ body {
   font-size: 18px;
   cursor: pointer;
   transition: all 0.3s ease;
+  
 }
 .signoutbutton {
-  margin-left: -50vw;
-  margin-top: -0.5vw;
-  padding: 3px 14px;
-  font-size: 1.8vw;
+  margin-top: -1vw;
+  margin-left: -18vw;
+  padding: .4vw 1.5vw;
+  font-size: 1.4vw;
   border-radius: 8px;
   background: rgba(166, 185, 238,0.15);  /* semi-transparent */
   border: 1px solid rgba(166, 185, 238,0.3);
@@ -205,7 +207,7 @@ body {
   text-shadow: 0 1px 2px rgba(0,0,0,0.6);
   color: rgb(166, 185, 238);
   font-family: 'Damion', cursive;
-  
+  cursor: pointer;
 }
 
 .glass-button:hover {
@@ -225,6 +227,34 @@ body {
 /* Message */
 .panel-message {
   margin-top: 1vw;
-  font-size: 14px;
-  color: rgb(200,200,255);
+  font-size: 2vw;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  color: rgb(166, 185, 238);
+  font-family: 'Damion', cursive;
+  transform: translateX(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 9999;
+  position: "fixed",
 }
+
+
+
+
+
+
+
+
+
+ #matterCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none; /* coins won’t block clicks */
+      z-index: 9999;
+ }

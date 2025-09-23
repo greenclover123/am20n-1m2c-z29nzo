@@ -39,8 +39,8 @@
     <input style="font-family: Arial, Helvetica, sans-serif;" id="email" type="email" placeholder="email" class="glass-input">
     <input style="font-family: Arial, Helvetica, sans-serif;" id="password" type="password" placeholder="password" class="glass-input">
 
-    <div class="button-group">
-      <button id="loginButton" class="glass-button">sign in</button>
+    <div style="text-align: center;" class="button-group">
+      <button id="loginButton"  class="glass-button">sign in</button>
       <button id="registerButton" class="glass-button">register</button>
     </div>
 
@@ -51,14 +51,8 @@
   <div id="signed-panel" class="panel" style="display: flex;">
     <h2 class="panel-title" style="text-align: left; margin-left: -18vw; margin-top: -3vw;">welcome!</h2>
     <p class="panel-subtitle" style="text-align: left; margin-left: -18vw; margin-top: -.5vw;">logged in as: <span id="user-email"></span></p>
-    <p class="panel-subtitle" style="text-align: left; margin-left: -18vw; margin-top: -1vw;">tokens: <span id="user-tokens">0</span></p>
-    
-
-
-    <div class="button-group">
-      <button id="logoutButton" class="signoutbutton">sign out</button>
-    </div>
-  
+    <p class="panel-subtitle" style="text-align: left; margin-left: -18vw; margin-top: -1.6vw;">tokens: <span id="user-tokens">0</span></p>
+    <button id="logoutButton" class="signoutbutton">sign out</button>
 
 
     <div class="button-group">
@@ -66,10 +60,166 @@
 <button id="loadCloud">load from cloud</button>
   <button id="disableCooldownBtn" class="glass-button">disable load cooldown</button>
 </div>
+<div style="text-align: center;">
 <p id="dataMessage" class="panel-message"></p>
 </div>
 </div>
+</div>
   </main>
+  <div id="coinOverlay" style="position: fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9999;">
+  <canvas id="matterCanvas" style="position:absolute; top:0; left:0;"></canvas>
+</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+   <script>
+async function spawnCoinBox(userTokens) {
+  // Load Matter.js if not loaded
+  if (typeof Matter === 'undefined') {
+    console.error("Matter.js is not loaded");
+    return;
+  }
+
+  const totalTokens = userTokens;
+  const tokensPerCoin = 1;
+  const coinLimit = 124;
+  const coinCount = totalTokens > 0 ? Math.ceil(totalTokens / tokensPerCoin) : 0;
+
+  const { Engine, Render, Runner, World, Bodies, Mouse, MouseConstraint, Events, Body } = Matter;
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  const engine = Engine.create();
+  const world = engine.world;
+  engine.gravity.y = 1;
+
+  // Fullscreen canvas
+  const canvas = document.getElementById('matterCanvas');
+  canvas.width = width;
+  canvas.height = height;
+
+  const render = Render.create({
+    canvas: canvas,
+    engine: engine,
+    options: { width, height, wireframes: false, background: 'transparent' }
+  });
+  Render.run(render);
+  Runner.run(Runner.create(), engine);
+
+  const coins = [];
+
+  // Box size in VW/VH
+  const boxW = 20; // 40vw
+  const boxH = 25; // 30vh
+  const boxWPx = (boxW / 100) * width;
+  const boxHPx = (boxH / 100) * height;
+
+  // Box position in VW/VH
+  const boxX = (68 / 100) * width; // 50vw center
+  const boxY = (65 / 100) * height; // 20vh from top
+
+  // Create segmented walls
+  function createWallSegments(x, y, w, h, pieces, horizontal = true) {
+    const segments = [];
+    for (let i = 0; i < pieces; i++) {
+      const segWidth = horizontal ? w / pieces : w;
+      const segHeight = horizontal ? h : h / pieces;
+      const segX = horizontal ? x - w/2 + segWidth/2 + i * segWidth : x;
+      const segY = horizontal ? y : y - h/2 + segHeight/2 + i * segHeight;
+      const wall = Bodies.rectangle(segX, segY, segWidth, segHeight, {
+        isStatic: true,
+        render: { fillStyle: 'rgba(255,255,255,0.3)' }
+      });
+      segments.push(wall);
+    }
+    return segments;
+  }
+
+  let walls = [];
+  walls = walls.concat(createWallSegments(boxX, boxY - boxHPx/2, boxWPx, 20, 8, true)); // top
+  walls = walls.concat(createWallSegments(boxX, boxY + boxHPx/2, boxWPx, 20, 8, true)); // bottom
+  walls = walls.concat(createWallSegments(boxX - boxWPx/2, boxY, 20, boxHPx, 6, false)); // left
+  walls = walls.concat(createWallSegments(boxX + boxWPx/2, boxY, 20, boxHPx, 6, false)); // right
+  World.add(world, walls);
+
+  // Spawn coins inside box
+  for (let i = 0; i < coinCount; i++) {
+    const coin = Bodies.circle(
+      boxX - boxWPx/2 + 16 + Math.random() * (boxWPx - 32),
+      boxY - boxHPx/2 + 16 + Math.random() * (boxHPx - 32),
+      12,
+      {
+        restitution: 0.6,
+        friction: 0.1,
+        render: { fillStyle: '#0b00a1', strokeStyle: 'black', lineWidth: 1 }
+      }
+    );
+    coin.tokenValue = tokensPerCoin;
+    coins.push(coin);
+    World.add(world, coin);
+  }
+
+  // Mouse drag
+  const mouse = Mouse.create(render.canvas);
+  const mouseConstraint = MouseConstraint.create(engine, {
+    mouse: mouse,
+    constraint: { stiffness: 0.2, render: { visible: false } }
+  });
+  World.add(world, mouseConstraint);
+  render.mouse = mouse;
+
+  // Draw coin values
+  Events.on(render, 'afterRender', () => {
+    const ctx = render.context;
+    ctx.font = "10px Arial";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    coins.forEach(c => ctx.fillText(c.tokenValue, c.position.x, c.position.y));
+  });
+
+  // Explosion function
+  function explodeBox() {
+    walls.forEach(w => Body.setStatic(w, false));
+    coins.forEach(c => {
+      const force = 0.05 + Math.random() * 0.05;
+      Body.applyForce(c, c.position, { x: (Math.random() - 0.5) * force, y: (Math.random() - 0.5) * force });
+    });
+    walls.forEach(w => {
+      const force = 0.08 + Math.random() * 0.08;
+      Body.applyForce(w, w.position, { x: (Math.random() - 0.5) * force, y: (Math.random() - 0.5) * force });
+    });
+  }
+
+  // Remove off-screen bodies
+  Events.on(engine, 'afterUpdate', () => {
+    for (let i = coins.length -1; i >= 0; i--) {
+      const c = coins[i];
+      if (c.position.x < -50 || c.position.x > width + 50 || c.position.y < -50 || c.position.y > height + 50) {
+        World.remove(world, c);
+        coins.splice(i, 1);
+      }
+    }
+    for (let i = walls.length -1; i >=0; i--) {
+      const w = walls[i];
+      if (w.position.x < -200 || w.position.x > width + 200 || w.position.y < -200 || w.position.y > height + 200) {
+        World.remove(world, w);
+        walls.splice(i, 1);
+      }
+    }
+  });
+
+  // Explode if over limit
+  if (totalTokens > coinLimit) {
+    setTimeout(explodeBox, 3000);
+  }
+}
+
+</script>
+
+
+
+
+
   <script type="module" src="/script.js"></script>
       <!-- Firebase SDKs - IMPORTANT: Use the actual versions from your Firebase Console -->
     <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-app-compat.js"></script>
@@ -155,7 +305,7 @@ function getMainSaveForFirebase() {
     data.cookies = utf8ToBase64(document.cookie);
     return utf8ToBase64(JSON.stringify(data));
   } catch (err) {
-    console.error("Error encoding save:", err);
+    console.error("error encoding save:", err);
     return null;
   }
 }
@@ -167,10 +317,10 @@ function loadMainSaveFromFirebase(encoded) {
     const cookiesData = base64ToUtf8(decoded.cookies);
     for (const [key, value] of localStorageData) localStorage.setItem(key, value);
     document.cookie = cookiesData;
-    showDataMessage("✅ Data loaded successfully!");
+    showDataMessage("data loaded!");
   } catch (err) {
-    console.error("Error decoding save:", err);
-    showDataMessage("❌ Failed to load data!");
+    console.error("error decoding save:", err);
+    showDataMessage("failed to load data");
   }
 }
 
@@ -178,39 +328,39 @@ function loadMainSaveFromFirebase(encoded) {
 registerButton.addEventListener('click', async () => {
   const email = emailInput.value;
   const password = passwordInput.value;
-  if (!email || !password) { showMessage("Enter email and password!", true); return; }
+  if (!email || !password) { showMessage("enter email and password", true); return; }
 
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    showMessage("Account created! Check your email.");
+    showMessage("account created! check your email to verify.");
 
     const userRef = doc(db, 'users', user.uid);
     await setDoc(userRef, { email: user.email, tokens: 0, createdAt: serverTimestamp() });
   } catch(e) {
-    showMessage("Registration failed: " + e.message, true);
+    showMessage("registration failed: " + e.message, true);
   }
 });
 
 loginButton.addEventListener('click', async () => {
   const email = emailInput.value;
   const password = passwordInput.value;
-  if (!email || !password) { showMessage("Enter email and password!", true); return; }
+  if (!email || !password) { showMessage("enter email and password!", true); return; }
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    showMessage("Signed in successfully!");
+    showMessage("signed in !");
   } catch(e) {
-    showMessage("Login failed: " + e.message, true);
+    showMessage("login failed: " + e.message, true);
   }
 });
 
 logoutButton.addEventListener('click', async () => {
   try {
     await signOut(auth);
-    showMessage("Signed out!");
+    showMessage("signed out");
   } catch(e) {
-    showMessage("Logout failed: " + e.message, true);
+    showMessage("logout failed: " + e.message, true);
   }
 });
 
@@ -219,22 +369,22 @@ logoutButton.addEventListener('click', async () => {
 // --- Save / Load ---
 saveCloud.addEventListener('click', async () => {
   const user = auth.currentUser;
-  if (!user) { showDataMessage("Sign in first!"); return; }
+  if (!user) { showDataMessage("sign in first!"); return; }
   const encoded = getMainSaveForFirebase();
-  if (!encoded) { showDataMessage("❌ Failed to encode data!"); return; }
+  if (!encoded) { showDataMessage("failed to encode data"); return; }
   try {
     const userRef = doc(db, 'users', user.uid);
     await updateDoc(userRef, { seleniteSave: encoded, lastSaved: serverTimestamp() });
-    showDataMessage("💾 Data saved to cloud!");
+    showDataMessage("data saved to cloud!");
   } catch(e) {
     console.error(e);
-    showDataMessage("❌ Failed to save data!");
+    showDataMessage("failed to save data");
   }
 });
 
 loadCloud.addEventListener('click', async () => {
   const user = auth.currentUser;
-  if (!user) { showDataMessage("Sign in first!"); return; }
+  if (!user) { showDataMessage("sign in first"); return; }
 
   try {
     const userRef = doc(db, 'users', user.uid);
@@ -245,13 +395,13 @@ loadCloud.addEventListener('click', async () => {
 
   } catch(e) {
     console.error(e);
-    showDataMessage("❌ Failed to load data!");
+    showDataMessage("failed to load data!");
   }
 });
 
 disableCooldownBtn.addEventListener('click', () => {
   cooldownDisabled = true;
-  showDataMessage("⚡ Load cooldown disabled!");
+  showDataMessage("load cooldown disabled!");
 });
 
 // --- Auth State Listener / Live Token Counter ---
@@ -263,15 +413,26 @@ onAuthStateChanged(auth, (user) => {
 
     const userRef = doc(db, 'users', user.uid);
 
-    // live token counter
-    onSnapshot(userRef, (docSnap) => {
-      if (docSnap.exists()) {
-        userTokensSpan.textContent = docSnap.data().tokens ?? 0;
-      } else {
-        userTokensSpan.textContent = 0;
-      }
-    });
+    // Wrap async code in an immediately-invoked async function
+    (async () => {
+      // Optional: fetch user data once
+      const docSnap = await getDoc(userRef);
+      const tokens = docSnap.exists() ? docSnap.data().tokens ?? 0 : 0;
+      userTokensSpan.textContent = tokens;
 
+      // Spawn coin box overlay using existing tokens
+      if (window.spawnCoinBox) window.spawnCoinBox(tokens);
+
+      // Live token counter
+      onSnapshot(userRef, (docSnap) => {
+        if (docSnap.exists()) {
+          userTokensSpan.textContent = docSnap.data().tokens ?? 0;
+        } else {
+          userTokensSpan.textContent = 0;
+        }
+      });
+    })();
+    
   } else {
     loginPanel.style.display = 'block';
     signedPanel.style.display = 'none';
