@@ -230,11 +230,14 @@ async function spawnCoinBox(userTokens) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
  <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.0/firebase-app.js";
+import { 
+  getAuth, onAuthStateChanged, createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, signOut, sendEmailVerification 
+} from "https://www.gstatic.com/firebasejs/12.2.0/firebase-auth.js";
 import { 
   getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp, increment, onSnapshot 
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.2.0/firebase-firestore.js";
         const firebaseConfig = {
             apiKey: "AIzaSyBA_M_gT63cj23LuIpjEL4qbD8czugbFXQ", // Replace with your actual API Key from Firebase Console
             authDomain: "skyless-84b51.firebaseapp.com",  
@@ -269,18 +272,51 @@ const dataMessage = document.getElementById('dataMessage');
 
 let cooldownDisabled = false;
 
-// --- Helper Functions ---
-function showMessage(msg, isError=false) {
-  messageDiv.textContent = msg;
-  messageDiv.style.color = isError ? '#f88' : '#8f8';
-  messageDiv.style.display = 'block';
-  setTimeout(() => messageDiv.style.display = 'none', 4000);
+// --- Toast Helper with Queue ---
+let toastQueue = [];
+let activeToast = null;
+let toastShowing = false;
+
+function showToast(msg, isError = false) {
+  // Add to queue
+  toastQueue.push({ msg, isError });
+  if (!toastShowing) {
+    processNextToast();
+  }
 }
 
-function showDataMessage(msg) {
-  dataMessage.textContent = msg;
-  dataMessage.style.display = 'block';
-  setTimeout(() => dataMessage.style.display = 'none', 4000);
+function processNextToast() {
+  if (toastQueue.length === 0) {
+    toastShowing = false;
+    return;
+  }
+
+  toastShowing = true;
+  const { msg, isError } = toastQueue.shift();
+
+  const toast = document.createElement("div");
+  toast.className = "panel-message";
+  toast.textContent = msg;
+  toast.style.background = isError
+    ? "rgba(200,0,0,0.4)"
+    : "rgba(166, 185, 238,0.15)";
+  document.body.appendChild(toast);
+
+  activeToast = toast;
+
+  // Trigger fade-in
+  requestAnimationFrame(() => toast.classList.add("show"));
+
+  // Stay for 2s
+  setTimeout(() => {
+    toast.classList.remove("show");
+    // After fade-out, remove + process next
+    setTimeout(() => {
+      toast.remove();
+      if (activeToast === toast) activeToast = null;
+      processNextToast();
+    }, 500);
+  }, 2000);
 }
 
 // UTF-8 Base64 helpers
@@ -317,10 +353,10 @@ function loadMainSaveFromFirebase(encoded) {
     const cookiesData = base64ToUtf8(decoded.cookies);
     for (const [key, value] of localStorageData) localStorage.setItem(key, value);
     document.cookie = cookiesData;
-    showDataMessage("data loaded!");
+    showToast("data loaded!");
   } catch (err) {
     console.error("error decoding save:", err);
-    showDataMessage("failed to load data");
+    showToast("failed to load data", true);
   }
 }
 
@@ -328,39 +364,44 @@ function loadMainSaveFromFirebase(encoded) {
 registerButton.addEventListener('click', async () => {
   const email = emailInput.value;
   const password = passwordInput.value;
-  if (!email || !password) { showMessage("enter email and password", true); return; }
+  if (!email || !password) { showToast("enter email and password"); return; }
 
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    showMessage("account created! check your email to verify.");
 
+    // Send verification email
+    await sendEmailVerification(user);
+    showToast("account created! check your email for verification before you can save/earn tokens.");
+
+    // Add user doc
     const userRef = doc(db, 'users', user.uid);
     await setDoc(userRef, { email: user.email, tokens: 0, createdAt: serverTimestamp() });
+
   } catch(e) {
-    showMessage("registration failed: " + e.message, true);
+    showToast("registration failed: " + e.message, true);
   }
 });
 
 loginButton.addEventListener('click', async () => {
   const email = emailInput.value;
   const password = passwordInput.value;
-  if (!email || !password) { showMessage("enter email and password!", true); return; }
+  if (!email || !password) { showToast("enter email and password!", true); return; }
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    showMessage("signed in !");
+    showToast("signed in !");
   } catch(e) {
-    showMessage("login failed: " + e.message, true);
+    showToast("login failed: " + e.message, true);
   }
 });
 
 logoutButton.addEventListener('click', async () => {
   try {
     await signOut(auth);
-    showMessage("signed out");
+    showToast("signed out");
   } catch(e) {
-    showMessage("logout failed: " + e.message, true);
+    showToast("logout failed: " + e.message, true);
   }
 });
 
@@ -369,53 +410,72 @@ logoutButton.addEventListener('click', async () => {
 // --- Save / Load ---
 saveCloud.addEventListener('click', async () => {
   const user = auth.currentUser;
-  if (!user) { showDataMessage("sign in first!"); return; }
+  if (!user) { showToast("sign in first!", true); return; }
   const encoded = getMainSaveForFirebase();
-  if (!encoded) { showDataMessage("failed to encode data"); return; }
+  if (!encoded) { showToast("failed to encode data", true); return; }
   try {
     const userRef = doc(db, 'users', user.uid);
     await updateDoc(userRef, { seleniteSave: encoded, lastSaved: serverTimestamp() });
-    showDataMessage("data saved to cloud!");
+    showToast("data saved to cloud!");
   } catch(e) {
     console.error(e);
-    showDataMessage("failed to save data");
+    showToast("failed to save data", true);
   }
 });
 
 loadCloud.addEventListener('click', async () => {
   const user = auth.currentUser;
-  if (!user) { showDataMessage("sign in first"); return; }
+  if (!user) { showToast("sign in first", true); return; }
 
   try {
     const userRef = doc(db, 'users', user.uid);
     const docSnap = await getDoc(userRef);
-    if (!docSnap.exists() || !docSnap.data().seleniteSave) { showDataMessage("No saved data!"); return; }
+    if (!docSnap.exists() || !docSnap.data().seleniteSave) { showToast("no saved data!"); return; }
 
     loadMainSaveFromFirebase(docSnap.data().seleniteSave);
 
   } catch(e) {
     console.error(e);
-    showDataMessage("failed to load data!");
+    showToast("failed to load data!", true);
   }
 });
 
 disableCooldownBtn.addEventListener('click', () => {
   cooldownDisabled = true;
-  showDataMessage("load cooldown disabled!");
+  showToast("load cooldown disabled!");
 });
 
 // --- Auth State Listener / Live Token Counter ---
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (user) {
+    await user.reload(); // refresh verification state
     loginPanel.style.display = 'none';
     signedPanel.style.display = 'block';
     userEmailSpan.textContent = user.email;
+
+    // If not verified → restrict features
+    if (!user.emailVerified) {
+      userTokensSpan.textContent = "0";
+      showToast("verify your email to start earning tokens and saving data!");
+
+      // Disable restricted buttons
+      saveCloud.disabled = true;
+      loadCloud.disabled = true;
+      disableCooldownBtn.disabled = true;
+
+      return; // stop here (no tokens / coin box / live updates)
+    }
+
+    // If verified → enable everything
+    saveCloud.disabled = false;
+    loadCloud.disabled = false;
+    disableCooldownBtn.disabled = false;
 
     const userRef = doc(db, 'users', user.uid);
 
     // Wrap async code in an immediately-invoked async function
     (async () => {
-      // Optional: fetch user data once
+      // Fetch tokens once
       const docSnap = await getDoc(userRef);
       const tokens = docSnap.exists() ? docSnap.data().tokens ?? 0 : 0;
       userTokensSpan.textContent = tokens;
@@ -432,8 +492,9 @@ onAuthStateChanged(auth, (user) => {
         }
       });
     })();
-    
+
   } else {
+    // Logged out
     loginPanel.style.display = 'block';
     signedPanel.style.display = 'none';
     emailInput.value = '';
@@ -442,6 +503,7 @@ onAuthStateChanged(auth, (user) => {
     userTokensSpan.textContent = '0';
   }
 });
+
 </script>
 </script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
