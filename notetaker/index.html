@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local AI Note Summarizer & Flashcards</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Note Summarizer & Flashcards</h1>
+        <textarea id="notes" placeholder="Type your notes here..."></textarea>
+        <button id="summarizeBtn">Summarize</button>
+        <button id="flashcardsBtn">Generate Flashcards</button>
+        <div id="summaryOutput">
+            <h2>Summary</h2>
+            <p id="summaryText">Your summary will appear here...</p>
+        </div>
+        <div id="flashcardsOutput">
+            <h2>Flashcards</h2>
+            <div id="flashcardsContainer"></div>
+        </div>
+        <button id="saveFlashcardsBtn">Save Flashcards</button>
+        <button id="loadFlashcardsBtn">Load Saved Flashcards</button>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

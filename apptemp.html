@@ -88,6 +88,8 @@
   }
 </script>
 
+
+
 <script type="text/javascript">
 // --- Token display ---
 const tokenDisplay = document.createElement("div");
@@ -99,26 +101,46 @@ Object.assign(tokenDisplay.style, {
   right: "1.5vw",
   padding: "3px 14px",
   borderRadius: "8px",
-  background: "rgba(88, 98, 125, 0.15)",  /* semi-transparent */
+  background: "rgba(88, 98, 125, 0.15)",
   border: "1px solid rgba(78, 87, 112, 0.3)",
-  textDecoration: "none",
   fontWeight: "500",
   transition: "all 0.3s ease",
   textShadow: "0 1px 2px rgba(0,0,0,0.6)",
   color: "rgb(166, 185, 238)",
   fontFamily: "'Damion', sans-serif",
-  src: "url('/resource/Damion-8gnD.ttf') format('truetype')",
   visibility: "visible"
 });
 tokenDisplay.textContent = "0 tokens";
 document.body.appendChild(tokenDisplay);
 
+// --- Active timer display ---
+const activeTimerDisplay = document.createElement("div");
+Object.assign(activeTimerDisplay.style, {
+  marginTop: "0.9vw",
+  position: "fixed",
+  top: "5.6vw",
+  right: "1.6vw",
+  fontSize: "1.2vw",
+  padding: "3px 14px",
+  borderRadius: "8px",
+  background: "rgba(88, 98, 125, 0.15)",
+  border: "1px solid rgba(78, 87, 112, 0.3)",
+  fontWeight: "500",
+  transition: "all 0.3s ease",
+  textShadow: "0 1px 2px rgba(0,0,0,0.6)",
+  color: "rgb(166, 185, 238)",
+  fontFamily: "'Damion', sans-serif",
+  visibility: "visible",
+  textAlign: "center"
+});
+activeTimerDisplay.textContent = "00:00";
+document.body.appendChild(activeTimerDisplay);
+
 // --- Popup for rewards ---
 const popup = document.createElement("div");
 Object.assign(popup.style, {
-  marginTop: "0.9vw",
   position: "fixed",
-  top: "5vw",
+  top: "8.1vw",
   right: "1.5vw",
   padding: "12px 16px",
   color: "white",
@@ -128,7 +150,7 @@ Object.assign(popup.style, {
   transition: "opacity 0.35s ease, transform 0.35s ease",
   zIndex: 9999,
   pointerEvents: "none",
-  color: "rgb(220, 228, 250)",
+  color: "rgb(166, 185, 238)",
   fontFamily: "'Damion', sans-serif",
   src: "url('/resource/Damion-8gnD.ttf') format('truetype')"
 });
@@ -144,60 +166,127 @@ function showPopup(text){
   }, 3000);
 }
 
-// --- Token reward logic ---
+// --- Token reward constants ---
 const REWARD_SECONDS = 300; // 5 minutes
 const REWARD_AMOUNT = 5;
+
+// --- Timer variables ---
+let activeSeconds = 0;
 let tokenInterval = null;
-let secondsCounter = 0;
 
-function startTokenRewardTimer(user){
-  if(tokenInterval) return;
-  secondsCounter = 0;
-  tokenInterval = setInterval(async ()=>{
-    secondsCounter++;
-    if(secondsCounter >= REWARD_SECONDS){
-      secondsCounter = 0;
-      if(!user) return;
+// --- User activity tracking ---
+let lastActivity = Date.now();
+let isActive = true;
+const INACTIVITY_TIMEOUT = 10 * 1000; // 10 seconds
 
-      const userRef = firebase.firestore().collection("users").doc(user.uid);
-      try{
-        await userRef.update({ tokens: firebase.firestore.FieldValue.increment(REWARD_AMOUNT) });
-        showPopup(`${REWARD_AMOUNT} tokens earned !`);
-      }catch(err){
-        console.error("failed to give tokens", err);
+["mousemove","keydown","click"].forEach(evt=>{
+  document.addEventListener(evt, () => {
+    lastActivity = Date.now();
+    if(!isActive){
+      isActive = true;
+      activeTimerDisplay.style.background = "rgba(88, 98, 125, 0.15)";
+      startInterval(currentUser);
+    }
+  });
+});
+
+// --- Format time mm:ss ---
+function formatTime(sec){
+  const m = Math.floor(sec/60).toString().padStart(2,'0');
+  const s = (sec%60).toString().padStart(2,'0');
+  return `${m}:${s}`;
+}
+
+// --- Update timer display ---
+function updateActiveTimerDisplay(){
+  activeTimerDisplay.textContent = formatTime(activeSeconds);
+}
+
+// --- Give tokens (checks multi-tab via lastRewardTime) ---
+async function giveTokens(user){
+  const userRef = firebase.firestore().collection("users").doc(user.uid);
+  try{
+    await firebase.firestore().runTransaction(async transaction => {
+      const docSnap = await transaction.get(userRef);
+      const now = Date.now();
+      const lastReward = docSnap.exists && docSnap.data().lastRewardTime ? docSnap.data().lastRewardTime.toMillis() : 0;
+
+      if(now - lastReward >= REWARD_SECONDS*1000){
+        transaction.update(userRef, {
+          tokens: firebase.firestore.FieldValue.increment(REWARD_AMOUNT),
+          lastRewardTime: firebase.firestore.Timestamp.fromMillis(now)
+        });
+        showPopup(`${REWARD_AMOUNT} tokens earned!`);
       }
+    });
+  }catch(err){
+    console.error("failed to give tokens", err);
+  }
+}
+
+let currentUser = null;
+
+// --- Interval logic ---
+function startInterval(user){
+  if(tokenInterval) return;
+  tokenInterval = setInterval(async ()=>{
+    if(Date.now() - lastActivity > INACTIVITY_TIMEOUT || document.hidden){
+      stopInterval();
+      activeTimerDisplay.style.background = "rgba(255,100,100,0.15)";
+      activeTimerDisplay.textContent = formatTime(activeSeconds) + " (paused)";
+      return;
+    }
+
+    activeSeconds++;
+    updateActiveTimerDisplay();
+    if(activeSeconds >= REWARD_SECONDS){
+      activeSeconds = 0;
+      if(user) await giveTokens(user);
     }
   }, 1000);
 }
 
-function stopTokenRewardTimer(){
+function stopInterval(){
   if(tokenInterval){
     clearInterval(tokenInterval);
     tokenInterval = null;
-    secondsCounter = 0;
+    isActive = false;
   }
 }
 
 // --- Listen for auth changes ---
 firebase.auth().onAuthStateChanged(user=>{
-  stopTokenRewardTimer();
+  stopInterval();
+  activeSeconds = 0;
+  updateActiveTimerDisplay();
+
+  currentUser = user;
+
   if(user){
-    startTokenRewardTimer(user);
+    tokenDisplay.style.visibility = "visible";
+    activeTimerDisplay.style.visibility = "visible";
+    activeTimerDisplay.style.background = "rgba(88, 98, 125, 0.15)";
 
     const userRef = firebase.firestore().collection("users").doc(user.uid);
     userRef.onSnapshot(doc=>{
       if(doc.exists){
         tokenDisplay.textContent = (doc.data().tokens || 0) + " tokens";
-      }else{
+      } else {
         tokenDisplay.textContent = "0 tokens";
-        userRef.set({tokens:0,email:user.email},{merge:true});
+        userRef.set({
+          tokens:0,
+          email:user.email,
+          lastRewardTime:firebase.firestore.Timestamp.now()
+        },{merge:true});
       }
     }, err=>console.error(err));
-  }else{
+
+    startInterval(user);
+  } else {
     tokenDisplay.style.visibility = "hidden";
     tokenDisplay.textContent = "no account";
-    
+    activeTimerDisplay.style.visibility = "hidden";
+    activeTimerDisplay.textContent = "00:00";
   }
 });
 </script>
-

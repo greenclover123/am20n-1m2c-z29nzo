@@ -10,7 +10,7 @@ var greeting = [
   "the creator of this website sucks at rivals p2w mutt",
   "sasageyo",
   "i think its all a ruse",
-  "i like big black rocks",
+  "flash",
   "play clash",
   "now whos there left to blame?",
   "was it real or just fantasy?",
@@ -24,7 +24,13 @@ var greeting = [
   "the more i come to know myself",
   "figure it figure it figure it out",
   "baby blue, i know how things have changed for you",
-  "everything is quiet"
+  "everything is quiet",
+  "life of the party, to think i could've almost died",
+  "no after-over, this is it, done",
+  "wait a minute, wait a minute, wait a goddamn minute",
+  "you already did it! see? its already over! yay! you did it!",
+  "okay, we going slow, we going slow down",
+  "bittersweet cake"
 ];
 
 var randomGreeting = Math.floor(Math.random() * greeting.length);
