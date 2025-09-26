@@ -27,14 +27,14 @@
   </header>
   
   <main>
-    <section style="padding-top: 1.5vw; text-align:center;"></section>
+  <section style="padding-top: 1.5vw; text-align:center;"></section>
   <div class="game-frame">
-    <iframe id="gameIframe" frameborder="0" width="800px" height="450px" id="iframe"></iframe>
-      <div class="game-footer">
-    <span id="gameTitle">game title</span>
-    <button onclick="goFullscreen()">⛶</button>
+    <iframe id="gameIframe" frameborder="0" width="800" height="450"></iframe>
+    <div class="game-footer">
+      <span id="gameTitle">game title</span>
+      <button onclick="goFullscreen()">⛶</button>
+    </div>
   </div>
-</div>
 
 
 <script>
@@ -70,8 +70,6 @@
 </main>
 </body>
 
-
-
 <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-firestore-compat.js"></script>
@@ -88,6 +86,8 @@
     firebase.initializeApp(firebaseConfig);
   }
 </script>
+
+
 <script type="text/javascript">
 // --- Token display ---
 const tokenDisplay = document.createElement("div");
@@ -172,19 +172,44 @@ let tokenInterval = null;
 
 // --- User activity tracking ---
 let lastActivity = Date.now();
-let isActive = true;
+let isActive = false; // start paused
 const INACTIVITY_TIMEOUT = 10 * 1000; // 10 seconds
 
-["mousemove","keydown","click"].forEach(evt=>{
-  document.addEventListener(evt, () => {
-    lastActivity = Date.now();
-    if(!isActive){
-      isActive = true;
-      activeTimerDisplay.style.background = "rgba(166, 185, 238,0.15)";
-      startInterval(currentUser);
+// --- Anti-macro entropy system ---
+let entropyScore = 0;
+let lastX = null, lastY = null, lastTs = null;
+
+function processActivityEvent(data){
+  const {x, y, ts} = data;
+
+  if(lastTs){
+    const dt = ts - lastTs;
+    if(dt > 30 && dt < 5000){
+      entropyScore += Math.random() * (1000/dt);
     }
-  });
-});
+  }
+
+  if(lastX !== null && lastY !== null){
+    const dx = Math.abs(x-lastX);
+    const dy = Math.abs(y-lastY);
+    const dist = Math.sqrt(dx*dx+dy*dy);
+    if(dist > 0) entropyScore += Math.random() * (dist/50);
+  }
+
+  lastX = x; lastY = y; lastTs = ts;
+
+  if(entropyScore > 100) entropyScore = 100;
+
+  // ✅ Update last activity FIRST
+  lastActivity = Date.now();
+
+  // ✅ Resume timer if paused
+  if(!isActive){
+    startInterval(currentUser);
+    activeTimerDisplay.style.background = "rgba(166, 185, 238,0.15)";
+    activeTimerDisplay.textContent = formatTime(activeSeconds);
+  }
+}
 
 // --- Format time mm:ss ---
 function formatTime(sec){
@@ -193,13 +218,17 @@ function formatTime(sec){
   return `${m}:${s}`;
 }
 
-// --- Update timer display ---
 function updateActiveTimerDisplay(){
   activeTimerDisplay.textContent = formatTime(activeSeconds);
 }
 
-// --- Give tokens (checks multi-tab via lastRewardTime) ---
+// --- Give tokens ---
 async function giveTokens(user){
+  if(entropyScore < 10){ 
+    console.warn("possible macro. skipping reward."); 
+    return;
+  }
+
   const userRef = firebase.firestore().collection("users").doc(user.uid);
   try{
     await firebase.firestore().runTransaction(async transaction => {
@@ -213,6 +242,7 @@ async function giveTokens(user){
           lastRewardTime: firebase.firestore.Timestamp.fromMillis(now)
         });
         showPopup(`${REWARD_AMOUNT} tokens earned!`);
+        entropyScore = 0; // reset after reward
       }
     });
   }catch(err){
@@ -225,8 +255,10 @@ let currentUser = null;
 // --- Interval logic ---
 function startInterval(user){
   if(tokenInterval) return;
+  isActive = true;
   tokenInterval = setInterval(async ()=>{
-    if(Date.now() - lastActivity > INACTIVITY_TIMEOUT || document.hidden){
+    const idleTooLong = Date.now() - lastActivity > INACTIVITY_TIMEOUT || document.hidden;
+    if(idleTooLong){
       stopInterval();
       activeTimerDisplay.style.background = "rgba(255,100,100,0.15)";
       activeTimerDisplay.textContent = formatTime(activeSeconds) + " (paused)";
@@ -246,9 +278,23 @@ function stopInterval(){
   if(tokenInterval){
     clearInterval(tokenInterval);
     tokenInterval = null;
-    isActive = false;
   }
+  isActive = false;
 }
+
+// --- Listen for iframe activity ---
+window.addEventListener("message",(event)=>{
+  if(event.data && event.data.type === "iframe-activity"){
+    processActivityEvent(event.data);
+  }
+});
+
+// --- Local activity fallback ---
+["mousemove","keydown","click"].forEach(evt=>{
+  document.addEventListener(evt,(e)=>{
+    processActivityEvent({x:e.clientX||0,y:e.clientY||0,ts:Date.now()});
+  });
+});
 
 // --- Listen for auth changes ---
 firebase.auth().onAuthStateChanged(user=>{
@@ -286,4 +332,3 @@ firebase.auth().onAuthStateChanged(user=>{
   }
 });
 </script>
-

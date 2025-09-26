@@ -36,3 +36,20 @@ var greeting = [
 var randomGreeting = Math.floor(Math.random() * greeting.length);
 
 $('#message').text(greeting[randomGreeting]);
+
+
+
+var greeting = [
+  "think we couldnt find this page", 
+  "how did you get here",
+  "interestin, theres nothing here",
+  "call me once you've had enough",
+  "404 means that nothing exists here",
+  "think this page dont exist man",
+  "did you type it wrong",
+  "of course you did"
+];
+
+var randomGreeting = Math.floor(Math.random() * greeting.length);
+
+$('#error').text(greeting[randomGreeting]);

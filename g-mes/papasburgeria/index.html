@@ -24,5 +24,19 @@
         player.load("papasburgeria.swf");
       });
     </script>
+    <script>
+  // Forward real gameplay events to parent
+  ["mousemove","keydown","click","touchstart"].forEach(evt=>{
+    document.addEventListener(evt, e=>{
+      parent.postMessage({
+        type:"iframe-activity",
+        x: e.clientX || 0,
+        y: e.clientY || 0,
+        ts: Date.now()
+      },"*");
+    });
+  });
+</script>
+
   </body>
 </html>

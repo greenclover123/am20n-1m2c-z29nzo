@@ -26,83 +26,77 @@
     </nav>
   </header>
 
-  <main>
+  <main style="padding-top: 8vw; text-align:center;">
+    <!-- Featured Game -->
+    <div id="featured" class="featured"></div>
 
-    
+    <!-- Genre + Search bar -->
+    <div class="genre-nav">
+      <div id="genreList" class="genre-list"></div>
+      <input type="text" id="gameSearch" placeholder="search g-mes...">
+    </div>
 
-    <div style="padding-top: 4vw; text-align:center;" class="content">
-
-        <!-- Featured Game -->
-<div id="featured" class="featured"></div>
-<div class="content">
-<br>
-<br>
-  <!-- Genre scrolling container -->
-  <div class="genre-nav">
-    <button class="arrow left">&#10094;</button>
-    <div class="genre-list" id="genreList"></div>
-    <button class="arrow right">&#10095;</button>
-  </div>
-
-  <!-- Games container -->
-  <div id="games"></div>
-</div>
+    <!-- Games container -->
+    <div id="games"></div>
+  
  <script type="module" src="/script.js"></script>
-<script>
-  async function loadGames() {
-    const res = await fetch("/g-mes.json");
-    const data = await res.json();
+<script type="module">
+    let currentGenres = {};
+    let currentGenre = "";
 
-    // group games by genre
-    const genres = {};
-    data.games.forEach(game => {
-      if (!genres[game.genre]) genres[game.genre] = [];
-      genres[game.genre].push(game);
-    });
+    async function loadGames() {
+      const res = await fetch("/g-mes.json");
+      const data = await res.json();
 
-    // add genre buttons
-    const genreList = document.getElementById("genreList");
-    Object.keys(genres).forEach((genre, i) => {
-      const btn = document.createElement("button");
-      btn.innerText = genre;
-      btn.className = "genre-btn";
-      if (i === 0) btn.classList.add("active");
-      btn.onclick = () => showGames(genre, genres);
-      genreList.appendChild(btn);
-    });
+      // group games by genre
+      currentGenres = {};
+      data.games.forEach(game => {
+        if (!currentGenres[game.genre]) currentGenres[game.genre] = [];
+        currentGenres[game.genre].push(game);
+      });
 
-    // show first genre by default
-    showGames(Object.keys(genres)[0], genres);
-  }
+      // add "All Games" as first genre
+      currentGenres = { "all g-mes": data.games, ...currentGenres };
 
-  function showGames(genre, genres) {
-    const container = document.getElementById("games");
-    container.innerHTML = "";
-    genres[genre].forEach(game => {
-      const link = document.createElement("a");
-      link.href = `/g-metemp.html?dir=${game.dir}&title=${encodeURIComponent(game.title)}&genre=${encodeURIComponent(game.genre)}`;
+      // add genre buttons
+      const genreList = document.getElementById("genreList");
+      genreList.innerHTML = "";
+      Object.keys(currentGenres).forEach((genre, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = genre;
+        btn.className = "genre-btn";
+        if (i === 0) { btn.classList.add("active"); currentGenre = genre; }
+        btn.onclick = () => {
+          currentGenre = genre;
+          showGames(genre, currentGenres, document.getElementById("gameSearch").value);
+        };
+        genreList.appendChild(btn);
+      });
 
-      const div = document.createElement("div");
-      div.className = "game-card";
+      showGames(currentGenre, currentGenres, "");
+    }
 
-      div.innerHTML = `
-        <img src="${game.icon}" alt="${game.title}">
-        <div class="overlay">
-          <span class="title">${game.title}</span>
-          <span class="genre">${game.genre}</span>
-        </div>
-      `;
+    function showGames(genre, genres, searchTerm = "") {
+      const container = document.getElementById("games");
+      container.innerHTML = "";
+      const filteredGames = genres[genre].filter(game => game.title.toLowerCase().includes(searchTerm.toLowerCase()));
+      filteredGames.forEach(game => {
+        const link = document.createElement("a");
+        link.href = `/g-metemp.html?dir=${game.dir}&title=${encodeURIComponent(game.title)}&genre=${encodeURIComponent(game.genre)}`;
+        const div = document.createElement("div");
+        div.className = "game-card";
+        div.innerHTML = `<img src="${game.icon}" alt="${game.title}"><div class="overlay"><span class="title">${game.title}</span><span class="genre">${game.genre}</span></div>`;
+        link.appendChild(div);
+        container.appendChild(link);
+      });
+      document.querySelectorAll(".genre-btn").forEach(b => b.classList.remove("active"));
+      [...document.querySelectorAll(".genre-btn")].find(b => b.innerText === genre).classList.add("active");
+    }
 
-      link.appendChild(div);
-      container.appendChild(link);
-    });
+    document.getElementById("gameSearch").addEventListener("input", e => showGames(currentGenre, currentGenres, e.target.value));
 
-    document.querySelectorAll(".genre-btn").forEach(b => b.classList.remove("active"));
-    [...document.querySelectorAll(".genre-btn")].find(b => b.innerText === genre).classList.add("active");
-  }
-
-  loadGames();
-</script>
+    loadGames();
+  </script>
 
 
 

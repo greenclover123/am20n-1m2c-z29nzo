@@ -56,9 +56,13 @@
 
 
     <div class="button-group">
-    <button id="saveCloud">save to cloud</button>
-<button id="loadCloud">load from cloud</button>
-  <button id="disableCooldownBtn" class="glass-button">disable load cooldown</button>
+      <br>
+      <br>
+    <button id="saveCloud" class="signoutbutton">save to cloud</button>
+    <br>
+    <br>
+    <br>
+<button id="loadCloud" class="signoutbutton">load from cloud</button>
 </div>
 <div style="text-align: center;">
 <p id="dataMessage" class="panel-message"></p>
@@ -305,10 +309,8 @@ const userTokensSpan = document.getElementById('user-tokens');
 
 const saveCloud = document.getElementById('saveCloud');
 const loadCloud = document.getElementById('loadCloud');
-const disableCooldownBtn = document.getElementById('disableCooldownBtn');
 const dataMessage = document.getElementById('dataMessage');
 
-let cooldownDisabled = false;
 
 // --- Toast Helper with Queue ---
 let toastQueue = [];
@@ -371,7 +373,7 @@ function base64ToUtf8(base64) {
   return new TextDecoder().decode(bytes);
 }
 
-// --- Selenite Save / Load ---
+// --- Save / Load ---
 function getMainSaveForFirebase() {
   try {
     const data = {};
@@ -453,7 +455,7 @@ saveCloud.addEventListener('click', async () => {
   if (!encoded) { showToast("failed to encode data", true); return; }
   try {
     const userRef = doc(db, 'users', user.uid);
-    await updateDoc(userRef, { seleniteSave: encoded, lastSaved: serverTimestamp() });
+    await updateDoc(userRef, { ghsave: encoded, lastSaved: serverTimestamp() });
     showToast("data saved to cloud!");
   } catch(e) {
     console.error(e);
@@ -468,9 +470,9 @@ loadCloud.addEventListener('click', async () => {
   try {
     const userRef = doc(db, 'users', user.uid);
     const docSnap = await getDoc(userRef);
-    if (!docSnap.exists() || !docSnap.data().seleniteSave) { showToast("no saved data!"); return; }
+    if (!docSnap.exists() || !docSnap.data().ghsave) { showToast("no saved data!"); return; }
 
-    loadMainSaveFromFirebase(docSnap.data().seleniteSave);
+    loadMainSaveFromFirebase(docSnap.data().ghsave);
 
   } catch(e) {
     console.error(e);
@@ -478,10 +480,7 @@ loadCloud.addEventListener('click', async () => {
   }
 });
 
-disableCooldownBtn.addEventListener('click', () => {
-  cooldownDisabled = true;
-  showToast("load cooldown disabled!");
-});
+
 
 // --- Auth State Listener / Live Token Counter ---
 onAuthStateChanged(auth, async (user) => {
@@ -499,7 +498,6 @@ onAuthStateChanged(auth, async (user) => {
       // Disable restricted buttons
       saveCloud.disabled = true;
       loadCloud.disabled = true;
-      disableCooldownBtn.disabled = true;
 
       // Destroy any existing coin box
       if (window.destroyCoinBox) window.destroyCoinBox();
@@ -510,7 +508,6 @@ onAuthStateChanged(auth, async (user) => {
     // If verified → enable everything
     saveCloud.disabled = false;
     loadCloud.disabled = false;
-    disableCooldownBtn.disabled = false;
 
     const userRef = doc(db, 'users', user.uid);
 
