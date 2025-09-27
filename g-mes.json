@@ -59,6 +59,18 @@
       "genre": "puzzle",
       "icon": "/icons/dont-press-the-button.jpg",
       "dir": "/g-mes/don'tpressthebutton"
+    },
+    {
+      "title": "Sandtrix",
+      "genre": "puzzle",
+      "icon": "/icons/sandtrix.png",
+      "dir": "/g-mes/sandtrix"
+    },
+    {
+      "title": "Papa's Sushiria",
+      "genre": "simulation",
+      "icon": "/icons/papassushiria.png",
+      "dir": "/g-mes/papa'ssushiria"
     }
   ]
 }

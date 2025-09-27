@@ -25,7 +25,6 @@
       });
     </script>
     <script>
-  // Forward real gameplay events to parent
   ["mousemove","keydown","click","touchstart"].forEach(evt=>{
     document.addEventListener(evt, e=>{
       parent.postMessage({
