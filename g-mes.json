@@ -35,6 +35,48 @@
       "genre": "action",
       "icon": "/icons/1on1soccer.png",
       "dir": "/g-mes/1on1soccer"
+    },
+    {
+      "title": "60 Seconds Burger Run",
+      "genre": "Puzzle",
+      "icon": "/icons/60sburgerrun.png",
+      "dir": "/g-mes/60secondsburgerrun"
+    },
+    {
+      "title": "Achievement Unlocked",
+      "genre": "puzzle",
+      "icon": "/icons/achievementunlocked.png",
+      "dir": "/g-mes/achievementunlocked"
+    },
+    {
+      "title": "Achievement Unlocked 2",
+      "genre": "puzzle",
+      "icon": "/icons/achievementunlocked2.jpg",
+      "dir": "/g-mes/achievementunlocked2"
+    },
+    {
+      "title": "Achievement Unlocked 3",
+      "genre": "puzzle",
+      "icon": "/icons/achievementunlocked3.png",
+      "dir": "/g-mes/achievementunlocked3"
+    },
+    {
+      "title": "Adventure Capitalist",
+      "genre": "idle",
+      "icon": "/icons/adventurecapitalist.png",
+      "dir": "/g-mes/adventurecapitalist"
+    },
+    {
+      "title": "Bad Ice Cream",
+      "genre": "puzzle",
+      "icon": "/icons/badicecream.png",
+      "dir": "/g-mes/badicecream"
+    },
+    {
+      "title": "Bad Ice Cream 2",
+      "genre": "puzzle",
+      "icon": "/icons/badicecream2.png",
+      "dir": "/g-mes/badicecream2"
     }
   ]
 }
