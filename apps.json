@@ -11,6 +11,12 @@
       "genre": "productivity",
       "icon": "/icons/fnaf6.png",
       "dir": "/g-mes/fnaf6/"
+    },
+{
+      "title": "Halfix x86 Emulator",
+      "genre": "emulators",
+      "icon": "/icons/halfix.png",
+      "dir": "/apps/halfix/"
     }
   ]
 }

@@ -120,7 +120,7 @@ body {
 /* Iframe sits at the top, no margin/padding to break layout */
 .game-frame iframe {
   width: 70vw;
-  height: 70vh;
+  height: 66vh;
   max-width: 100%;
   display: block;             /* removes inline gap */
   border: none;               /* wrapper handles border */

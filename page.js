@@ -47,7 +47,10 @@ var greeting = [
   "404 means that nothing exists here",
   "think this page dont exist man",
   "did you type it wrong",
-  "of course you did"
+  "of course you did",
+  "on some zen",
+  "demari",
+  "noah elijah allen 3rd jr"
 ];
 
 var randomGreeting = Math.floor(Math.random() * greeting.length);
