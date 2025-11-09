@@ -209,6 +209,84 @@
       "genre": "puzzle",
       "icon": "/icons/bubbletanks2.png",
       "dir": "/g-mes/bubbletanks2"
+    },
+    {
+      "title": "Burger and Frights",
+      "genre": "horror",
+      "icon": "/icons/burgerandfrights.png",
+      "dir": "/g-mes/burgerandfrights"
+    },
+    {
+      "title": "Burrito Bison",
+      "genre": "action",
+      "icon": "/icons/burritobison.png",
+      "dir": "/g-mes/burritobison"
+    },
+    {
+      "title": "Celeste Pico-8 Edition",
+      "genre": "platformer",
+      "icon": "/icons/celeste.png",
+      "dir": "/g-mes/celestepico-8edition"
+    },
+    {
+      "title": "Cell Machine",
+      "genre": "puzzle",
+      "icon": "/icons/cellmachine.png",
+      "dir": "/g-mes/cellmachine"
+    },
+    {
+      "title": "Chess",
+      "genre": "strategy",
+      "icon": "/icons/chess.png",
+      "dir": "/g-mes/chess"
+    },
+    {
+      "title": "Chibi Knight",
+      "genre": "adventure",
+      "icon": "/icons/chibiknight.png",
+      "dir": "/g-mes/chibiknight"
+    },
+    {
+      "title": "Clicker Heros",
+      "genre": "idle",
+      "icon": "/icons/clickerheroes.png",
+      "dir": "/g-mes/clickerheros"
+    },
+    {
+      "title": "Cluster Rush",
+      "genre": "platformer",
+      "icon": "/icons/clusterrush.png",
+      "dir": "/g-mes/clusterrush"
+    },
+    {
+      "title": "Color Switch",
+      "genre": "casual",
+      "icon": "/icons/colorswitch.png",
+      "dir": "/g-mes/colorswitch"
+    },
+    {
+      "title": "Core Ball",
+      "genre": "puzzle",
+      "icon": "/icons/coreball.png",
+      "dir": "/g-mes/coreball"
+    },
+    {
+      "title": "Crossy Road",
+      "genre": "casual",
+      "icon": "/icons/crossyroad.png",
+      "dir": "/g-mes/crossyroad"
+    },
+    {
+      "title": "Dadish",
+      "genre": "adventure",
+      "icon": "/icons/dadish.png",
+      "dir": "/g-mes/dadish"
+    },
+    {
+      "title": "Dadish 2",
+      "genre": "adventure",
+      "icon": "/icons/dadish2.png",
+      "dir": "/g-mes/dadish2"
     }
   ]
 }
