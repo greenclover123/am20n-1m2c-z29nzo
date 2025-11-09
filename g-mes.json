@@ -38,7 +38,7 @@
     },
     {
       "title": "60 Seconds Burger Run",
-      "genre": "Puzzle",
+      "genre": "puzzle",
       "icon": "/icons/60sburgerrun.png",
       "dir": "/g-mes/60secondsburgerrun"
     },
@@ -77,6 +77,138 @@
       "genre": "puzzle",
       "icon": "/icons/badicecream2.png",
       "dir": "/g-mes/badicecream2"
+    },
+    {
+      "title": "Bad Ice Cream 3",
+      "genre": "puzzle",
+      "icon": "/icons/badicecream3.png",
+      "dir": "/g-mes/badicecream3"
+    },
+    {
+      "title": "Bad Piggies",
+      "genre": "action",
+      "icon": "/icons/badpiggies.png",
+      "dir": "/g-mes/badpiggies"
+    },
+    {
+      "title": "Bad Time Simulator",
+      "genre": "action",
+      "icon": "/icons/badtimesimulator.png",
+      "dir": "/g-mes/badtimesimulator"
+    },
+    {
+      "title": "Eating Simulator",
+      "genre": "casual",
+      "icon": "/icons/balleatingsimulator.png",
+      "dir": "/g-mes/eatingsimulator"
+    },
+    {
+      "title": "Basketball Stars",
+      "genre": "sports",
+      "icon": "/icons/basketballstars.png",
+      "dir": "/g-mes/basketballstars"
+    },
+    {
+      "title": "Basket Bros",
+      "genre": "sports",
+      "icon": "/icons/basketbros.png",
+      "dir": "/g-mes/basketbros"
+    },
+    {
+      "title": "Basket Random",
+      "genre": "sports",
+      "icon": "/icons/basket.png",
+      "dir": "/g-mes/basketrandom"
+    },
+    {
+      "title": "Bikechamp",
+      "genre": "sports",
+      "icon": "/icons/bikechamp.png",
+      "dir": "/g-mes/bikechamp"
+    },
+    {
+      "title": "Bikechamp 2",
+      "genre": "sports",
+      "icon": "/icons/bikechamp2.png",
+      "dir": "/g-mes/bikechamp2"
+    },
+    {
+      "title": "Bitlife",
+      "genre": "simulation",
+      "icon": "/icons/bitlife.png",
+      "dir": "/g-mes/bitlife"
+    },
+    {
+      "title": "Block Blast",
+      "genre": "puzzle",
+      "icon": "/icons/blockblast.jpg",
+      "dir": "/g-mes/blockblast"
+    },
+    {
+      "title": "Bloxorz",
+      "genre": "puzzle",
+      "icon": "/icons/bloxors.png",
+      "dir": "/g-mes/bloxors"
+    },
+    {
+      "title": "Bob The Robber 2",
+      "genre": "puzzle",
+      "icon": "/icons/bob-the-robber-2.png",
+      "dir": "/g-mes/bobtherobber2"
+    },
+    {
+      "title": "Boxing Physics 2",
+      "genre": "strategy",
+      "icon": "/icons/boxingphysics2.png",
+      "dir": "/g-mes/boxingphysics2"
+    },
+    {
+      "title": "Boxing Random",
+      "genre": "sports",
+      "icon": "/icons/boxingrandom.png",
+      "dir": "/g-mes/boxingrandom"
+    },
+    {
+      "title": "Breaking The Bank",
+      "genre": "puzzle",
+      "icon": "/icons/breakingthebank.png",
+      "dir": "/g-mes/breakingthebank"
+    },
+    {
+      "title": "Balloon Tower Defense",
+      "genre": "strategy",
+      "icon": "/icons/btd.png",
+      "dir": "/g-mes/balloontowerdefense"
+    },
+    {
+      "title": "Balloon Tower Defense 2",
+      "genre": "strategy",
+      "icon": "/icons/btd2.png",
+      "dir": "/g-mes/balloontowerdefense2"
+    },
+    {
+      "title": "Balloon Tower Defense 3",
+      "genre": "strategy",
+      "icon": "/icons/btd3.png",
+      "dir": "/g-mes/balloontowerdefense3"
+    },
+    {
+      "title": "Balloon Tower Defense 4",
+      "genre": "strategy",
+      "icon": "/icons/btd4.png",
+      "dir": "/g-mes/balloontowerdefense4"
+    },
+    {
+      "title": "Bubble Spinner",
+      "genre": "casual",
+      "icon": "/icons/bubblespinner.png",
+      "dir": "/g-mes/bubblespinner"
+    },
+    {
+      "title": "Bubble Tanks 2",
+      "genre": "puzzle",
+      "icon": "/icons/bubbletanks2.png",
+      "dir": "/g-mes/bubbletanks2"
     }
   ]
 }
