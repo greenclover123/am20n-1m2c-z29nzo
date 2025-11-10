@@ -19,12 +19,6 @@
       "dir": "/g-mes/don'tpressthebutton"
     },
     {
-      "title": "Sandtrix",
-      "genre": "puzzle",
-      "icon": "/icons/sandtrix.png",
-      "dir": "/g-mes/sandtrix"
-    },
-    {
       "title": "1 On 1 Soccer",
       "genre": "action",
       "icon": "/icons/1on1soccer.png",
@@ -761,6 +755,204 @@
       "genre": "action",
       "icon": "/icons/run.png",
       "dir": "/g-mes/run"
+    },
+    {
+      "title": "Run 2",
+      "genre": "action",
+      "icon": "/icons/run2.png",
+      "dir": "/g-mes/run2"
+    },
+    {
+      "title": "Sandtrix",
+      "genre": "puzzle",
+      "icon": "/icons/sandtrix.png",
+      "dir": "/g-mes/sandtrix"
+    },
+    {
+      "title": "Slope",
+      "genre": "casual",
+      "icon": "/icons/slope.png",
+      "dir": "/g-mes/slope"
+    },
+    {
+      "title": "Slope 2 Player",
+      "genre": "co-op",
+      "icon": "/icons/slope2.png",
+      "dir": "/g-mes/slope2player"
+    },
+    {
+      "title": "Snow Battle io",
+      "genre": "casual",
+      "icon": "/icons/snowbattleio.png",
+      "dir": "/g-mes/snowbattleio"
+    },
+    {
+      "title": "Snow Rider 3D",
+      "genre": "action",
+      "icon": "/icons/snowrider3d.png",
+      "dir": "/g-mes/snowrider3d"
+    },
+    {
+      "title": "Soccer Random",
+      "genre": "co-op",
+      "icon": "/icons/soccerrandom.png",
+      "dir": "/g-mes/soccerrandom"
+    },
+    {
+      "title": "Stack",
+      "genre": "casual",
+      "icon": "/icons/stack.png",
+      "dir": "/g-mes/stack"
+    },
+    {
+      "title": "Stair Race 3D",
+      "genre": "casual",
+      "icon": "/icons/stairrace3d.png",
+      "dir": "/g-mes/stairrace3d"
+    },
+    {
+      "title": "Stealing The Diamond",
+      "genre": "puzzle",
+      "icon": "/icons/stealingthediamond.png",
+      "dir": "/g-mes/stealingthediamond"
+    },
+    {
+      "title": "Stickman Boost",
+      "genre": "puzzle",
+      "icon": "/icons/stickmanboost.png",
+      "dir": "/g-mes/stickmanboost"
+    },
+    {
+      "title": "Stickman Climb",
+      "genre": "puzzle",
+      "icon": "/icons/stickmanclimb.png",
+      "dir": "/g-mes/stickmanclimb"
+    },
+    {
+      "title": "Stickman Golf",
+      "genre": "casual",
+      "icon": "/icons/stickmangolf.png",
+      "dir": "/g-mes/stickmangolf"
+    },
+    {
+      "title": "Superhot",
+      "genre": "action",
+      "icon": "/icons/superhot.png",
+      "dir": "/g-mes/superhot"
+    },
+    {
+      "title": "Temple Run 2",
+      "genre": "casual",
+      "icon": "/icons/templerun2.png",
+      "dir": "/g-mes/templerun2"
+    },
+    {
+      "title": "Territorial io",
+      "genre": "strategy",
+      "icon": "/icons/territorialio.png",
+      "dir": "/g-mes/territorialio"
+    },
+    {
+      "title": "Tetris N-Blox",
+      "genre": "casual",
+      "icon": "/icons/tetris.png",
+      "dir": "/g-mes/tetrisn-blox"
+    },
+    {
+      "title": "The Impossible Quiz",
+      "genre": "puzzle",
+      "icon": "/icons/theimpossiblequiz.png",
+      "dir": "/g-mes/impossiblequiz"
+    },
+    {
+      "title": "The Impossible Quiz 2",
+      "genre": "puzzle",
+      "icon": "/icons/theimpossiblequiz2.png",
+      "dir": "/g-mes/theimpossiblequiz2"
+    },
+    {
+      "title": "There is No Game",
+      "genre": "puzzle",
+      "icon": "/icons/thereisnogame.png",
+      "dir": "/g-mes/thereisnogame"
+    },
+    {
+      "title": "Don't You Lecture Me With Your Thirty Dollar Haircut",
+      "genre": "casual",
+      "icon": "/icons/thirtydollarwebsite.png",
+      "dir": "/g-mes/don'tyoulecturemewithyourthirtydollarhaircut"
+    },
+    {
+      "title": "Timeshooter",
+      "genre": "action",
+      "icon": "/icons/timeshooter1.png",
+      "dir": "/g-mes/timeshooter"
+    },
+    {
+      "title": "Timeshooter 2",
+      "genre": "action",
+      "icon": "/icons/timeshooter2.png",
+      "dir": "/g-mes/timeshooter2"
+    },
+    {
+      "title": "Timeshooter 3",
+      "genre": "action",
+      "icon": "/icons/timeshooter3.png",
+      "dir": "/g-mes/timeshooter3"
+    },
+    {
+      "title": "Tiny Fishing",
+      "genre": "idle",
+      "icon": "/icons/tinyfishing.png",
+      "dir": "/g-mes/tinyfishing"
+    },
+    {
+      "title": "Tomb Of The Mask",
+      "genre": "puzzle",
+      "icon": "/icons/tombofthemask.png",
+      "dir": "/g-mes/tombofthemask"
+    },
+    {
+      "title": "Unfair Mayro",
+      "genre": "puzzle",
+      "icon": "/icons/unfairmario.png",
+      "dir": "/g-mes/unfairmayro"
+    },
+    {
+      "title": "Vex 3",
+      "genre": "platformer",
+      "icon": "/icons/vex3.png",
+      "dir": "/g-mes/vex3"
+    },
+    {
+      "title": "Vex 4",
+      "genre": "platformer",
+      "icon": "/icons/vex4.png",
+      "dir": "/g-mes/vex4"
+    },
+    {
+      "title": "Vex 5",
+      "genre": "platformer",
+      "icon": "/icons/vex5.png",
+      "dir": "/g-mes/vex5"
+    },
+    {
+      "title": "Vex 6",
+      "genre": "platformer",
+      "icon": "/icons/vex6.png",
+      "dir": "/g-mes/vex6"
+    },
+    {
+      "title": "Vex 7",
+      "genre": "platformer",
+      "icon": "/icons/vex7.png",
+      "dir": "/g-mes/vex7"
+    },
+    {
+      "title": "Volley Random",
+      "genre": "co-op",
+      "icon": "/icons/volleyrandom.png",
+      "dir": "/g-mes/volleyrandom"
     }
   ]
 }
