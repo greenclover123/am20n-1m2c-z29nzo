@@ -449,6 +449,66 @@
       "genre": "action",
       "icon": "/icons/fnf.png",
       "dir": "/g-mes/fridaynightfunkin"
+    },
+    {
+      "title": "Fruit Ninja",
+      "genre": "casual",
+      "icon": "/icons/fruitninja.png",
+      "dir": "/g-mes/fruitninja"
+    },
+    {
+      "title": "Getaway Shootout",
+      "genre": "co-op",
+      "icon": "/icons/getawayshooter.png",
+      "dir": "/g-mes/getawayshootout"
+    },
+    {
+      "title": "Gladihoppers",
+      "genre": "action",
+      "icon": "/icons/gladihoppers.png",
+      "dir": "/g-mes/gladihoppers"
+    },
+    {
+      "title": "Go Ball",
+      "genre": "puzzle",
+      "icon": "/icons/goball.png",
+      "dir": "/g-mes/goball"
+    },
+    {
+      "title": "Gold Digger FRVR",
+      "genre": "idle",
+      "icon": "/icons/golddiggerfrvr.png",
+      "dir": "/g-mes/golddiggerfrvr"
+    },
+    {
+      "title": "Helixjump",
+      "genre": "casual",
+      "icon": "/icons/helixjump.png",
+      "dir": "/g-mes/helixjump"
+    },
+    {
+      "title": "HexGL",
+      "genre": "racing",
+      "icon": "/icons/hexgl.png",
+      "dir": "/g-mes/hexgl"
+    },
+    {
+      "title": "Hextris",
+      "genre": "puzzle",
+      "icon": "/icons/hextris.png",
+      "dir": "/g-mes/hextris"
+    },
+    {
+      "title": "House Of Hazards",
+      "genre": "co-op",
+      "icon": "/icons/houseofhazards.png",
+      "dir": "/g-mes/houseofhazards"
+    },
+    {
+      "title": "Jetpack Joyride",
+      "genre": "action",
+      "icon": "/icons/jetpackjoyride.png",
+      "dir": "/g-mes/jetpackjoyride"
     }
   ]
 }
