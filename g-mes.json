@@ -287,6 +287,78 @@
       "genre": "adventure",
       "icon": "/icons/dadish2.png",
       "dir": "/g-mes/dadish2"
+    },
+    {
+      "title": "Dadish 3",
+      "genre": "platformer",
+      "icon": "/icons/dadish3.png",
+      "dir": "/g-mes/dadish3"
+    },
+    {
+      "title": "A Dance Of Fire And Ice",
+      "genre": "puzzle",
+      "icon": "/icons/dance.png",
+      "dir": "/g-mes/adanceoffireandice"
+    },
+    {
+      "title": "Deepest Sword",
+      "genre": "casual",
+      "icon": "/icons/deepestsword.png",
+      "dir": "/g-mes/deepestsword"
+    },
+    {
+      "title": "Dogeminer",
+      "genre": "idle",
+      "icon": "/icons/dogeminer.png",
+      "dir": "/g-mes/dogeminer"
+    },
+    {
+      "title": "Doodle Defender",
+      "genre": "strategy",
+      "icon": "/icons/doodledefender.png",
+      "dir": "/g-mes/doodledefender"
+    },
+    {
+      "title": "Drifthunters",
+      "genre": "racing",
+      "icon": "/icons/drifthunters.png",
+      "dir": "/g-mes/drifthunters"
+    },
+    {
+      "title": "Drive Mad",
+      "genre": "casual",
+      "icon": "/icons/drivemad.png",
+      "dir": "/g-mes/drivemad"
+    },
+    {
+      "title": "Ducklife",
+      "genre": "simulation",
+      "icon": "/icons/ducklife.png",
+      "dir": "/g-mes/ducklife"
+    },
+    {
+      "title": "Ducklife 2",
+      "genre": "simulation",
+      "icon": "/icons/ducklife2.png",
+      "dir": "/g-mes/ducklife2"
+    },
+    {
+      "title": "Ducklife 3",
+      "genre": "simulation",
+      "icon": "/icons/ducklife3.png",
+      "dir": "/g-mes/ducklife3"
+    },
+    {
+      "title": "Ducklife 4",
+      "genre": "simulation",
+      "icon": "/icons/ducklife4.png",
+      "dir": "/g-mes/ducklife4"
+    },
+    {
+      "title": "Ducklife 5",
+      "genre": "simulation",
+      "icon": "/icons/ducklife5.png",
+      "dir": "/g-mes/ducklife5"
     }
   ]
 }
