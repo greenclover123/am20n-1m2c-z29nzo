@@ -25,12 +25,6 @@
       "dir": "/g-mes/sandtrix"
     },
     {
-      "title": "Papa's Sushiria",
-      "genre": "simulation",
-      "icon": "/icons/papassushiria.png",
-      "dir": "/g-mes/papa'ssushiria"
-    },
-    {
       "title": "1 On 1 Soccer",
       "genre": "action",
       "icon": "/icons/1on1soccer.png",
@@ -509,6 +503,264 @@
       "genre": "action",
       "icon": "/icons/jetpackjoyride.png",
       "dir": "/g-mes/jetpackjoyride"
+    },
+    {
+      "title": "Knife Hit",
+      "genre": "casual",
+      "icon": "/icons/knifehit.png",
+      "dir": "/g-mes/knifehit"
+    },
+    {
+      "title": "Lazy Jump 3D",
+      "genre": "casual",
+      "icon": "/icons/lazyjump3d.png",
+      "dir": "/g-mes/lazyjump3d"
+    },
+    {
+      "title": "Learn To Fly",
+      "genre": "simulation",
+      "icon": "/icons/learntofly.png",
+      "dir": "/g-mes/learntofly"
+    },
+    {
+      "title": "Learn To Fly 2",
+      "genre": "simulation",
+      "icon": "/icons/learntofly2.png",
+      "dir": "/g-mes/learntofly2"
+    },
+    {
+      "title": "Learn To Fly 3",
+      "genre": "simulation",
+      "icon": "/icons/learntofly3.png",
+      "dir": "/g-mes/learntofly3"
+    },
+    {
+      "title": "Learn To Fly Idle",
+      "genre": "idle",
+      "icon": "/icons/learntoflyidle.png",
+      "dir": "/g-mes/learntoflyidle"
+    },
+    {
+      "title": "Line Rider",
+      "genre": "casual",
+      "icon": "/icons/linerider.png",
+      "dir": "/g-mes/linerider"
+    },
+    {
+      "title": "Little Alchemy",
+      "genre": "simulation",
+      "icon": "/icons/littlealchemy.png",
+      "dir": "/g-mes/littlealchemy"
+    },
+    {
+      "title": "Monkey Mart",
+      "genre": "simulation",
+      "icon": "/icons/monkeymart.png",
+      "dir": "/g-mes/monkeymart"
+    },
+    {
+      "title": "Monster Brawl",
+      "genre": "action",
+      "icon": "/icons/monsterbrawl.png",
+      "dir": "/g-mes/monsterbrawl"
+    },
+    {
+      "title": "MotoX3M",
+      "genre": "racing",
+      "icon": "/icons/motox3m.png",
+      "dir": "/g-mes/motox3m"
+    },
+    {
+      "title": "MotoX3M Pool",
+      "genre": "racing",
+      "icon": "/icons/motox3mpool.png",
+      "dir": "/g-mes/motox3mpool"
+    },
+    {
+      "title": "MotoX3M Spooky",
+      "genre": "racing",
+      "icon": "/icons/motox3mspooky.png",
+      "dir": "/g-mes/motox3mspooky"
+    },
+    {
+      "title": "MotoX3M Winter",
+      "genre": "racing",
+      "icon": "/icons/motox3mwinter.png",
+      "dir": "/g-mes/motox3mwinter"
+    },
+    {
+      "title": "Ngon",
+      "genre": "puzzle",
+      "icon": "/icons/ngon.png",
+      "dir": "/g-mes/ngon"
+    },
+    {
+      "title": "Osu (Scratch)",
+      "genre": "action",
+      "icon": "/icons/osu.png",
+      "dir": "/g-mes/osu(scratch)"
+    },
+    {
+      "title": "Papa's Bakeria",
+      "genre": "simulation",
+      "icon": "/icons/papasbakeria.png",
+      "dir": "/g-mes/papa'sbakeria"
+    },
+    {
+      "title": "Papa's Burgeria",
+      "genre": "simulation",
+      "icon": "/icons/papasburgeria.png",
+      "dir": "/g-mes/papa'sburgeria"
+    },
+    {
+      "title": "Papa's Cheeseria",
+      "genre": "simulation",
+      "icon": "/icons/papascheeseria.png",
+      "dir": "/g-mes/papa'scheeseria"
+    },
+    {
+      "title": "Papa's Cupcakeria",
+      "genre": "simulation",
+      "icon": "/icons/papascupcakeria.png",
+      "dir": "/g-mes/papa'scupcakeria"
+    },
+    {
+      "title": "Papa's Freezeria",
+      "genre": "simulation",
+      "icon": "/icons/papasfreezeria.png",
+      "dir": "/g-mes/papa'sfreezeria"
+    },
+    {
+      "title": "Papa's Hotdoggeria",
+      "genre": "simulation",
+      "icon": "/icons/papashotdoggeria.png",
+      "dir": "/g-mes/papa'shotdoggeria"
+    },
+    {
+      "title": "Papa's Pancakeria",
+      "genre": "simulation",
+      "icon": "/icons/papaspancakeria.png",
+      "dir": "/g-mes/papa'spancakeria"
+    },
+    {
+      "title": "Papa's Pastaria",
+      "genre": "simulation",
+      "icon": "/icons/papaspastaria.png",
+      "dir": "/g-mes/papa'spastaria"
+    },
+    {
+      "title": "Papa's Pizzeria",
+      "genre": "simulation",
+      "icon": "/icons/papaspizzeria.png",
+      "dir": "/g-mes/papa'spizzeria"
+    },
+    {
+      "title": "Papa's Sushiria",
+      "genre": "simulation",
+      "icon": "/icons/papassushiria.png",
+      "dir": "/g-mes/papa'ssushiria"
+    },
+    {
+      "title": "Papa's Tacomia",
+      "genre": "simulation",
+      "icon": "/icons/papastacomia.png",
+      "dir": "/g-mes/papa'stacomia"
+    },
+    {
+      "title": "Papa's Wingeria",
+      "genre": "simulation",
+      "icon": "/icons/papaswingeria.png",
+      "dir": "/g-mes/papa'swingeria"
+    },
+    {
+      "title": "Paper io 2",
+      "genre": "casual",
+      "icon": "/icons/paperio2.png",
+      "dir": "/g-mes/paperio2"
+    },
+    {
+      "title": "Pizza Tower Demo",
+      "genre": "platformer",
+      "icon": "/icons/pizzatower.png",
+      "dir": "/g-mes/pizzatowerdemo"
+    },
+    {
+      "title": "Portal Flash Edition",
+      "genre": "puzzle",
+      "icon": "/icons/portal.png",
+      "dir": "/g-mes/portalflashedition"
+    },
+    {
+      "title": "Retro Bowl",
+      "genre": "sports",
+      "icon": "/icons/retrobowl.png",
+      "dir": "/g-mes/retrobowl"
+    },
+    {
+      "title": "Retro Bowl College",
+      "genre": "sports",
+      "icon": "/icons/retrobowlcollege.png",
+      "dir": "/g-mes/retrobowlcollege"
+    },
+    {
+      "title": "Riddle School",
+      "genre": "puzzle",
+      "icon": "/icons/riddleschool.png",
+      "dir": "/g-mes/riddleschool"
+    },
+    {
+      "title": "Riddle School 2",
+      "genre": "puzzle",
+      "icon": "/icons/riddleschool2.png",
+      "dir": "/g-mes/riddleschool2"
+    },
+    {
+      "title": "Riddle School 3",
+      "genre": "puzzle",
+      "icon": "/icons/riddleschool3.png",
+      "dir": "/g-mes/riddleschool3"
+    },
+    {
+      "title": "Riddle School 4",
+      "genre": "puzzle",
+      "icon": "/icons/riddleschool4.png",
+      "dir": "/g-mes/riddleschool4"
+    },
+    {
+      "title": "Riddle School 5",
+      "genre": "puzzle",
+      "icon": "/icons/riddleschool5.png",
+      "dir": "/g-mes/riddleschool5"
+    },
+    {
+      "title": "Riddle School Transfer",
+      "genre": "puzzle",
+      "icon": "/icons/riddletransfer.png",
+      "dir": "/g-mes/riddleschooltransfer"
+    },
+    {
+      "title": "Riddle School Transfer 2",
+      "genre": "puzzle",
+      "icon": "/icons/riddletransfer2.png",
+      "dir": "/g-mes/riddleschooltransfer2"
+    },
+    {
+      "title": "Rise Higher",
+      "genre": "casual",
+      "icon": "/icons/risehigher.png",
+      "dir": "/g-mes/risehigher"
+    },
+    {
+      "title": "Rooftop Snipers 2",
+      "genre": "co-op",
+      "icon": "/icons/rooftopsnipers2.png",
+      "dir": "/g-mes/rooftopsnipers"
+    },
+    {
+      "title": "Run",
+      "genre": "action",
+      "icon": "/icons/run.png",
+      "dir": "/g-mes/run"
     }
   ]
 }
