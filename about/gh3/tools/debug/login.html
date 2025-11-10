@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>login</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .hidden { display: none; }
+    #status, #siteDataStatus {
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 5px;
+    }
+    .success {
+      background: #e0ffe0;
+      color: #206020;
+      border: 1px solid #60c060;
+    }
+    .error {
+      background: #ffe0e0;
+      color: #802020;
+      border: 1px solid #e06060;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>login</h2>
+  <div id="auth">
+    <input type="email" id="email" placeholder="Email"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button id="loginBtn">login</button>
+    <button id="signupBtn">sign Up</button>
+    <div id="status"></div>
+  </div>
+
+  <div id="app" class="hidden">
+    <h3>logged in</h3>
+    <button id="logoutBtn">logout</button>
+  </div>
+
+  <div id="siteDataControls" class="hidden">
+    <h3>game data</h3>
+    <button id="saveBtn">save my game data</button>
+    <button id="loadBtn">load my game data</button>
+    <div id="siteDataStatus"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js" type="module"></script>
+  <script type="module" src="/app.js"></script>
+  <script type="module" src="/site-data-handler.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>skyless hub</title>
+  <link rel="icon" type="image/x-icon" href="/images/faviconyes.ico">
+  <link rel="stylesheet" href="/css/account.css">
+  
+  
+</head>
+<body>
+   
+  <header class="navbar">
+    <!-- Logo on left -->
+    <div class="logo">
+      <a href="/index.html"><img src="/images/skylesshub.png" alt="skyless"></a>
+    </div>
+
+    <!-- Centered nav buttons -->
+    <nav class="nav-links">
+      <a href="/g-mes.html" class="nav-btn">g-mes</a>
+      <a href="#services" class="nav-btn">apps</a>
+      <a href="#contact" class="nav-btn">about</a>
+    </nav>
+  </header>
+
+  <main>
+     <div id="auth-section">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="center-container">
+  <!-- Login/Register Panel -->
+  <div id="login-panel" class="panel">
+    <h2 class="panel-title">Skyless Hub</h2>
+    <p class="panel-subtitle">Login or Register</p>
+
+    <input id="email" type="email" placeholder="Email" class="glass-input">
+    <input id="password" type="password" placeholder="Password" class="glass-input">
+
+    <div class="button-group">
+      <button id="loginButton" class="glass-button">Sign In</button>
+      <button id="registerButton" class="glass-button">Register</button>
+    </div>
+
+    <p id="message" class="panel-message"></p>
+  </div>
+
+  <!-- Signed-in Panel -->
+  <div id="signed-panel" class="panel" style="display: none;">
+    <h2 class="panel-title">Welcome!</h2>
+    <p class="panel-subtitle">Logged in as: <span id="user-email"></span></p>
+    <p class="panel-subtitle">Tokens: <span id="user-tokens">0</span></p>
+    <div class="button-group">
+  <button id="saveDataBtn" class="glass-button">Save Game Data</button>
+  <button id="loadDataBtn" class="glass-button">Load Game Data</button>
+  <button id="disableCooldownBtn" class="glass-button">Disable Load Cooldown</button>
+</div>
+<p id="dataMessage" class="panel-message"></p>
+
+
+    <div class="button-group">
+      <button id="logoutButton" class="glass-button">Sign Out</button>
+      <button id="addTokensBtn" class="glass-button">+5 Tokens</button>
+    </div>
+  </div>
+</div>
+
+    
+
+  </main>
+      <!-- Firebase SDKs - IMPORTANT: Use the actual versions from your Firebase Console -->
+    <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-firestore-compat.js"></script>
+ <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyBA_M_gT63cj23LuIpjEL4qbD8czugbFXQ", // Replace with your actual API Key from Firebase Console
+            authDomain: "skyless-84b51.firebaseapp.com",  
+            projectId: "skyless-84b51",
+            storageBucket: "skyless-84b51.appspot.com",
+            messagingSenderId: "990229888756", // Replace with your actual Sender ID
+            appId: "1:990229888756:web:ae7cc6a3f4bbbdb6c368a1" // Replace with your actual App ID
+        };
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  // --- Elements ---
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const loginButton = document.getElementById('loginButton');
+  const registerButton = document.getElementById('registerButton');
+  const logoutButton = document.getElementById('logoutButton');
+  const addTokensBtn = document.getElementById('addTokensBtn');
+  const messageDiv = document.getElementById('message');
+
+  const loginPanel = document.getElementById('login-panel');
+  const signedPanel = document.getElementById('signed-panel');
+  const userEmailSpan = document.getElementById('user-email');
+  const userTokensSpan = document.getElementById('user-tokens');
+
+  // --- Game Data Elements ---
+  const saveDataBtn = document.getElementById('saveDataBtn');
+  const loadDataBtn = document.getElementById('loadDataBtn');
+  const disableCooldownBtn = document.getElementById('disableCooldownBtn');
+  const dataMessage = document.getElementById('dataMessage');
+
+  let cooldownDisabled = false;
+
+  // --- Helper ---
+  function showMessage(msg, isError=false) {
+    messageDiv.textContent = msg;
+    messageDiv.style.color = isError ? '#f88' : '#8f8';
+    messageDiv.style.display = 'block';
+    setTimeout(() => messageDiv.style.display = 'none', 4000);
+  }
+
+  function showDataMessage(msg) {
+    dataMessage.textContent = msg;
+    dataMessage.style.display = 'block';
+    setTimeout(() => dataMessage.style.display = 'none', 4000);
+  }
+
+  function getAllGameData() {
+    // Replace this with actual game data collection
+    return {
+      score: Math.floor(Math.random() * 1000),
+      level: Math.floor(Math.random() * 20),
+      inventory: ['item1', 'item2'],
+      otherWebsiteData: { coins: 123, gems: 5 }
+    };
+  }
+
+  // --- Register ---
+  registerButton.addEventListener('click', async () => {
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    if (!email || !password) { showMessage("Enter email and password!", true); return; }
+
+    try {
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+      await user.sendEmailVerification();
+      showMessage("Account created! Check your email for verification.");
+
+      const userRef = db.collection('users').doc(user.uid);
+      await userRef.set({
+        email: user.email,
+        tokens: 0,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+    } catch(e) {
+      showMessage("Registration failed: " + e.message, true);
+    }
+  });
+
+  // --- Login ---
+  loginButton.addEventListener('click', async () => {
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    if (!email || !password) { showMessage("Enter email and password!", true); return; }
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      showMessage("Signed in successfully!");
+    } catch(e) {
+      showMessage("Login failed: " + e.message, true);
+    }
+  });
+
+  // --- Logout ---
+  logoutButton.addEventListener('click', async () => {
+    try {
+      await auth.signOut();
+      showMessage("Signed out!");
+    } catch(e) {
+      showMessage("Logout failed: " + e.message, true);
+    }
+  });
+
+  // --- Add Tokens ---
+  addTokensBtn.addEventListener('click', async () => {
+    const user = auth.currentUser;
+    if (!user) { showMessage("Sign in first!", true); return; }
+
+    const userRef = db.collection('users').doc(user.uid);
+    try {
+      await userRef.update({ tokens: firebase.firestore.FieldValue.increment(5) });
+      showMessage("+5 Tokens added!");
+    } catch(e) {
+      showMessage("Failed to add tokens: " + e.message, true);
+    }
+  });
+
+  // --- Save Game Data ---
+  saveDataBtn.addEventListener('click', async () => {
+    const user = auth.currentUser;
+    if (!user) { showDataMessage("Sign in first!"); return; }
+
+    try {
+      const userRef = db.collection('users').doc(user.uid);
+      const data = getAllGameData();
+
+      await userRef.set({
+        gameData: data,
+        lastSaved: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+
+      showDataMessage("✅ Game data saved!");
+    } catch (e) {
+      console.error(e);
+      showDataMessage("❌ Failed to save data!");
+    }
+  });
+
+  // --- Load Game Data with Cooldown ---
+  loadDataBtn.addEventListener('click', async () => {
+    const user = auth.currentUser;
+    if (!user) { showDataMessage("Sign in first!"); return; }
+
+    try {
+      const userRef = db.collection('users').doc(user.uid);
+      const doc = await userRef.get();
+      if (!doc.exists) { showDataMessage("No saved data!"); return; }
+
+      const lastLoad = doc.data().lastLoad?.toDate?.() || null;
+      const now = new Date();
+      const cooldownMs = 60 * 60 * 1000; // 1 hour
+
+      if (!cooldownDisabled && lastLoad && now - lastLoad < cooldownMs) {
+        const remaining = Math.ceil((cooldownMs - (now - lastLoad)) / 60000);
+        showDataMessage(`⏳ Load cooldown active. Wait ${remaining} minutes.`);
+        return;
+      }
+
+      const savedData = doc.data().gameData;
+      console.log("Loaded game data:", savedData);
+      showDataMessage("✅ Game data loaded!");
+
+      await userRef.update({ lastLoad: firebase.firestore.FieldValue.serverTimestamp() });
+    } catch (e) {
+      console.error(e);
+      showDataMessage("❌ Failed to load data!");
+    }
+  });
+
+  // --- Disable Cooldown ---
+  disableCooldownBtn.addEventListener('click', () => {
+    cooldownDisabled = true;
+    showDataMessage("⚡ Load cooldown disabled for testing!");
+  });
+
+  // --- Auth State Listener ---
+  auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      loginPanel.style.display = 'none';
+      signedPanel.style.display = 'block';
+      userEmailSpan.textContent = user.email;
+
+      const userRef = db.collection('users').doc(user.uid);
+      await userRef.set({ email: user.email, tokens: firebase.firestore.FieldValue.increment(0) }, { merge: true });
+
+      userRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          userTokensSpan.textContent = doc.data().tokens || 0;
+        } else {
+          userTokensSpan.textContent = 0;
+        }
+      }, (err) => console.error(err));
+
+    } else {
+      loginPanel.style.display = 'block';
+      signedPanel.style.display = 'none';
+      emailInput.value = '';
+      passwordInput.value = '';
+      userEmailSpan.textContent = '';
+      userTokensSpan.textContent = '0';
+    }
+  });
+</script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+</body>
+</html>
