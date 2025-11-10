@@ -359,6 +359,60 @@
       "genre": "simulation",
       "icon": "/icons/ducklife5.png",
       "dir": "/g-mes/ducklife5"
+    },
+    {
+      "title": "Eggy Car",
+      "genre": "casual",
+      "icon": "/icons/eggycar.png",
+      "dir": "/g-mes/eggycar"
+    },
+    {
+      "title": "Electric Box",
+      "genre": "puzzle",
+      "icon": "/icons/electricbox.png",
+      "dir": "/g-mes/electricbox"
+    },
+    {
+      "title": "Electric Man 2",
+      "genre": "action",
+      "icon": "/icons/electricman2.png",
+      "dir": "/g-mes/electricman2"
+    },
+    {
+      "title": "Escaping The Prison",
+      "genre": "puzzle",
+      "icon": "/icons/escapingtheprison.png",
+      "dir": "/g-mes/escapingtheprison"
+    },
+    {
+      "title": "Factory Balls Forever",
+      "genre": "puzzle",
+      "icon": "/icons/factoryballsforever.png",
+      "dir": "/g-mes/factoryballsforever"
+    },
+    {
+      "title": "Fancy Pants Adventure",
+      "genre": "adventure",
+      "icon": "/icons/fancypantsadventure.png",
+      "dir": "/g-mes/fancypantsadventure"
+    },
+    {
+      "title": "Fancy Pants Adventure 2",
+      "genre": "adventure",
+      "icon": "/icons/fancypantsadventure2.png",
+      "dir": "/g-mes/fancypantsadventure2"
+    },
+    {
+      "title": "Fireboy and Watergirl",
+      "genre": "co-op",
+      "icon": "/icons/fireboyandwatergirl1.png",
+      "dir": "/g-mes/fireboyandwatergirl"
+    },
+    {
+      "title": "Fireboy and Watergirl 2",
+      "genre": "co-op",
+      "icon": "/icons/fireboyandwatergirl2.png",
+      "dir": "/g-mes/fireboyandwatergirl2"
     }
   ]
 }
