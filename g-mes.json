@@ -413,6 +413,42 @@
       "genre": "co-op",
       "icon": "/icons/fireboyandwatergirl2.png",
       "dir": "/g-mes/fireboyandwatergirl2"
+    },
+    {
+      "title": "Fireboy and Watergirl 3",
+      "genre": "co-op",
+      "icon": "/icons/fireboyandwatergirl3.png",
+      "dir": "/g-mes/fireboyandwatergirl3"
+    },
+    {
+      "title": "Fireboy and Watergirl 4",
+      "genre": "co-op",
+      "icon": "/icons/fireboyandwatergirl4.png",
+      "dir": "/g-mes/fireboyandwatergirl4"
+    },
+    {
+      "title": "Flappy Bird",
+      "genre": "casual",
+      "icon": "/icons/flappybird.png",
+      "dir": "/g-mes/flappybird"
+    },
+    {
+      "title": "Fleeing The Complex",
+      "genre": "puzzle",
+      "icon": "/icons/fleeingthecomplex.png",
+      "dir": "/g-mes/fleeingthecomplex"
+    },
+    {
+      "title": "Five Nights at Freddy's 1",
+      "genre": "horror",
+      "icon": "/icons/fnaf1.png",
+      "dir": "/g-mes/fivenightsatfreddy's1"
+    },
+    {
+      "title": "Friday Night Funkin",
+      "genre": "action",
+      "icon": "/icons/fnf.png",
+      "dir": "/g-mes/fridaynightfunkin"
     }
   ]
 }

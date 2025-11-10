@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+<script src="/js/all.js"></script>
+
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="manifest" href="manifest.json" />
+    <style></style>
+    <title>Flappy Bird</title>
+    <script src="playcanvas-stable.min.js"></script>
+    <script src="settings.js"></script>
+  </head>
+  <body>
+    <script src="start.js"></script>
+    <script src="loading.js"></script>
+  <script>
+  ["mousemove","keydown","click","touchstart"].forEach(evt=>{
+    document.addEventListener(evt, e=>{
+      parent.postMessage({
+        type:"iframe-activity",
+        x: e.clientX || 0,
+        y: e.clientY || 0,
+        ts: Date.now()
+      },"*");
+    });
+  });
+</script>
+
+</body>
+</html>
