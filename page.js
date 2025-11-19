@@ -30,7 +30,9 @@ var greeting = [
   "wait a minute, wait a minute, wait a goddamn minute",
   "you already did it! see? its already over! yay! you did it!",
   "okay, we going slow, we going slow down",
-  "bittersweet cake"
+  "bittersweet cake",
+  "photoshot fresh, lookin' like wealth",
+  "sophisticated ignorance"
 ];
 
 var randomGreeting = Math.floor(Math.random() * greeting.length);
