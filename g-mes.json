@@ -124,7 +124,9 @@
       "title": "Bitlife",
       "genre": "simulation",
       "icon": "/icons/bitlife.png",
-      "dir": "/g-mes/bitlife"
+      "dir": "/g-mes/bitlife",
+      "featured": true,
+      "description": "become a murder or a rich man"
     },
     {
       "title": "Block Blast",
@@ -184,7 +186,9 @@
       "title": "Balloon Tower Defense 4",
       "genre": "strategy",
       "icon": "/icons/btd4.png",
-      "dir": "/g-mes/balloontowerdefense4"
+      "dir": "/g-mes/balloontowerdefense4",
+      "featured": true,
+      "description": "animal hit balloon simulator"
     },
     {
       "title": "Bubble Spinner",
@@ -256,7 +260,9 @@
       "title": "Core Ball",
       "genre": "puzzle",
       "icon": "/icons/coreball.png",
-      "dir": "/g-mes/coreball"
+      "dir": "/g-mes/coreball",
+      "featured": true,
+      "description": "a classic reaction time tester 3000"
     },
     {
       "title": "Crossy Road",
@@ -454,7 +460,9 @@
       "title": "Gladihoppers",
       "genre": "action",
       "icon": "/icons/gladihoppers.png",
-      "dir": "/g-mes/gladihoppers"
+      "dir": "/g-mes/gladihoppers",
+      "featured": true,
+      "description": "actually really good time waster"
     },
     {
       "title": "Go Ball",
@@ -652,7 +660,9 @@
       "title": "Papa's Sushiria",
       "genre": "simulation",
       "icon": "/icons/papassushiria.png",
-      "dir": "/g-mes/papa'ssushiria"
+      "dir": "/g-mes/papa'ssushiria",
+      "featured": true,
+      "description": "favorite papa game personally"
     },
     {
       "title": "Papa's Tacomia",
@@ -688,7 +698,9 @@
       "title": "Retro Bowl",
       "genre": "sports",
       "icon": "/icons/retrobowl.png",
-      "dir": "/g-mes/retrobowl"
+      "dir": "/g-mes/retrobowl",
+      "featured": true,
+      "description": "cant go wrong with retro bowl"
     },
     {
       "title": "Retro Bowl College",
@@ -766,7 +778,9 @@
       "title": "Sandtrix",
       "genre": "puzzle",
       "icon": "/icons/sandtrix.png",
-      "dir": "/g-mes/sandtrix"
+      "dir": "/g-mes/sandtrix",
+      "featured": true,
+      "description": "actually good remix of tetris"
     },
     {
       "title": "Slope",
@@ -953,6 +967,48 @@
       "genre": "co-op",
       "icon": "/icons/volleyrandom.png",
       "dir": "/g-mes/volleyrandom"
+    },
+    {
+      "title": "3D Bowling",
+      "genre": "casual",
+      "icon": "/icons/3dbowling.png",
+      "dir": "/g-mes/3dbowling"
+    },
+    {
+      "title": "Baldi Basic's Plus!",
+      "genre": "horror",
+      "icon": "/icons/baldiplus.png",
+      "dir": "/g-mes/baldibasic'splus!"
+    },
+    {
+      "title": "Bowmasters",
+      "genre": "action",
+      "icon": "/icons/bowmasters.png",
+      "dir": "/g-mes/bowmasters"
+    },
+    {
+      "title": "People Playground",
+      "genre": "simulation",
+      "icon": "/icons/peopleplayground.png",
+      "dir": "/g-mes/peopleplayground"
+    },
+    {
+      "title": "Quake III Arena",
+      "genre": "action",
+      "icon": "/icons/quake3.png",
+      "dir": "/g-mes/quakeiiiarena"
+    },
+    {
+      "title": "Raft",
+      "genre": "simulation",
+      "icon": "/icons/raft.png",
+      "dir": "/g-mes/raft"
+    },
+    {
+      "title": "Webfishing",
+      "genre": "simulation",
+      "icon": "/icons/webfishing.png",
+      "dir": "/g-mes/webfishing"
     }
   ]
 }

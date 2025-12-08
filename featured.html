@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>skyless hub</title>
+  <link rel="icon" type="image/x-icon" href="/images/faviconyes.ico">
+  <link rel="stylesheet" href="/css/featured.css">
+</head>
+<body>
+  <header class="navbar">
+    <!-- Logo on left -->
+    <div class="logo">
+      <a href="/index.html"><img src="/images/skylesshub.png" alt="skyless"></a>
+    </div>
+
+    <!-- Centered nav buttons -->
+    <nav class="nav-links">
+      <a href="/featured.html" class="nav-btn">g-mes</a>
+      <a href="/apps.html" class="nav-btn">apps</a>
+      <a href="/about.html" class="nav-btn">about</a>
+      <a id="authNavBtn" class="nav-btn" href="account.html" class="nav-link">loading</a>
+    </nav>
+  </header>
+   
+<main>
+  <h1 href="/g-mes.html" class="centertext">featured g-mes</h1>
+
+  <div id="featuredWrap">
+    <div id="featuredGrid"></div>
+  </div>
+
+  <div id="controls" style="position:fixed;left:20px;bottom:20px;display:flex;gap:8px;z-index:200;">
+    <a href="/g-mes.html" class="ctl">see all g-mes</a>
+  </div>
+</main>
+
+<script type="module">
+/* ============================================================
+   BASIC CONFIG
+============================================================ */
+const COLS = 12;
+const GAP = 18;
+
+/* tile shapes */
+const presets = [
+[4,4],[4,6],[3,5],[6,4],[5,7]
+];
+
+let seed = Date.now()%999999;
+function rand(){ seed=(seed*9301+49297)%233280; return seed/233280; }
+function pickPreset(randomize,total){
+  if(!randomize){
+    if(total<=3) return presets[Math.floor(rand()*2)];
+    if(total<=6) return presets[Math.floor(rand()*4)];
+    return presets[Math.floor(rand()*presets.length)];
+  }
+  return presets[Math.floor(rand()*presets.length)];
+}
+
+/* ============================================================
+   PACKER (greedy)
+============================================================ */
+function pack(items){
+  const occ=[];
+  const placements=[];
+
+  const ensure = n => { while(occ.length<n) occ.push(new Array(COLS).fill(false)); };
+
+  const fits = (r,c,w,h)=>{
+    if(c+w>COLS) return false;
+    ensure(r+h);
+    for(let rr=r; rr<r+h; rr++){
+      for(let cc=c; cc<c+w; cc++){
+        if(occ[rr][cc]) return false;
+      }
+    }
+    return true;
+  };
+
+  const occupy = (r,c,w,h)=>{
+    ensure(r+h);
+    for(let rr=r; rr<r+h; rr++)
+      for(let cc=c; cc<c+w; cc++)
+        occ[rr][cc]=true;
+  };
+
+  items.forEach(item=>{
+    let placed=false;
+    for(let r=0; r<occ.length+8 && !placed; r++){
+      for(let c=0; c<=COLS-item.w && !placed; c++){
+        if(fits(r,c,item.w,item.h)){
+          occupy(r,c,item.w,item.h);
+          placements.push({row:r,col:c,w:item.w,h:item.h});
+          placed=true;
+        }
+      }
+    }
+    if(!placed){
+      const r=occ.length;
+      occupy(r,0,item.w,item.h);
+      placements.push({row:r,col:0,w:item.w,h:item.h});
+    }
+  });
+
+  return {placements, rows:occ.length};
+}
+
+/* ============================================================
+   PIXEL POSITIONING
+============================================================ */
+function computePositions(placements, rows, rect){
+  const colW = (rect.width - (COLS-1)*GAP)/COLS;
+  const rowH = (rect.height - (rows-1)*GAP)/rows;
+
+  return placements.map(p=>({
+    left: Math.round(p.col*(colW+GAP)),
+    top: Math.round(p.row*(rowH+GAP)),
+    width: Math.round(p.w*colW + (p.w-1)*GAP),
+    height: Math.round(p.h*rowH + (p.h-1)*GAP)
+  }));
+}
+
+/* ============================================================
+   RENDER ENGINE (icons 60% of smaller dimension - capped by padding)
+============================================================ */
+async function render({randomize=false}={}) {
+  const res = await fetch('/g-mes.json');
+  if(!res.ok){
+    document.getElementById('featuredGrid').innerHTML = '<div style="color:#fff;padding:18px">Cannot load /g-mes.json</div>';
+    return;
+  }
+  const data = await res.json();
+  let featured = data.games.filter(g=>g.featured);
+
+
+  const container = document.getElementById("featuredGrid");
+
+  const oldEls = Array.from(container.children);
+  const firstRects = oldEls.map(e=>e.getBoundingClientRect());
+
+  seed = Date.now()%999999;
+  const shaped = featured.map(g=>{
+    const [w,h] = pickPreset(randomize, featured.length);
+    return {game:g,w,h};
+  });
+
+  const items = shaped.map(s=>({w:s.w,h:s.h}));
+  const {placements, rows} = pack(items);
+
+  const wrap = document.getElementById("featuredWrap");
+  const rect = wrap.getBoundingClientRect();
+  const posArr = computePositions(placements, rows, rect);
+
+  // build elements
+  container.innerHTML = "";
+  const els = [];
+
+  shaped.forEach((s,i)=>{
+    const g = s.game;
+    const pos = posArr[i];
+
+    const el = document.createElement("div");
+    el.className = "feat-card fadeIn";
+
+    // set initial position/size (these will transition smoothly)
+    el.style.left = pos.left + "px";
+    el.style.top = pos.top + "px";
+    el.style.width = pos.width + "px";
+    el.style.height = pos.height + "px";
+
+    // compute sizes
+    const padding = 6; // matches CSS padding so icon won't touch edges
+    const smaller = Math.min(pos.width - padding*2, pos.height - padding*2);
+    // ICON: 60% of smaller dimension
+    let iconSize = Math.round(smaller * 0.70);
+    // cap to ensure it never exceeds tile available space
+    iconSize = Math.max(30, Math.min(iconSize, pos.width - padding*2, pos.height - padding*2));
+
+    const titleSize = Math.max(14, Math.round(smaller * 0.20));
+    const genreSize = Math.max(12, Math.round(smaller * 0.15));
+    const descSize  = Math.max(12, Math.round(smaller * 0.1));
+
+    el.style.setProperty('--icon-size', iconSize + "px");
+    el.style.setProperty('--title-size', titleSize + "px");
+    el.style.setProperty('--genre-size', genreSize + "px");
+    el.style.setProperty('--desc-size', descSize + "px");
+
+    // tiny classification
+    if(pos.width < 220 || pos.height < 140) el.classList.add('tiny');
+
+    // content
+    const content = document.createElement("div");
+    content.className = "tile-content";
+    if(s.h >= s.w && pos.height > pos.width * 1.15) content.classList.add("stacked");
+
+    const iconWrap = document.createElement("div");
+    iconWrap.className = "tile-icon";
+    const img = document.createElement("img");
+    img.src = g.icon;
+    img.alt = g.title;
+    img.onerror = () => { img.src = '/icons/default-icon.png'; };
+    iconWrap.appendChild(img);
+
+    const meta = document.createElement("div");
+    meta.className = "tile-meta";
+    meta.innerHTML = `
+      <div class="tile-title" style="font-size:var(--title-size)">${escapeHtml(g.title)}</div>
+      <div class="tile-genre" style="font-size:var(--genre-size)">${escapeHtml(g.genre||"")}</div>
+      <div class="tile-desc" style="font-size:var(--desc-size)">${escapeHtml(g.description||"")}</div>
+    `;
+
+    content.appendChild(iconWrap);
+    content.appendChild(meta);
+
+    const gloss = document.createElement("div");
+    gloss.className = "gloss";
+
+    el.appendChild(gloss);
+    el.appendChild(content);
+
+    el.addEventListener("click", ()=>{
+      if(g.dir === "__view_all__") window.location.href = "/g-mes.html";
+      else window.location.href = `/g-metemp.html?dir=${g.dir}&title=${encodeURIComponent(g.title)}&genre=${encodeURIComponent(g.genre)}`;
+    });
+
+    container.appendChild(el);
+    els.push(el);
+  });
+
+  // optional: animate appear / simple FLIP-like opacity fallback if counts changed
+  if(firstRects.length && firstRects.length !== els.length){
+    els.forEach(el => { el.style.opacity = 0; el.style.transition = 'opacity 420ms ease'; });
+    requestAnimationFrame(()=> els.forEach(el => el.style.opacity = 1));
+  }
+}
+
+/* helpers */
+function escapeHtml(s){ return (s+'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  render({randomize:true});
+
+  let t;
+  window.addEventListener("resize", ()=>{
+    clearTimeout(t);
+    t = setTimeout(()=> render({randomize:false}), 180);
+  });
+});
+</script>
+<script type="module" src="/script.js"></script>
+</body>
+</html>

@@ -32,7 +32,8 @@ var greeting = [
   "okay, we going slow, we going slow down",
   "bittersweet cake",
   "photoshot fresh, lookin' like wealth",
-  "sophisticated ignorance"
+  "sophisticated ignorance",
+  "w fraps??"
 ];
 
 var randomGreeting = Math.floor(Math.random() * greeting.length);
