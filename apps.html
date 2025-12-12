@@ -11,12 +11,10 @@
 </head>
 <body>
   <header class="navbar">
-    <!-- Logo on left -->
     <div class="logo">
       <a href="/index.html"><img src="/images/darklogo.png" alt="skyless"></a>
     </div>
 
-    <!-- Centered nav buttons -->
     <nav class="nav-links">
       <a href="/featured.html" class="nav-btn">g-mes</a>
       <a href="/apps.html" class="nav-btn">apps</a>
@@ -31,19 +29,16 @@
 
     <div style="padding-top: 4vw; text-align:center;" class="content">
 
-        <!-- Featured Game -->
 <div id="featured" class="featured"></div>
 <div class="content">
 <br>
 <br>
-  <!-- Genre scrolling container -->
   <div class="genre-nav">
     <button class="arrow left">&#10094;</button>
     <div class="genre-list" id="genreList"></div>
     <button class="arrow right">&#10095;</button>
   </div>
 
-  <!-- Games container -->
   <div id="games"></div>
 </div>
  <script type="module" src="/script.js"></script>
@@ -52,14 +47,12 @@
     const res = await fetch("/apps.json");
     const data = await res.json();
 
-    // group games by genre
     const genres = {};
     data.games.forEach(game => {
       if (!genres[game.genre]) genres[game.genre] = [];
       genres[game.genre].push(game);
     });
 
-    // add genre buttons
     const genreList = document.getElementById("genreList");
     Object.keys(genres).forEach((genre, i) => {
       const btn = document.createElement("button");
@@ -70,7 +63,6 @@
       genreList.appendChild(btn);
     });
 
-    // show first genre by default
     showGames(Object.keys(genres)[0], genres);
   }
 

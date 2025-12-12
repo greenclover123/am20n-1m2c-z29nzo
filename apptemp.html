@@ -12,12 +12,10 @@
   
 </head>
   <header class="navbar">
-    <!-- Logo on left -->
     <div class="logo">
       <a href="/index.html"><img src="/images/darklogo.png" alt="skyless"></a>
     </div>
 
-    <!-- Centered nav buttons -->
     <nav class="nav-links">
       <a href="/featured.html" class="nav-btn">g-mes</a>
       <a href="/apps.html" class="nav-btn">apps</a>
@@ -31,13 +29,19 @@
     <iframe id="gameIframe" frameborder="0" width="800px" height="450px" id="iframe"></iframe>
       <div class="game-footer">
     <span id="gameTitle">game title</span>
-    <button onclick="goFullscreen()">⛶</button>
+    <button style="font-family: 'Damion'; src: url('/resource/Damion-8gnD.ttf') format('truetype')" onclick="openInNewTab()">open in a new tab</button>
   </div>
 </div>
 
 
 <script>
   
+function openInNewTab() {
+  const url = document.getElementById("gameIframe").src;
+  if (!url) return;
+  window.open(url, "_blank");
+}
+
   function loadGame(title, url) {
     document.getElementById("gameTitle").innerText = title;
     document.getElementById("gameIframe").src = dir + "/index.html";
@@ -76,12 +80,12 @@
 <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-firestore-compat.js"></script>
 <script>
   const firebaseConfig = {
-            apiKey: "AIzaSyBA_M_gT63cj23LuIpjEL4qbD8czugbFXQ", // Replace with your actual API Key from Firebase Console
+            apiKey: "AIzaSyBA_M_gT63cj23LuIpjEL4qbD8czugbFXQ", 
             authDomain: "skyless-84b51.firebaseapp.com",  
             projectId: "skyless-84b51",
             storageBucket: "skyless-84b51.appspot.com",
-            messagingSenderId: "990229888756", // Replace with your actual Sender ID
-            appId: "1:990229888756:web:ae7cc6a3f4bbbdb6c368a1" // Replace with your actual App ID
+            messagingSenderId: "990229888756",
+            appId: "1:990229888756:web:ae7cc6a3f4bbbdb6c368a1" 
         };
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -89,7 +93,6 @@
 </script>
 
 <script type="text/javascript">
-// --- Token display ---
 const tokenDisplay = document.createElement("div");
 Object.assign(tokenDisplay.style, {
   marginTop: "0.9vw",
@@ -111,7 +114,6 @@ Object.assign(tokenDisplay.style, {
 tokenDisplay.textContent = "0 tokens";
 document.body.appendChild(tokenDisplay);
 
-// --- Active timer display ---
 const activeTimerDisplay = document.createElement("div");
 Object.assign(activeTimerDisplay.style, {
   marginTop: "0.9vw",
@@ -134,7 +136,6 @@ Object.assign(activeTimerDisplay.style, {
 activeTimerDisplay.textContent = "00:00";
 document.body.appendChild(activeTimerDisplay);
 
-// --- Popup for rewards ---
 const popup = document.createElement("div");
 Object.assign(popup.style, {
   position: "fixed",
@@ -164,20 +165,16 @@ function showPopup(text){
   }, 3000);
 }
 
-// --- Token reward constants ---
-const REWARD_SECONDS = 300; // 5 minutes
+const REWARD_SECONDS = 300; 
 const REWARD_AMOUNT = 5;
 
-// --- Timer variables ---
 let activeSeconds = 0;
 let tokenInterval = null;
 
-// --- User activity tracking ---
 let lastActivity = Date.now();
-let isActive = false; // start paused
-const INACTIVITY_TIMEOUT = 10 * 1000; // 10 seconds
+let isActive = false; 
+const INACTIVITY_TIMEOUT = 10 * 1000;
 
-// --- Anti-macro entropy system ---
 let entropyScore = 0;
 let lastX = null, lastY = null, lastTs = null;
 
@@ -202,10 +199,8 @@ function processActivityEvent(data){
 
   if(entropyScore > 100) entropyScore = 100;
 
-  // ✅ Update last activity FIRST
   lastActivity = Date.now();
 
-  // ✅ Resume timer if paused
   if(!isActive){
     startInterval(currentUser);
     activeTimerDisplay.style.background = "rgba(88, 98, 125, 0.15)";
@@ -213,7 +208,6 @@ function processActivityEvent(data){
   }
 }
 
-// --- Format time mm:ss ---
 function formatTime(sec){
   const m = Math.floor(sec/60).toString().padStart(2,'0');
   const s = (sec%60).toString().padStart(2,'0');
@@ -224,7 +218,6 @@ function updateActiveTimerDisplay(){
   activeTimerDisplay.textContent = formatTime(activeSeconds);
 }
 
-// --- Give tokens ---
 async function giveTokens(user){
   if(entropyScore < 10){ 
     console.warn("possible macro. skipping reward."); 
@@ -244,7 +237,7 @@ async function giveTokens(user){
           lastRewardTime: firebase.firestore.Timestamp.fromMillis(now)
         });
         showPopup(`${REWARD_AMOUNT} tokens earned!`);
-        entropyScore = 0; // reset after reward
+        entropyScore = 0; 
       }
     });
   }catch(err){
@@ -254,7 +247,6 @@ async function giveTokens(user){
 
 let currentUser = null;
 
-// --- Interval logic ---
 function startInterval(user){
   if(tokenInterval) return;
   isActive = true;
@@ -284,21 +276,18 @@ function stopInterval(){
   isActive = false;
 }
 
-// --- Listen for iframe activity ---
 window.addEventListener("message",(event)=>{
   if(event.data && event.data.type === "iframe-activity"){
     processActivityEvent(event.data);
   }
 });
 
-// --- Local activity fallback ---
 ["mousemove","keydown","click"].forEach(evt=>{
   document.addEventListener(evt,(e)=>{
     processActivityEvent({x:e.clientX||0,y:e.clientY||0,ts:Date.now()});
   });
 });
 
-// --- Listen for auth changes ---
 firebase.auth().onAuthStateChanged(user=>{
   stopInterval();
   activeSeconds = 0;

@@ -4,41 +4,96 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>skyless hub</title>
-  <link rel="icon" type="image/x-icon" href="/images/faviconyes.ico">
   <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+main {
+  padding-top: 10vw;
+  display: flex;
+  justify-content: center;
+}
+
+.iframe-row {
+  width: 95%;
+  max-width: 1300px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5vw;
+}
+
+.iframe-box {
+  flex: 0 1 32%;
+  min-width: 300px;
+  max-width: 400px; 
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.3);
+  border: 2px solid rgba(255,255,255,0.15);
+}
+
+
+.iframe-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+
+@media (max-width: 900px) {
+  .iframe-box {
+    flex: 0 1 80%;            
+    max-width: 600px;
+  }
+}
+
+
+    footer {
+      margin-top: 5vw;
+      text-align: center;
+      font-family: 'Damion', sans-serif;
+      font-size: 1.5vw;
+      color: rgb(166,185,238);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+    }
+
+    footer a {
+      color: rgb(166,185,238);
+      text-decoration: none;
+    }
+  </style>
 </head>
+
 <body>
+
   <header class="navbar">
-    <!-- Logo on left -->
     <div class="logo">
       <a href="/index.html"><img src="/images/skylesshub.png" alt="skyless"></a>
     </div>
 
-    <!-- Centered nav buttons -->
     <nav class="nav-links">
       <a href="/featured.html" class="nav-btn">g-mes</a>
       <a href="/apps.html" class="nav-btn">apps</a>
       <a href="/about.html" class="nav-btn">about</a>
-      <a id="authNavBtn" class="nav-btn" href="account.html" class="nav-link">loading</a>
+      <a id="authNavBtn" class="nav-btn" href="account.html">loading</a>
     </nav>
   </header>
 
-  <main>
-
-
-    <section style="padding-top: 10vw; text-align:center;">
-      <div class="center-container">
-        
-    <img src="/images/skylesshubtextv2.png" style= "margin-top: -2vw; margin-left: -67vw; height: 7vw;" alt="skyless" class="logo">
-    <h2 class="top-logo" style= "margin-left: -50vw; font-size: 1.9vw; margin-top: -1vw;" >a simple g-me website that has gone through some changes;</h2>
-    <iframe src="about/gh3/index.html" style="margin-left: -40vw; margin-top: 3vw;" frameborder="0" width="600vw" height="300vw"></iframe>
-    <img src="/images/Screenshot 2025-11-10 154552.png" style="margin-left: 42vw; margin-top: -19.5vw;" frameborder="0" width="590vw" height="290vw"></iframe>
+ <main>
+  <div class="iframe-row">
+    <div class="iframe-box"><iframe src="about/gh1/index.html"></iframe></div>
+    <div class="iframe-box"><iframe src="about/gh2/index.html"></iframe></div>
+    <div class="iframe-box"><iframe src="about/gh3/index.html"></iframe></div>
   </div>
-    </section>
-<script type="module" src="/script.js"></script>
-  </main>
+</main>
 
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+
+  <footer style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" ><a href="mailto:contact@starrydreams.space">support@starrydreams.space</a>  
+    • for DMCA takedowns or inquiries
+  </footer>
 
 </body>
 </html>

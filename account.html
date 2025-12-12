@@ -12,12 +12,10 @@
 <body>
    
   <header class="navbar">
-    <!-- Logo on left -->
     <div class="logo">
       <a href="/index.html"><img src="/images/skylesshub.png" alt="skyless"></a>
     </div>
 
-    <!-- Centered nav buttons -->
     <nav class="nav-links">
       <a href="/featured.html" class="nav-btn">g-mes</a>
       <a href="/apps.html" class="nav-btn">apps</a>
@@ -33,7 +31,6 @@
         <br>
         <br>
         <div class="center-container">
-  <!-- Login/Register Panel -->
   <div style="font-size: 1.5vw;" id="login-panel" class="panel">
 
     <input style="font-family: Arial, Helvetica, sans-serif;" id="email" type="email" placeholder="email" class="glass-input">
@@ -81,7 +78,6 @@ let world = null;
 let coins = [];
 let walls = [];
 
-// Call this to remove the current coin box (e.g., on sign out)
 function destroyCoinBox() {
   if (render && render.canvas) render.canvas.style.display = "none";
   if (engine) {
@@ -104,8 +100,6 @@ async function spawnCoinBox(userTokens) {
     console.error("Matter.js is not loaded");
     return;
   }
-
-  // Destroy previous box if exists
   destroyCoinBox();
 
   const totalTokens = userTokens;
@@ -130,7 +124,7 @@ async function spawnCoinBox(userTokens) {
   Render.run(render);
   Runner.run(Runner.create(), engine);
 
-  // Config percentages
+
   const boxWPercent = 20;
   const boxHPercent = 25;
   const centerXPercent = 68;
@@ -138,7 +132,6 @@ async function spawnCoinBox(userTokens) {
   const coinRPercent = 0.8;
 
   function buildScene() {
-    // Clear world
     World.clear(world, false);
     coins.length = 0;
     walls.length = 0;
@@ -154,7 +147,6 @@ async function spawnCoinBox(userTokens) {
     const boxY = (centerYPercent / 100) * height;
     const coinRadius = (coinRPercent / 100) * width;
 
-    // Build walls
     function createWallSegments(x, y, w, h, pieces, horizontal = true) {
       const segments = [];
       for (let i = 0; i < pieces; i++) {
@@ -177,7 +169,6 @@ async function spawnCoinBox(userTokens) {
     walls = walls.concat(createWallSegments(boxX + boxWPx / 2, boxY, 20, boxHPx, 6, false));
     World.add(world, walls);
 
-    // Spawn coins
     for (let i = 0; i < coinCount; i++) {
       const coin = Bodies.circle(
         boxX - boxWPx / 2 + coinRadius + Math.random() * (boxWPx - 2 * coinRadius),
@@ -194,7 +185,6 @@ async function spawnCoinBox(userTokens) {
       World.add(world, coin);
     }
 
-    // Mouse drag
     const mouse = Mouse.create(render.canvas);
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse: mouse,
@@ -206,7 +196,6 @@ async function spawnCoinBox(userTokens) {
 
   buildScene();
 
-  // Draw coin values
   Events.on(render, "afterRender", () => {
     const ctx = render.context;
     ctx.font = "10px Arial";
@@ -216,7 +205,7 @@ async function spawnCoinBox(userTokens) {
     coins.forEach(c => ctx.fillText(c.tokenValue, c.position.x, c.position.y));
   });
 
-  // Explosion
+
   function explodeBox() {
     walls.forEach(w => Body.setStatic(w, false));
     coins.forEach(c => {
@@ -229,7 +218,7 @@ async function spawnCoinBox(userTokens) {
     });
   }
 
-  // Cleanup off-screen bodies
+
   Events.on(engine, "afterUpdate", () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -263,12 +252,12 @@ async function spawnCoinBox(userTokens) {
 
 
   <script type="module" src="/script.js"></script>
-      <!-- Firebase SDKs - IMPORTANT: Use the actual versions from your Firebase Console -->
+      
     <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.2.0/firebase-firestore-compat.js"></script>
 
-<!-- CryptoJS for encryption -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
  <script type="module">
@@ -281,20 +270,19 @@ import {
   getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp, increment, onSnapshot 
 } from "https://www.gstatic.com/firebasejs/12.2.0/firebase-firestore.js";
         const firebaseConfig = {
-            apiKey: "AIzaSyBA_M_gT63cj23LuIpjEL4qbD8czugbFXQ", // Replace with your actual API Key from Firebase Console
+            apiKey: "AIzaSyBA_M_gT63cj23LuIpjEL4qbD8czugbFXQ",
             authDomain: "skyless-84b51.firebaseapp.com",  
             projectId: "skyless-84b51",
             storageBucket: "skyless-84b51.appspot.com",
-            messagingSenderId: "990229888756", // Replace with your actual Sender ID
-            appId: "1:990229888756:web:ae7cc6a3f4bbbdb6c368a1" // Replace with your actual App ID
+            messagingSenderId: "990229888756", 
+            appId: "1:990229888756:web:ae7cc6a3f4bbbdb6c368a1" 
         };
   
-// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// --- Elements ---
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const loginButton = document.getElementById('loginButton');
@@ -312,13 +300,13 @@ const loadCloud = document.getElementById('loadCloud');
 const dataMessage = document.getElementById('dataMessage');
 
 
-// --- Toast Helper with Queue ---
+
 let toastQueue = [];
 let activeToast = null;
 let toastShowing = false;
 
 function showToast(msg, isError = false) {
-  // Add to queue
+
   toastQueue.push({ msg, isError });
   if (!toastShowing) {
     processNextToast();
@@ -344,13 +332,12 @@ function processNextToast() {
 
   activeToast = toast;
 
-  // Trigger fade-in
+
   requestAnimationFrame(() => toast.classList.add("show"));
 
-  // Stay for 2s
+
   setTimeout(() => {
     toast.classList.remove("show");
-    // After fade-out, remove + process next
     setTimeout(() => {
       toast.remove();
       if (activeToast === toast) activeToast = null;
@@ -359,7 +346,7 @@ function processNextToast() {
   }, 2000);
 }
 
-// UTF-8 Base64 helpers
+
 function utf8ToBase64(str) {
   const bytes = new TextEncoder().encode(str);
   let binary = '';
@@ -373,7 +360,7 @@ function base64ToUtf8(base64) {
   return new TextDecoder().decode(bytes);
 }
 
-// --- Save / Load ---
+
 function getMainSaveForFirebase() {
   try {
     const data = {};
@@ -400,7 +387,7 @@ function loadMainSaveFromFirebase(encoded) {
   }
 }
 
-// --- Auth Functions ---
+
 registerButton.addEventListener('click', async () => {
   const email = emailInput.value;
   const password = passwordInput.value;
@@ -410,11 +397,10 @@ registerButton.addEventListener('click', async () => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Send verification email
+
     await sendEmailVerification(user);
     showToast("account created! check your email for verification before you can save/earn tokens.");
 
-    // Add user doc
     const userRef = doc(db, 'users', user.uid);
     await setDoc(userRef, { email: user.email, tokens: 0, createdAt: serverTimestamp() });
 
@@ -446,8 +432,6 @@ logoutButton.addEventListener('click', async () => {
 });
 
 
-
-// --- Save / Load ---
 saveCloud.addEventListener('click', async () => {
   const user = auth.currentUser;
   if (!user) { showToast("sign in first!", true); return; }
@@ -482,63 +466,61 @@ loadCloud.addEventListener('click', async () => {
 
 
 
-// --- Auth State Listener / Live Token Counter ---
+
 onAuthStateChanged(auth, async (user) => {
   if (user) {
-    await user.reload(); // refresh verification state
+    await user.reload();
     loginPanel.style.display = 'none';
     signedPanel.style.display = 'block';
     userEmailSpan.textContent = user.email;
 
-    // If not verified → restrict features
     if (!user.emailVerified) {
       userTokensSpan.textContent = "0";
-      showToast("verify your email to start earning tokens and saving data!");
+      showToast("verify your email to start earning tokens and saving data");
 
-      // Disable restricted buttons
+
       saveCloud.disabled = true;
       loadCloud.disabled = true;
 
-      // Destroy any existing coin box
+     
       if (window.destroyCoinBox) window.destroyCoinBox();
 
-      return; // stop here (no tokens / coin box / live updates)
+      return; 
     }
 
-    // If verified → enable everything
+    
     saveCloud.disabled = false;
     loadCloud.disabled = false;
 
     const userRef = doc(db, 'users', user.uid);
 
-    // Wrap async code in an immediately-invoked async function
     (async () => {
-      // Fetch tokens once
+      
       const docSnap = await getDoc(userRef);
       const tokens = docSnap.exists() ? docSnap.data().tokens ?? 0 : 0;
       userTokensSpan.textContent = tokens;
 
-      // Spawn coin box overlay using existing tokens
+      
       if (window.spawnCoinBox) window.spawnCoinBox(tokens);
 
-      // Live token counter
+      
       onSnapshot(userRef, (docSnap) => {
         if (docSnap.exists()) {
           const newTokens = docSnap.data().tokens ?? 0;
           userTokensSpan.textContent = newTokens;
 
-          // Update coin box if needed
+        
           if (window.spawnCoinBox) window.spawnCoinBox(newTokens);
         } else {
           userTokensSpan.textContent = 0;
-          // Remove coin box if no user data
+      
           if (window.destroyCoinBox) window.destroyCoinBox();
         }
       });
     })();
 
   } else {
-    // Logged out
+  
     loginPanel.style.display = 'block';
     signedPanel.style.display = 'none';
     emailInput.value = '';
@@ -546,7 +528,7 @@ onAuthStateChanged(auth, async (user) => {
     userEmailSpan.textContent = '';
     userTokensSpan.textContent = '0';
 
-    // Destroy coin box when user logs out
+    
     if (window.destroyCoinBox) window.destroyCoinBox();
   }
 });

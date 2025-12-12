@@ -11,12 +11,10 @@
 </head>
 <body>
   <header class="navbar">
-    <!-- Logo on left -->
     <div class="logo">
       <a href="/index.html"><img src="/images/skylesshub.png" alt="skyless"></a>
     </div>
 
-    <!-- Centered nav buttons -->
     <nav class="nav-links">
       <a href="/featured.html" class="nav-btn">g-mes</a>
       <a href="/apps.html" class="nav-btn">apps</a>
@@ -27,16 +25,13 @@
   </header>
 
   <main style="padding-top: 8vw; text-align:center;">
-    <!-- Featured Game -->
     <div id="featured" class="featured"></div>
 
-    <!-- Genre + Search bar -->
     <div class="genre-nav">
       <div id="genreList" class="genre-list"></div>
       <input type="text" id="gameSearch" placeholder="search g-mes...">
     </div>
 
-    <!-- Games container -->
     <div id="games"></div>
   
  <script type="module" src="/script.js"></script>
@@ -47,18 +42,16 @@
     async function loadGames() {
       const res = await fetch("/g-mes.json");
       const data = await res.json();
-
-      // group games by genre
       currentGenres = {};
       data.games.forEach(game => {
         if (!currentGenres[game.genre]) currentGenres[game.genre] = [];
         currentGenres[game.genre].push(game);
       });
 
-      // add "All Games" as first genre
+
       currentGenres = { "all g-mes": data.games, ...currentGenres };
 
-      // add genre buttons
+
       const genreList = document.getElementById("genreList");
       genreList.innerHTML = "";
       Object.keys(currentGenres).forEach((genre, i) => {

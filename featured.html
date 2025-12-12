@@ -9,12 +9,11 @@
 </head>
 <body>
   <header class="navbar">
-    <!-- Logo on left -->
+
     <div class="logo">
       <a href="/index.html"><img src="/images/skylesshub.png" alt="skyless"></a>
     </div>
 
-    <!-- Centered nav buttons -->
     <nav class="nav-links">
       <a href="/featured.html" class="nav-btn">g-mes</a>
       <a href="/apps.html" class="nav-btn">apps</a>
@@ -36,9 +35,6 @@
 </main>
 
 <script type="module">
-/* ============================================================
-   BASIC CONFIG
-============================================================ */
 const COLS = 12;
 const GAP = 18;
 
@@ -58,9 +54,6 @@ function pickPreset(randomize,total){
   return presets[Math.floor(rand()*presets.length)];
 }
 
-/* ============================================================
-   PACKER (greedy)
-============================================================ */
 function pack(items){
   const occ=[];
   const placements=[];
@@ -106,9 +99,6 @@ function pack(items){
   return {placements, rows:occ.length};
 }
 
-/* ============================================================
-   PIXEL POSITIONING
-============================================================ */
 function computePositions(placements, rows, rect){
   const colW = (rect.width - (COLS-1)*GAP)/COLS;
   const rowH = (rect.height - (rows-1)*GAP)/rows;
@@ -121,9 +111,6 @@ function computePositions(placements, rows, rect){
   }));
 }
 
-/* ============================================================
-   RENDER ENGINE (icons 60% of smaller dimension - capped by padding)
-============================================================ */
 async function render({randomize=false}={}) {
   const res = await fetch('/g-mes.json');
   if(!res.ok){
@@ -152,7 +139,6 @@ async function render({randomize=false}={}) {
   const rect = wrap.getBoundingClientRect();
   const posArr = computePositions(placements, rows, rect);
 
-  // build elements
   container.innerHTML = "";
   const els = [];
 
@@ -163,18 +149,16 @@ async function render({randomize=false}={}) {
     const el = document.createElement("div");
     el.className = "feat-card fadeIn";
 
-    // set initial position/size (these will transition smoothly)
+
     el.style.left = pos.left + "px";
     el.style.top = pos.top + "px";
     el.style.width = pos.width + "px";
     el.style.height = pos.height + "px";
 
-    // compute sizes
-    const padding = 6; // matches CSS padding so icon won't touch edges
+
+    const padding = 6; 
     const smaller = Math.min(pos.width - padding*2, pos.height - padding*2);
-    // ICON: 60% of smaller dimension
     let iconSize = Math.round(smaller * 0.70);
-    // cap to ensure it never exceeds tile available space
     iconSize = Math.max(30, Math.min(iconSize, pos.width - padding*2, pos.height - padding*2));
 
     const titleSize = Math.max(14, Math.round(smaller * 0.20));
@@ -186,10 +170,10 @@ async function render({randomize=false}={}) {
     el.style.setProperty('--genre-size', genreSize + "px");
     el.style.setProperty('--desc-size', descSize + "px");
 
-    // tiny classification
+   
     if(pos.width < 220 || pos.height < 140) el.classList.add('tiny');
 
-    // content
+
     const content = document.createElement("div");
     content.className = "tile-content";
     if(s.h >= s.w && pos.height > pos.width * 1.15) content.classList.add("stacked");
@@ -228,14 +212,12 @@ async function render({randomize=false}={}) {
     els.push(el);
   });
 
-  // optional: animate appear / simple FLIP-like opacity fallback if counts changed
   if(firstRects.length && firstRects.length !== els.length){
     els.forEach(el => { el.style.opacity = 0; el.style.transition = 'opacity 420ms ease'; });
     requestAnimationFrame(()=> els.forEach(el => el.style.opacity = 1));
   }
 }
 
-/* helpers */
 function escapeHtml(s){ return (s+'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 document.addEventListener("DOMContentLoaded", ()=>{

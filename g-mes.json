@@ -981,30 +981,6 @@
       "dir": "/g-mes/baldibasic'splus!"
     },
     {
-      "title": "Bowmasters",
-      "genre": "action",
-      "icon": "/icons/bowmasters.png",
-      "dir": "/g-mes/bowmasters"
-    },
-    {
-      "title": "People Playground",
-      "genre": "simulation",
-      "icon": "/icons/peopleplayground.png",
-      "dir": "/g-mes/peopleplayground"
-    },
-    {
-      "title": "Quake III Arena",
-      "genre": "action",
-      "icon": "/icons/quake3.png",
-      "dir": "/g-mes/quakeiiiarena"
-    },
-    {
-      "title": "Raft",
-      "genre": "simulation",
-      "icon": "/icons/raft.png",
-      "dir": "/g-mes/raft"
-    },
-    {
       "title": "Webfishing",
       "genre": "simulation",
       "icon": "/icons/webfishing.png",
