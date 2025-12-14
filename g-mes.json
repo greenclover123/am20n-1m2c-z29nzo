@@ -985,6 +985,54 @@
       "genre": "simulation",
       "icon": "/icons/webfishing.png",
       "dir": "/g-mes/webfishing"
+    },
+    {
+      "title": "8 Ball Classic",
+      "genre": "casual",
+      "icon": "/icons/8ballclassic.png",
+      "dir": "/g-mes/8ballclassic"
+    },
+    {
+      "title": "Baseball Bros",
+      "genre": "sports",
+      "icon": "/icons/baseballbros.jpg",
+      "dir": "/g-mes/baseballbros"
+    },
+    {
+      "title": "Blocky Snakes",
+      "genre": "casual",
+      "icon": "/icons/blockysnakes.jpg",
+      "dir": "/g-mes/blockysnakes"
+    },
+    {
+      "title": "Candy Crush",
+      "genre": "puzzle",
+      "icon": "/icons/candycrush.png",
+      "dir": "/g-mes/candycrush"
+    },
+    {
+      "title": "Clash of Vikings",
+      "genre": "puzzle",
+      "icon": "/icons/clashofvikings.png",
+      "dir": "/g-mes/clashofvikings"
+    },
+    {
+      "title": "Crazy Cattle 3D",
+      "genre": "action",
+      "icon": "/icons/crazycattle3d.png",
+      "dir": "/g-mes/crazycattle3d"
+    },
+    {
+      "title": "Crush Cars 3D",
+      "genre": "action",
+      "icon": "/icons/crushcars3d.png",
+      "dir": "/g-mes/crushcars3d"
+    },
+    {
+      "title": "Sandboxels",
+      "genre": "simulation",
+      "icon": "/icons/sandboxels.png",
+      "dir": "/g-mes/sandboxels"
     }
   ]
 }
