@@ -1,17 +1,4 @@
-<body style="background-color:black"> <script>
-  ["mousemove","keydown","click","touchstart"].forEach(evt=>{
-    document.addEventListener(evt, e=>{
-      parent.postMessage({
-        type:"iframe-activity",
-        x: e.clientX || 0,
-        y: e.clientY || 0,
-        ts: Date.now()
-      },"*");
-    });
-  });
-</script>
-
-</body>
+<body style="background-color:black"> </body>
 
 
 

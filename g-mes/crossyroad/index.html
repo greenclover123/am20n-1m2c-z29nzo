@@ -1,38 +1,39 @@
 <!--
 Game Bootstrapper
 
-@author Kasper Mol <kasper@poki.com>
-@copyright Poki 2017
+New - Jon A Bellini 11/4/2024
+ 
 -->
-<!DOCTYPE html>
+<!doctype HTML>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<head>
+  <base href="./">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Crossy Road</title>
 
-    <title>Crossy Road | 3kh0</title>
+  <!-- Load the YouTube Playables SDK as the first script -->
+  <script src="ytgame.js" nonce="2KHli9LrFFijH2jCb5SkMw"></script>
 
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" async href="app-store-interstitial.css" />
+  <!-- Load game's CSS file. -->
+  <link rel="stylesheet" href="style.css" nonce="2KHli9LrFFijH2jCb5SkMw">
 
-    <script src="scripts/extra.min.js"></script>
-    <script src="poki-sdk.js"></script>
-  </head>
-  <body>
-    <script src="scripts/bootstrap.min.js"></script>
-    <script src="/js/main.js"></script>
-  <script>
-  ["mousemove","keydown","click","touchstart"].forEach(evt=>{
-    document.addEventListener(evt, e=>{
-      parent.postMessage({
-        type:"iframe-activity",
-        x: e.clientX || 0,
-        y: e.clientY || 0,
-        ts: Date.now()
-      },"*");
-    });
-  });
-</script>
+   <!-- Core libraries like Three.js -->
+  <script src="scripts/three.min.js" nonce="2KHli9LrFFijH2jCb5SkMw"></script>
 
+  <!-- Main game script -->
+  <script src="scripts/game.min.js" nonce="2KHli9LrFFijH2jCb5SkMw"></script>
+
+  <!-- Additional scripts -->
+  <script src="scripts/extra.min.js" nonce="2KHli9LrFFijH2jCb5SkMw"></script>
+  <script src="scripts/bootstrap.min.js" nonce="2KHli9LrFFijH2jCb5SkMw"></script>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <div id="build-number"></div>  <!-- delete this when not in testing -->
+
+  
 </body>
 </html>

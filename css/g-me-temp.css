@@ -10,28 +10,27 @@ body {
   margin: 0;
   font-family: "Segoe UI", Arial, sans-serif;
   height: 2000px;
-
+  overflow: hidden;
   color: white;
 }
 
-/* Transparent navbar container */
+
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: flex-start;  /* logo on left */
-  align-items: center;          /* vertical center */
+  justify-content: flex-start;  
+  align-items: center;          
   padding: 1vw 40px;
-  background: transparent;      /* invisible */
+  background: transparent;     
   z-index: 1000;
   font-family: 'Damion', sans-serif;
   font-size: 30px;
 
 }
 
-/* Logo */
 .logo img {
   height: 6vw;
   width: auto;
@@ -44,20 +43,18 @@ body {
     transform: scale(1.05);
 }
 
-/* Nav buttons centered with logo */
 .nav-links {
   display: flex;
   gap: 0.8vw;
   align-items: center;
 }
 
-/* Glass buttons */
 .nav-btn {
   margin-top: 0.9vw;
   padding: 3px 14px;
   font-size: 2vw;
   border-radius: 8px;
-  background: rgba(166, 185, 238,0.15);  /* semi-transparent */
+  background: rgba(166, 185, 238,0.15); 
   border: 1px solid rgba(166, 185, 238,0.3);
   color: white;
   text-decoration: none;
@@ -74,7 +71,6 @@ body {
   transform: scale(0.95);
 }
 
-/* Center container */
 .center-container {
   display: flex;
   flex-direction: column;
@@ -106,9 +102,9 @@ body {
 
 .game-frame {
   display: inline-block;     
-  margin: 35px auto;      /* frame border here */
-  border-radius: 1vw;         /* full rounded edges */
-  overflow: hidden;           /* keeps footer + iframe aligned */
+  margin: 35px auto;     
+  border-radius: 1vw;        
+  overflow: hidden;      
   background-size: 2000px 1200px;
   box-sizing: border-box;
   max-width: 100%;
@@ -117,17 +113,15 @@ body {
   margin-top: 5vw;
 }
 
-/* Iframe sits at the top, no margin/padding to break layout */
 .game-frame iframe {
   width: 70vw;
   height: 66vh;
   max-width: 100%;
-  display: block;             /* removes inline gap */
-  border: none;               /* wrapper handles border */
-  border-radius: 0.8vw 0.8vw 0 0; /* rounded top only */
+  display: block;          
+  border: none;            
+  border-radius: 0.8vw 0.8vw 0 0;
 }
 
-/* Footer directly under iframe, fits width */
 .game-footer {
   display: flex;
   justify-content: space-between;
@@ -136,7 +130,7 @@ body {
   color: white;
   padding: 10px 15px;
   font-size: 1rem;
-  border-radius: 0 0 0.8vw 0.8vw; /* rounded bottom only */
+  border-radius: 0 0 0.8vw 0.8vw; 
   box-sizing: border-box;
 }
 

@@ -1020,7 +1020,7 @@
       "title": "Crazy Cattle 3D",
       "genre": "action",
       "icon": "/icons/crazycattle3d.png",
-      "dir": "/g-mes/crazycattle3d"
+      "dir": "https://rawcdn.githack.com/genizy/cc3d-mobile/main/"
     },
     {
       "title": "Crush Cars 3D",
@@ -1033,6 +1033,66 @@
       "genre": "simulation",
       "icon": "/icons/sandboxels.png",
       "dir": "/g-mes/sandboxels"
+    },
+    {
+      "title": "FNAF 2",
+      "genre": "horror",
+      "icon": "/icons/fnaf2.jpg",
+      "dir": "/g-mes/fnaf2"
+    },
+    {
+      "title": "FNAF 3",
+      "genre": "horror",
+      "icon": "/icons/fnaf3.png",
+      "dir": "/g-mes/fnaf3"
+    },
+    {
+      "title": "FNAF 4",
+      "genre": "horror",
+      "icon": "/icons/fnaf4.png",
+      "dir": "/g-mes/fnaf4"
+    },
+    {
+      "title": "FNAF 4 Halloween",
+      "genre": "horror",
+      "icon": "/icons/fnaf4halloween.png",
+      "dir": "/g-mes/fnaf4halloween"
+    },
+    {
+      "title": "FNAF Pizzeria Simulator",
+      "genre": "horror",
+      "icon": "/icons/fnafps.png",
+      "dir": "/g-mes/fnafpizzeriasimulator"
+    },
+    {
+      "title": "FNAF Sister Location",
+      "genre": "horror",
+      "icon": "/icons/fnafsl.png",
+      "dir": "/g-mes/fnafsisterlocation"
+    },
+    {
+      "title": "FNAF Ultimate Custom Night",
+      "genre": "horror",
+      "icon": "/icons/fnafucn.png",
+      "dir": "/g-mes/fnafultimatecustomnight"
+    },
+    {
+      "title": "FNAF World",
+      "genre": "horror",
+      "icon": "/icons/fnafworld.png",
+      "dir": "/g-mes/fnafworld"
+    },
+    {
+      "title": "Football Bros",
+      "genre": "sports",
+      "icon": "/icons/footballbros.png",
+      "dir": "/g-mes/footballbros"
+    },
+    {
+      "title": "Fortzone",
+      "genre": "action",
+      "icon": "/icons/fortzone.jpg",
+      "dir": "/g-mes/fortzone"
     }
   ]
 }
