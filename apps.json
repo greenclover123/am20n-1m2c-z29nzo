@@ -1,18 +1,6 @@
 {
   "games": [
     {
-      "title": "Wikipedia Mini",
-      "genre": "research",
-      "icon": "/icons/death.png",
-      "dir": "/g-mes/tinyfishing/"
-    },
-    {
-      "title": "skyless music",
-      "genre": "productivity",
-      "icon": "/icons/fnaf6.png",
-      "dir": "/g-mes/fnaf6/"
-    },
-    {
       "title": "Halfix x86 Emulator",
       "genre": "emulators",
       "icon": "/icons/halfix.png",
