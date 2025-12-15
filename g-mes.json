@@ -1014,7 +1014,7 @@
       "title": "Crazy Cattle 3D",
       "genre": "action",
       "icon": "/icons/crazycattle3d.png",
-      "dir": "https://rawcdn.githack.com/genizy/cc3d-mobile/main/"
+      "dir": "/g-mes/crazycattle3d/"
     },
     {
       "title": "Sandboxels",
