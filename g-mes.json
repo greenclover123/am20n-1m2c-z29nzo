@@ -433,12 +433,6 @@
       "dir": "/g-mes/fleeingthecomplex"
     },
     {
-      "title": "Five Nights at Freddy's 1",
-      "genre": "horror",
-      "icon": "/icons/fnaf1.png",
-      "dir": "/g-mes/fivenightsatfreddy's1"
-    },
-    {
       "title": "Friday Night Funkin",
       "genre": "action",
       "icon": "/icons/fnf.png",
@@ -1023,16 +1017,16 @@
       "dir": "https://rawcdn.githack.com/genizy/cc3d-mobile/main/"
     },
     {
-      "title": "Crush Cars 3D",
-      "genre": "action",
-      "icon": "/icons/crushcars3d.png",
-      "dir": "/g-mes/crushcars3d"
-    },
-    {
       "title": "Sandboxels",
       "genre": "simulation",
       "icon": "/icons/sandboxels.png",
       "dir": "/g-mes/sandboxels"
+    },
+    {
+      "title": "FNAF 1",
+      "genre": "horror",
+      "icon": "/icons/fnaf1.png",
+      "dir": "/g-mes/fivenightsatfreddy's1"
     },
     {
       "title": "FNAF 2",
@@ -1051,12 +1045,6 @@
       "genre": "horror",
       "icon": "/icons/fnaf4.png",
       "dir": "/g-mes/fnaf4"
-    },
-    {
-      "title": "FNAF 4 Halloween",
-      "genre": "horror",
-      "icon": "/icons/fnaf4halloween.png",
-      "dir": "/g-mes/fnaf4halloween"
     },
     {
       "title": "FNAF Pizzeria Simulator",
@@ -1087,12 +1075,6 @@
       "genre": "sports",
       "icon": "/icons/footballbros.png",
       "dir": "/g-mes/footballbros"
-    },
-    {
-      "title": "Fortzone",
-      "genre": "action",
-      "icon": "/icons/fortzone.jpg",
-      "dir": "/g-mes/fortzone"
     }
   ]
 }
