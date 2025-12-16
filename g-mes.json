@@ -1075,6 +1075,12 @@
       "genre": "sports",
       "icon": "/icons/footballbros.png",
       "dir": "/g-mes/footballbros"
+    },
+    {
+      "title": "Hyperr Sandbox",
+      "genre": "simulation",
+      "icon": "/icons/hyperr.png",
+      "dir": "/g-mes/hyperrsandbox"
     }
   ]
 }
