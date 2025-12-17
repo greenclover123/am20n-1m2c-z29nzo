@@ -1087,6 +1087,12 @@
       "genre": "simulation",
       "icon": "/icons/tomodah.png",
       "dir": "/g-mes/tomodachicollection"
+    },
+    {
+      "title": "War The Knights",
+      "genre": "action",
+      "icon": "/icons/wartheknights.png",
+      "dir": "/g-mes/wartheknights"
     }
   ]
 }
