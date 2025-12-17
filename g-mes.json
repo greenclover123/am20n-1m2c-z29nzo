@@ -1081,6 +1081,12 @@
       "genre": "simulation",
       "icon": "/icons/hyperr.png",
       "dir": "/g-mes/hyperrsandbox"
+    },
+    {
+      "title": "Tomodachi Collection",
+      "genre": "simulation",
+      "icon": "/icons/tomodah.png",
+      "dir": "/g-mes/tomodachicollection"
     }
   ]
 }
