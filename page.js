@@ -35,7 +35,8 @@ var greeting = [
   "sophisticated ignorance",
   "w fraps??",
   "give some time for ya self once in a while",
-  "your my kind of woman"
+  "your my kind of woman",
+  "time continues"
 ];
 
 var randomGreeting = Math.floor(Math.random() * greeting.length);

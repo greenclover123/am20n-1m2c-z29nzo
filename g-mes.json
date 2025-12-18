@@ -4,7 +4,9 @@
       "title": "SUPRA MAYRO KRATT",
       "genre": "racing",
       "icon": "/icons/supra.png",
-      "dir": "/g-mes/mayrokrattbuilt/"
+      "dir": "/g-mes/mayrokrattbuilt/",
+      "featured": true,
+      "description": "best g-me ever, i even ported it myself"
     },
     {
       "title": "A Dark Room",
@@ -186,9 +188,7 @@
       "title": "Balloon Tower Defense 4",
       "genre": "strategy",
       "icon": "/icons/btd4.png",
-      "dir": "/g-mes/balloontowerdefense4",
-      "featured": true,
-      "description": "animal hit balloon simulator"
+      "dir": "/g-mes/balloontowerdefense4"
     },
     {
       "title": "Bubble Spinner",
@@ -261,7 +261,6 @@
       "genre": "puzzle",
       "icon": "/icons/coreball.png",
       "dir": "/g-mes/coreball",
-      "featured": true,
       "description": "a classic reaction time tester 3000"
     },
     {
@@ -692,9 +691,7 @@
       "title": "Retro Bowl",
       "genre": "sports",
       "icon": "/icons/retrobowl.png",
-      "dir": "/g-mes/retrobowl",
-      "featured": true,
-      "description": "cant go wrong with retro bowl"
+      "dir": "/g-mes/retrobowl"
     },
     {
       "title": "Retro Bowl College",
@@ -996,7 +993,9 @@
       "title": "Blocky Snakes",
       "genre": "casual",
       "icon": "/icons/blockysnakes.jpg",
-      "dir": "/g-mes/blockysnakes"
+      "dir": "/g-mes/blockysnakes",
+      "featured": true,
+      "description": "slither io but 3d"
     },
     {
       "title": "Candy Crush",
@@ -1092,7 +1091,9 @@
       "title": "War The Knights",
       "genre": "action",
       "icon": "/icons/wartheknights.png",
-      "dir": "/g-mes/wartheknights"
+      "dir": "/g-mes/wartheknights",
+      "featured": true,
+      "description": "TABS and war game combined, actually my top 5 game"
     }
   ]
 }
