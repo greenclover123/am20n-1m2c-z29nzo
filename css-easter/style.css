@@ -1,0 +1,145 @@
+
+
+body {
+    background-color: #000226;
+}
+
+body {
+	background: linear-gradient(20deg, #44a778, #54a6b1, #8fbd77, #7066af, #ae6eaf);
+	background-size: 100% 100%;
+	animation: gradient-animation 25s ease infinite;
+  overflow: hidden;
+}
+
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+      @font-face {
+  font-family: 'Damion';
+  src: url('/resource/Damion-8gnD.ttf') format('truetype');
+}
+
+body {
+  margin: 0;
+  height: 2000px;
+
+  color: white;
+}
+
+/* Transparent navbar container */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;  /* logo on left */
+  align-items: center;          /* vertical center */
+  padding: 1vw 40px;
+  background: transparent;      /* invisible */
+  z-index: 1000;
+  font-family: 'Damion', sans-serif;
+  font-size: 30px;
+}
+
+/* Logo */
+.logo img {
+  height: 6vw;
+  width: auto;
+  margin-right: 1vw;
+  transition: transform .4s;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Nav buttons centered with logo */
+.nav-links {
+  display: flex;
+  gap: 0.8vw;
+  align-items: center;
+}
+
+/* Glass buttons */
+.nav-btn {
+  padding: 3px 14px;
+  font-size: 2vw;
+  border-radius: 8px;
+  background: #7066af63;  /* semi-transparent */
+  border: 1px solid #978dd693;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  color: #cfc9f3;
+
+}
+
+.nav-btn:hover {
+  background: #534c8121;
+  border-color: #978dd693;
+  color: #a6a1c2;
+  transform: scale(0.95);
+}
+
+
+/* Center container */
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.caption {
+  margin-top: -0.8vw;
+  font-size: 2vw;
+  color: #cfc9f3;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  font-family: 'Damion', sans-serif;
+  src: url('/resource/Damion-8gnD.ttf') format('truetype');
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.top-logo {
+  margin-top: 2.4vw;
+  margin-bottom: -0.6vw;
+  font-size: 3vw;
+  color: #e4e1f3;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  font-family: 'Damion', sans-serif;
+  src: url('/resource/Damion-8gnD.ttf') format('truetype');
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.top-logo-error {
+  margin-top: 0.5vw;
+  margin-bottom: -0.6vw;
+  font-size: 3vw;
+  color: #e4e1f3;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  font-family: 'Damion', sans-serif;
+  src: url('/resource/Damion-8gnD.ttf') format('truetype');
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+.errortext {
+  margin-top: 7vw;
+  margin-bottom: -0.6vw;
+  font-size: 6vw;
+  color: rgb(224, 73, 73);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  font-family: 'Damion', sans-serif;
+  src: url('/resource/Damion-8gnD.ttf') format('truetype');
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}

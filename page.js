@@ -36,7 +36,15 @@ var greeting = [
   "w fraps??",
   "give some time for ya self once in a while",
   "your my kind of woman",
-  "time continues"
+  "time continues",
+  "taking my time to be",
+  "one with myself",
+  "people in life are like seasons !",
+  "straight from shibuya",
+  "throw in some hot cars",
+  "but they cant cop cars without seeing cop cars",
+  "nothing is ever promised tomorrow or today",
+  "im so drowesxy",
 ];
 
 var randomGreeting = Math.floor(Math.random() * greeting.length);

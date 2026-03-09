@@ -1,0 +1,174 @@
+body {
+    background-color: #000226;
+}
+
+body {
+	background: #8f6cb8;
+	background-size: 100% 100%;
+	animation: gradient-animation 25s ease infinite;
+  overflow: hidden;
+}
+
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+      @font-face {
+  font-family: 'Damion';
+  src: url('/resource/Damion-8gnD.ttf') format('truetype');
+}
+
+body {
+  margin: 0;
+  height: 2000px;
+
+  color: white;
+}
+
+/* Transparent navbar container */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;  /* logo on left */
+  align-items: center;          /* vertical center */
+  padding: 1vw 40px;
+  background: transparent;      /* invisible */
+  z-index: 1000;
+  font-family: 'Damion', sans-serif;
+  font-size: 30px;
+}
+
+/* Logo */
+.logo img {
+  height: 6vw;
+  width: auto;
+  margin-right: 1vw;
+  transition: transform .4s;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Nav buttons centered with logo */
+.nav-links {
+  display: flex;
+  gap: 0.8vw;
+  align-items: center;
+}
+
+/* Glass buttons */
+.nav-btn {
+  padding: 3px 14px;
+  font-size: 2vw;
+  border-radius: 8px;
+  background: #7066af63;  /* semi-transparent */
+  border: 1px solid #978dd693;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  color: #cfc9f3;
+
+}
+
+.nav-btn:hover {
+  background: #534c8121;
+  border-color: #978dd693;
+  color: #a6a1c2;
+  transform: scale(0.95);
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.caption {
+  margin-top: -1vw;
+  font-size: 40px;
+  color: rgb(68, 90, 184);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  font-family: 'Damion', sans-serif;
+  src: url('/resource/Damion-8gnD.ttf') format('truetype');
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.top-logo {
+  margin-top: 2vw;
+  margin-bottom: -0.5vw;
+  font-size: 50px;
+  color: rgba(166, 185, 238);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  font-family: 'Damion', sans-serif;
+  src: url('/resource/Damion-8gnD.ttf') format('truetype');
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+
+
+.game-frame {
+  display: inline-block;     
+  margin: 35px auto;     
+  border-radius: 1vw;        
+  overflow: hidden;      
+  background-size: 2000px 1200px;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 35px;
+  padding: 20px;
+  margin-top: 5vw;
+}
+
+.game-frame iframe {
+  width: 70vw;
+  height: 66vh;
+  max-width: 100%;
+  display: block;          
+  border: none;            
+  border-radius: 0.8vw 0.8vw 0 0;
+}
+
+.game-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #534c81dc;
+  color: #cfc9f3;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 0 0 0.8vw 0.8vw; 
+  box-sizing: border-box;
+}
+
+.game-footer button {
+  background: rgba(213, 218, 230, 0.384);
+  border: 1px solid rgba(209, 218, 241, 0.356);
+  color: #98e774;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 1.4vw;
+}
+
+.game-footer button:hover {
+  background: rgba(178, 177, 238, 0.3);
+  border-color: rgba(103, 124, 168, 0.6);
+  color: #9892e4;
+  transform: scale(0.95);
+}

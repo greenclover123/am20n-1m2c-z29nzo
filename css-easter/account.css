@@ -1,0 +1,269 @@
+
+
+body {
+    background-color: #000226;
+}
+
+body {
+	background: linear-gradient(20deg, #44a778, #54a6b1, #8fbd77, #7066af, #ae6eaf);
+	background-size: 100% 100%;
+	animation: gradient-animation 25s ease infinite;
+  overflow: hidden;
+}
+
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+      @font-face {
+  font-family: 'Damion';
+  src: url('/resource/Damion-8gnD.ttf') format('truetype');
+}
+
+body {
+  margin: 0;
+  height: 2000px;
+
+  color: white;
+}
+
+/* Transparent navbar container */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;  /* logo on left */
+  align-items: center;          /* vertical center */
+  padding: 1vw 40px;
+  background: transparent;      /* invisible */
+  z-index: 1000;
+  font-family: 'Damion', sans-serif;
+  font-size: 30px;
+}
+
+/* Logo */
+.logo img {
+  height: 6vw;
+  width: auto;
+  margin-right: 1vw;
+  transition: transform .4s;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Nav buttons centered with logo */
+.nav-links {
+  display: flex;
+  gap: 0.8vw;
+  align-items: center;
+}
+
+/* Glass buttons */
+.nav-btn {
+  padding: 3px 14px;
+  font-size: 2vw;
+  border-radius: 8px;
+  background: #7066af63;  /* semi-transparent */
+  border: 1px solid #978dd693;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  color: #cfc9f3;
+
+}
+
+.nav-btn:hover {
+  background: #534c8121;
+  border-color: #978dd693;
+  color: #a6a1c2;
+  transform: scale(0.95);
+}
+
+
+/* Center container */
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.caption {
+  margin-top: -1vw;
+  font-size: 40px;
+  color: rgb(68, 90, 184);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  font-family: 'Damion', sans-serif;
+  src: url('/resource/Damion-8gnD.ttf') format('truetype');
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.top-logo {
+  margin-top: 2vw;
+  margin-bottom: -0.5vw;
+  font-size: 50px;
+  color: rgba(166, 185, 238);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  font-family: 'Damion', sans-serif;
+  src: url('/resource/Damion-8gnD.ttf') format('truetype');
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+/* Glass-style panel */
+.panel {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 5vw 20vw;
+  width: 22vw;
+  max-width: 100vw;
+  min-width: 10vw;
+  margin-top: 8vw;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  flex-direction: column; 
+  
+}
+
+/* Titles */
+.panel-title {
+  font-family: 'Damion', cursive;
+  font-size: 3.5vw;
+  color: #cfc9f3;
+  margin-bottom: 0.5vw;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.7);
+}
+
+.panel-subtitle {
+  font-family: 'Damion', cursive;
+  font-size: 1.7vw;
+  margin-bottom: 1.5vw;
+  color: #cfc9f3;
+}
+
+/* Glass input fields */
+.glass-input {
+  display: block;
+  width: 80%;
+  margin: 1vw auto;
+  padding: 0.8vw;
+  border-radius: 12px;
+  background: #9084e08c;
+  border-color: #978dd693;
+  color: #a6a1c2;
+  font-family: 'Damion', cursive;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+  background: #34305221;
+  border-color: #68629493;
+}
+
+/* Buttons */
+.glass-button {
+  padding: 0.8vw 1.5vw;
+  border-radius: 12px;
+  margin: 0.5vw;
+  background: #7066af63;  /* semi-transparent */
+  border: 1px solid #978dd693;
+  color: #cfc9f3;
+  font-family: 'Damion', cursive;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+}
+.signoutbutton {
+  margin-top: -1vw;
+  margin-left: -18vw;
+  padding: .4vw 1.5vw;
+  font-size: 1.4vw;
+  border-radius: 8px;
+  background: rgba(166, 185, 238,0.15);  /* semi-transparent */
+  border: 1px solid rgba(166, 185, 238,0.3);
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  color: #cfc9f3;
+  font-family: 'Damion', cursive;
+  cursor: pointer;
+}
+
+.glass-button:hover {
+  background: #534c8121;
+  border-color: #978dd693;
+  color: #a6a1c2;
+  transform: scale(0.95);
+}
+
+.signoutbutton:hover {
+  background: #534c8121;
+  border-color: #978dd693;
+  color: #a6a1c2;
+  transform: scale(0.95);
+}
+
+/* Message */
+/* Global toast notification */
+.panel-message {
+  position: fixed;
+  bottom: 2vw;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px); /* start lower */
+  background: rgba(0, 0, 0, 0.75);
+  padding: 0.6vw 1.5vw;
+  border-radius: 12px;
+  color: #f16a6a;
+  font-family: 'Damion', cursive;
+  font-size: 1.4vw;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* visible state */
+.panel-message.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+
+
+
+
+
+
+
+ #matterCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none; /* coins won’t block clicks */
+      z-index: 9999;
+ }

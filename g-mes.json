@@ -4,9 +4,7 @@
       "title": "SUPRA MAYRO KRATT",
       "genre": "racing",
       "icon": "/icons/supra.png",
-      "dir": "/g-mes/mayrokrattbuilt/",
-      "featured": true,
-      "description": "best g-me ever, i even ported it myself"
+      "dir": "/g-mes/mayrokrattbuilt/"
     },
     {
       "title": "A Dark Room",
@@ -126,9 +124,7 @@
       "title": "Bitlife",
       "genre": "simulation",
       "icon": "/icons/bitlife.png",
-      "dir": "/g-mes/bitlife",
-      "featured": true,
-      "description": "become a murder or a rich man"
+      "dir": "/g-mes/bitlife"
     },
     {
       "title": "Block Blast",
@@ -769,9 +765,7 @@
       "title": "Sandtrix",
       "genre": "puzzle",
       "icon": "/icons/sandtrix.png",
-      "dir": "/g-mes/sandtrix",
-      "featured": true,
-      "description": "actually good remix of tetris"
+      "dir": "/g-mes/sandtrix"
     },
     {
       "title": "Slope",
@@ -993,9 +987,7 @@
       "title": "Blocky Snakes",
       "genre": "casual",
       "icon": "/icons/blockysnakes.jpg",
-      "dir": "/g-mes/blockysnakes",
-      "featured": true,
-      "description": "slither io but 3d"
+      "dir": "/g-mes/blockysnakes"
     },
     {
       "title": "Candy Crush",
@@ -1091,9 +1083,31 @@
       "title": "War The Knights",
       "genre": "action",
       "icon": "/icons/wartheknights.png",
-      "dir": "/g-mes/wartheknights",
+      "dir": "/g-mes/wartheknights"
+    },
+    {
+      "title": "Dumb Ways To Die",
+      "genre": "puzzle",
+      "icon": "/icons/dwtd.png",
+      "dir": "/g-mes/dumbwaystodie",
       "featured": true,
-      "description": "TABS and war game combined, actually my top 5 game"
+      "description": "a classic"
+    },
+    {
+      "title": "Jumbo Mayro",
+      "genre": "platformer",
+      "icon": "/icons/jumbomayro.png",
+      "dir": "/g-mes/jumbomayro",
+      "featured": true,
+      "description": "such a jolly good time"
+    },
+    {
+      "title": "Kitty Toy",
+      "genre": "simulation",
+      "icon": "/icons/kittytoy.png",
+      "dir": "/g-mes/kittytoy",
+      "featured": true,
+      "description": "kitty kitty kitty"
     }
   ]
 }
