@@ -1108,6 +1108,14 @@
       "dir": "/g-mes/kittytoy",
       "featured": true,
       "description": "kitty kitty kitty"
+    },
+    {
+      "title": "My Rusty Submarine",
+      "genre": "co-op",
+      "icon": "/icons/myrusty.png",
+      "dir": "/g-mes/myrustysubmarine",
+      "featured": true,
+      "description": "repair !"
     }
   ]
 }

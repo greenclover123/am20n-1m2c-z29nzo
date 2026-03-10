@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.webgl-content {
+  width: 100%;
+  height: 100%;
+}
+
+#unityContainer {
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+</head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>My Rusty Submarine</title>
+    <meta name="description" content="Play My Rusty Submarine online for free. Unblocked and available on all devices. Experience the best My Rusty Submarine gameplay now!"> 
+    <meta name="author" content="HSINI">
+    <link rel="shortcut icon" href="TemplateData/favicon.ico" />
+    <link rel="stylesheet" href="TemplateData/style.css" />
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/MyRustySubmarineWebGL.json", { onProgress: UnityProgress });
+    </script>
+  
+</head>
+  <body>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 100%; height: 100%;"></div>
+    </div>
+    
+</script>
+<script>
+  ["mousemove","keydown","click","touchstart"].forEach(evt=>{
+    document.addEventListener(evt, e=>{
+      parent.postMessage({
+        type:"iframe-activity",
+        x: e.clientX || 0,
+        y: e.clientY || 0,
+        ts: Date.now()
+      },"*");
+    });
+  });
+</script>
+
+</body>
+</html>
