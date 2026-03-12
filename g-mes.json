@@ -1116,6 +1116,30 @@
       "dir": "/g-mes/myrustysubmarine",
       "featured": true,
       "description": "repair !"
+    },
+    {
+      "title": "Super Monkey Ball",
+      "genre": "casual",
+      "icon": "/icons/supermonkey.png",
+      "dir": "/g-mes/supermonkeyball"
+    },
+    {
+      "title": "Pixel Speedrun",
+      "genre": "platformer",
+      "icon": "/icons/pixelspeedrun.png",
+      "dir": "/g-mes/pixelspeedrun"
+    },
+    {
+      "title": "Stick With It",
+      "genre": "platformer",
+      "icon": "/icons/stickwithit.png",
+      "dir": "/g-mes/stickwithit"
+    },
+    {
+      "title": "Tag",
+      "genre": "co-op",
+      "icon": "/icons/tag.png",
+      "dir": "/g-mes/tag"
     }
   ]
 }
