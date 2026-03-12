@@ -449,9 +449,8 @@
       "title": "Gladihoppers",
       "genre": "action",
       "icon": "/icons/gladihoppers.png",
-      "dir": "/g-mes/gladihoppers",
-      "featured": true,
-      "description": "actually really good time waster"
+      "dir": "/g-mes/gladihoppers"
+      
     },
     {
       "title": "Go Ball",
@@ -649,9 +648,7 @@
       "title": "Papa's Sushiria",
       "genre": "simulation",
       "icon": "/icons/papassushiria.png",
-      "dir": "/g-mes/papa'ssushiria",
-      "featured": true,
-      "description": "favorite papa game personally"
+      "dir": "/g-mes/papa'ssushiria"
     },
     {
       "title": "Papa's Tacomia",
@@ -1091,55 +1088,57 @@
       "icon": "/icons/dwtd.png",
       "dir": "/g-mes/dumbwaystodie",
       "featured": true,
-      "description": "a classic"
+      "description": "a classic that actually somewhat works now"
     },
     {
       "title": "Jumbo Mayro",
       "genre": "platformer",
       "icon": "/icons/jumbomayro.png",
-      "dir": "/g-mes/jumbomayro",
-      "featured": true,
-      "description": "such a jolly good time"
+      "dir": "/g-mes/jumbomayro"
     },
     {
       "title": "Kitty Toy",
       "genre": "simulation",
       "icon": "/icons/kittytoy.png",
-      "dir": "/g-mes/kittytoy",
-      "featured": true,
-      "description": "kitty kitty kitty"
+      "dir": "/g-mes/kittytoy"
     },
     {
       "title": "My Rusty Submarine",
       "genre": "co-op",
       "icon": "/icons/myrusty.png",
-      "dir": "/g-mes/myrustysubmarine",
-      "featured": true,
-      "description": "repair !"
+      "dir": "/g-mes/myrustysubmarine"
     },
     {
       "title": "Super Monkey Ball",
       "genre": "casual",
       "icon": "/icons/supermonkey.png",
-      "dir": "/g-mes/supermonkeyball"
+      "dir": "/g-mes/supermonkeyball",
+      "featured": true,
+      "description": "dont get me started on this peak g-me"
     },
     {
       "title": "Pixel Speedrun",
       "genre": "platformer",
       "icon": "/icons/pixelspeedrun.png",
-      "dir": "/g-mes/pixelspeedrun"
+      "dir": "/g-mes/pixelspeedrun",
+      "featured": true,
+      "description": "construct classic"
     },
     {
       "title": "Stick With It",
       "genre": "platformer",
       "icon": "/icons/stickwithit.png",
-      "dir": "/g-mes/stickwithit"
+      "dir": "/g-mes/stickwithit",
+      "featured": true,
+      "description": "its like getting over it but its worse 1"
     },
     {
       "title": "Tag",
       "genre": "co-op",
       "icon": "/icons/tag.png",
-      "dir": "/g-mes/tag"
+      "dir": "/g-mes/tag",
+      "featured": true,
+      "description": "its just tag"
     }
   ]
 }
