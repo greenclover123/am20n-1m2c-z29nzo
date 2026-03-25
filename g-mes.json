@@ -1139,6 +1139,14 @@
       "dir": "/g-mes/tag",
       "featured": true,
       "description": "its just tag"
+    },
+    {
+      "title": "Resident Evil Two",
+      "genre": "action",
+      "icon": "/icons/residentevil2.png",
+      "dir": "/g-mes/residentevil2",
+      "featured": true,
+      "description": "such a evil resident"
     }
   ]
 }
