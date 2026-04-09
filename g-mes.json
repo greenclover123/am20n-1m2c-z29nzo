@@ -450,7 +450,6 @@
       "genre": "action",
       "icon": "/icons/gladihoppers.png",
       "dir": "/g-mes/gladihoppers"
-      
     },
     {
       "title": "Go Ball",
@@ -1086,9 +1085,7 @@
       "title": "Dumb Ways To Die",
       "genre": "puzzle",
       "icon": "/icons/dwtd.png",
-      "dir": "/g-mes/dumbwaystodie",
-      "featured": true,
-      "description": "a classic that actually somewhat works now"
+      "dir": "/g-mes/dumbwaystodie"
     },
     {
       "title": "Jumbo Mayro",
@@ -1120,33 +1117,49 @@
       "title": "Pixel Speedrun",
       "genre": "platformer",
       "icon": "/icons/pixelspeedrun.png",
-      "dir": "/g-mes/pixelspeedrun",
-      "featured": true,
-      "description": "construct classic"
+      "dir": "/g-mes/pixelspeedrun"
     },
     {
       "title": "Stick With It",
       "genre": "platformer",
       "icon": "/icons/stickwithit.png",
-      "dir": "/g-mes/stickwithit",
-      "featured": true,
-      "description": "its like getting over it but its worse 1"
+      "dir": "/g-mes/stickwithit"
     },
     {
       "title": "Tag",
       "genre": "co-op",
       "icon": "/icons/tag.png",
-      "dir": "/g-mes/tag",
-      "featured": true,
-      "description": "its just tag"
+      "dir": "/g-mes/tag"
     },
     {
       "title": "Resident Evil Two",
       "genre": "action",
       "icon": "/icons/residentevil2.png",
-      "dir": "/g-mes/residentevil2",
+      "dir": "/g-mes/residentevil2"
+    },
+    {
+      "title": "Balloon Tower Defense 5",
+      "genre": "strategy",
+      "icon": "/icons/btd5.png",
+      "dir": "/g-mes/balloontowerdefense5",
       "featured": true,
-      "description": "such a evil resident"
+      "description": "holy balloons !!!"
+    },
+    {
+      "title": "Toss The Turtle",
+      "genre": "casual",
+      "icon": "/icons/tosstheturtlee.png",
+      "dir": "/g-mes/tosstheturtle",
+      "featured": true,
+      "description": "its like that pegiuin g-me"
+    },
+    {
+      "title": "Super Meat Boy",
+      "genre": "platformer",
+      "icon": "/icons/supermeatboy.png",
+      "dir": "/g-mes/supermeatboy",
+      "featured": true,
+      "description": "meat meat meat"
     }
   ]
 }
