@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<title>whatt</title>
+	<link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+	<link rel="stylesheet" href="assets/style.css">
+
+
+    	
+	<!-- Libraries and stuff -->
+	<script src="assets/scripts/allObjects.js"></script>
+	<script src="assets/scripts/allLevels.js"></script>
+	<script src="assets/scripts/phaser.min.js"></script>
+	<script src="assets/scripts/pako.min.js"></script>
+	<!-- - -->
+	<!-- ACTUAL GAME CODE -->
+	<script type="module" crossorigin src="assets/scripts/index-game.js"></script>
+	<!-- - -->
+	<script>
+		new ResizeObserver(() => {
+			window.dispatchEvent(new Event('resize'));
+		}).observe(document.documentElement);
+    
+    document.oncontextmenu = (event) => {
+      event.preventDefault();
+    };
+	</script>
+</head>
+
+<body>
+<script>
+  ["mousemove","keydown","click","touchstart"].forEach(evt=>{
+    document.addEventListener(evt, e=>{
+      parent.postMessage({
+        type:"iframe-activity",
+        x: e.clientX || 0,
+        y: e.clientY || 0,
+        ts: Date.now()
+      },"*");
+    });
+  });
+</script>
+
+</body>
+
+</html>

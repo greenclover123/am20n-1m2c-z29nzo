@@ -1109,9 +1109,7 @@
       "title": "Super Monkey Ball",
       "genre": "casual",
       "icon": "/icons/supermonkey.png",
-      "dir": "/g-mes/supermonkeyball",
-      "featured": true,
-      "description": "dont get me started on this peak g-me"
+      "dir": "/g-mes/supermonkeyball"
     },
     {
       "title": "Pixel Speedrun",
@@ -1160,6 +1158,22 @@
       "dir": "/g-mes/supermeatboy",
       "featured": true,
       "description": "meat meat meat"
+    },
+    {
+      "title": "Geometry Dash",
+      "genre": "platformer",
+      "icon": "/icons/geometrydash.png",
+      "dir": "/g-mes/geometrydash",
+      "featured": true,
+      "description": "its finally here btw"
+    },
+    {
+      "title": "Earthbound",
+      "genre": "adventure",
+      "icon": "/icons/earthbound.png",
+      "dir": "/g-mes/earthbound",
+      "featured": true,
+      "description": "love the graphic and music design on this !!"
     }
   ]
 }
