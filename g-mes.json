@@ -1152,14 +1152,6 @@
       "description": "its like that pegiuin g-me"
     },
     {
-      "title": "Super Meat Boy",
-      "genre": "platformer",
-      "icon": "/icons/supermeatboy.png",
-      "dir": "/g-mes/supermeatboy",
-      "featured": true,
-      "description": "meat meat meat"
-    },
-    {
       "title": "Geometry Dash",
       "genre": "platformer",
       "icon": "/icons/geometrydash.png",
@@ -1171,9 +1163,23 @@
       "title": "Earthbound",
       "genre": "adventure",
       "icon": "/icons/earthbound.png",
-      "dir": "/g-mes/earthbound",
+      "dir": "/g-mes/earthbound"
+    },
+    {
+      "title": "Pandemic 2",
+      "genre": "simulation",
+      "icon": "/icons/pandemictwo.png",
+      "dir": "/g-mes/pandemic2",
       "featured": true,
-      "description": "love the graphic and music design on this !!"
+      "description": "2020 all over againn"
+    },
+    {
+      "title": "Balatro",
+      "genre": "strategy",
+      "icon": "/icons/balatro.png",
+      "dir": "/g-mes/balatro",
+      "featured": true,
+      "description": "holy peak card g-me"
     }
   ]
 }
