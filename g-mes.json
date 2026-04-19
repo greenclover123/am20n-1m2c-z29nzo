@@ -1139,17 +1139,13 @@
       "title": "Balloon Tower Defense 5",
       "genre": "strategy",
       "icon": "/icons/btd5.png",
-      "dir": "/g-mes/balloontowerdefense5",
-      "featured": true,
-      "description": "holy balloons !!!"
+      "dir": "/g-mes/balloontowerdefense5"
     },
     {
       "title": "Toss The Turtle",
       "genre": "casual",
       "icon": "/icons/tosstheturtlee.png",
-      "dir": "/g-mes/tosstheturtle",
-      "featured": true,
-      "description": "its like that pegiuin g-me"
+      "dir": "/g-mes/tosstheturtle"
     },
     {
       "title": "Geometry Dash",
@@ -1169,9 +1165,7 @@
       "title": "Pandemic 2",
       "genre": "simulation",
       "icon": "/icons/pandemictwo.png",
-      "dir": "/g-mes/pandemic2",
-      "featured": true,
-      "description": "2020 all over againn"
+      "dir": "/g-mes/pandemic2"
     },
     {
       "title": "Balatro",
@@ -1180,6 +1174,30 @@
       "dir": "/g-mes/balatro",
       "featured": true,
       "description": "holy peak card g-me"
+    },
+    {
+      "title": "Good Impression",
+      "genre": "casual",
+      "icon": "/icons/goodimpression.png",
+      "dir": "/g-mes/goodimpression",
+      "featured": true,
+      "description": "what if i just leave it all like this"
+    },
+    {
+      "title": "Zuma's Revenge",
+      "genre": "puzzle",
+      "icon": "/icons/zuma.png",
+      "dir": "/g-mes/zuma'srevenge",
+      "featured": true,
+      "description": "im addicted"
+    },
+    {
+      "title": "Shift 3",
+      "genre": "puzzle",
+      "icon": "/icons/shift3.png",
+      "dir": "/g-mes/shift3",
+      "featured": true,
+      "description": "just switching back and forth !"
     }
   ]
 }

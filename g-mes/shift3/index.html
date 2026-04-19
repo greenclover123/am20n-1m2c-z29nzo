@@ -1,0 +1,64 @@
+<html>
+  <head>
+
+<script src="/js/all.js"></script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>1 on 1 Soccer</title>
+    <style>html{background-color:#000;}</style>
+    <script>
+(function (originalFetch) {
+  window.fetch = function () {
+    let args = Array.from(arguments);
+    
+    // Check if the first argument (the URL) is the game you want to spoof
+    if (typeof(args[0]) === "string" && args[0].includes("my_game.swf")) {
+      // Replace it with the URL the game expects for its sitelock
+      args[0] = "https://armorgames.com"; 
+    } else if (args[0] && typeof(args[0].url) === "string" && args[0].url.includes("my_game.swf")) {
+      // Handle cases where fetch is called with a Request object instead of a string
+      args[0] = "https://armorgames.com";
+    }
+    
+    return originalFetch.apply(window, args);
+  };
+})(window.fetch);
+</script>
+  </head>
+  <body>
+    <div id="ruffle" width="100%" height="100%"></div>
+    <script src="/storage/ruffle/ruffle.js"></script>
+    <script>
+      window.RufflePlayer = window.RufflePlayer || {};
+      window.RufflePlayer.config = {
+        "compatibilityRules": true
+      };
+      window.addEventListener("load", (event) => {
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        const container = document.getElementById("ruffle");
+        player.id = "player";
+        player.style.width = "100%";
+        player.style.height = "100%";
+        container.appendChild(player);
+        player.load("holy.swf");
+      });
+    </script>
+
+
+<script>
+  ["mousemove","keydown","click","touchstart"].forEach(evt=>{
+    document.addEventListener(evt, e=>{
+      parent.postMessage({
+        type:"iframe-activity",
+        x: e.clientX || 0,
+        y: e.clientY || 0,
+        ts: Date.now()
+      },"*");
+    });
+  });
+</script>
+
+</body>
+</html>
