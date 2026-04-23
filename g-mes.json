@@ -1187,17 +1187,35 @@
       "title": "Zuma's Revenge",
       "genre": "puzzle",
       "icon": "/icons/zuma.png",
-      "dir": "/g-mes/zuma'srevenge",
-      "featured": true,
-      "description": "im addicted"
+      "dir": "/g-mes/zuma'srevenge"
     },
     {
       "title": "Shift 3",
       "genre": "puzzle",
       "icon": "/icons/shift3.png",
-      "dir": "/g-mes/shift3",
+      "dir": "/g-mes/shift3"
+    },
+    {
+      "title": "Soccer Bros",
+      "genre": "sports",
+      "icon": "/icons/soccerbros.png",
+      "dir": "/g-mes/soccerbros"
+    },
+    {
+      "title": "Crunch Ball 3000",
+      "genre": "sports",
+      "icon": "/icons/crunchball3000s.png",
+      "dir": "/g-mes/crunchball3000",
       "featured": true,
-      "description": "just switching back and forth !"
+      "description": "just crunching away"
+    },
+    {
+      "title": "Big Tower Tiny Square 2",
+      "genre": "platformer",
+      "icon": "/icons/bigtower.png",
+      "dir": "/g-mes/bigtowertinysquare2",
+      "featured": true,
+      "description": "its so over"
     }
   ]
 }
