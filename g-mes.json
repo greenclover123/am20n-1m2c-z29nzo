@@ -1151,9 +1151,7 @@
       "title": "Geometry Dash",
       "genre": "platformer",
       "icon": "/icons/geometrydash.png",
-      "dir": "/g-mes/geometrydash",
-      "featured": true,
-      "description": "its finally here btw"
+      "dir": "/g-mes/geometrydash"
     },
     {
       "title": "Earthbound",
@@ -1179,9 +1177,7 @@
       "title": "Good Impression",
       "genre": "casual",
       "icon": "/icons/goodimpression.png",
-      "dir": "/g-mes/goodimpression",
-      "featured": true,
-      "description": "what if i just leave it all like this"
+      "dir": "/g-mes/goodimpression"
     },
     {
       "title": "Zuma's Revenge",
@@ -1205,9 +1201,7 @@
       "title": "Crunch Ball 3000",
       "genre": "sports",
       "icon": "/icons/crunchball3000s.png",
-      "dir": "/g-mes/crunchball3000",
-      "featured": true,
-      "description": "just crunching away"
+      "dir": "/g-mes/crunchball3000"
     },
     {
       "title": "Big Tower Tiny Square 2",
@@ -1216,6 +1210,30 @@
       "dir": "/g-mes/bigtowertinysquare2",
       "featured": true,
       "description": "its so over"
+    },
+    {
+      "title": "Breaklock",
+      "genre": "puzzle",
+      "icon": "/icons/breaklock.jpg",
+      "dir": "/g-mes/breaklock",
+      "featured": true,
+      "description": "train your android pattern unlocking skills !"
+    },
+    {
+      "title": "Unicycle Hero",
+      "genre": "strategy",
+      "icon": "/icons/unicyclehero.png",
+      "dir": "/g-mes/unicyclehero",
+      "featured": true,
+      "description": "i can't get the stick past 200😭"
+    },
+    {
+      "title": "Super Liquid Soccer",
+      "genre": "sports",
+      "icon": "/icons/superliquidsoccer.png",
+      "dir": "/g-mes/superliquidsoccer",
+      "featured": true,
+      "description": "actually good soccer game"
     }
   ]
 }
