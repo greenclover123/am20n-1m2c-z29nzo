@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>skyless hub</title>
+  <link rel="icon" type="image/x-icon" href="/images/faviconyes.ico">
+  <link rel="stylesheet" href="/css/g-mes.css">
+  
+  
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <a href="/index.html"><img src="/images/skylesshub.png" alt="skyless"></a>
+    </div>
+
+  </header>
+
+  <main style="padding-top: 8vw; text-align:center;">
+    <div id="featured" class="featured"></div>
+
+    <div class="genre-nav">
+      <div id="genreList" class="genre-list"></div>
+      <input type="text" id="gameSearch" placeholder="search g-mes...">
+    </div>
+
+    <div id="games"></div>
+  
+ <script type="module" src="/script.js"></script>
+<script type="module">
+    let currentGenres = {};
+    let currentGenre = "";
+
+    async function loadGames() {
+      const res = await fetch("/secretg-mes.json");
+      const data = await res.json();
+      currentGenres = {};
+      data.games.forEach(game => {
+        if (!currentGenres[game.genre]) currentGenres[game.genre] = [];
+        currentGenres[game.genre].push(game);
+      });
+
+
+      currentGenres = { "all g-mes": data.games, ...currentGenres };
+
+
+      const genreList = document.getElementById("genreList");
+      genreList.innerHTML = "";
+      Object.keys(currentGenres).forEach((genre, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = genre;
+        btn.className = "genre-btn";
+        if (i === 0) { btn.classList.add("active"); currentGenre = genre; }
+        btn.onclick = () => {
+          currentGenre = genre;
+          showGames(genre, currentGenres, document.getElementById("gameSearch").value);
+        };
+        genreList.appendChild(btn);
+      });
+
+      showGames(currentGenre, currentGenres, "");
+    }
+
+    function showGames(genre, genres, searchTerm = "") {
+      const container = document.getElementById("games");
+      container.innerHTML = "";
+      const filteredGames = genres[genre].filter(game => game.title.toLowerCase().includes(searchTerm.toLowerCase()));
+      filteredGames.forEach(game => {
+        const link = document.createElement("a");
+        link.href = `/g-metemp.html?dir=${game.dir}&title=${encodeURIComponent(game.title)}&genre=${encodeURIComponent(game.genre)}`;
+        const div = document.createElement("div");
+        div.className = "game-card";
+        div.innerHTML = `<img src="${game.icon}" alt="${game.title}"><div class="overlay"><span class="title">${game.title}</span><span class="genre">${game.genre}</span></div>`;
+        link.appendChild(div);
+        container.appendChild(link);
+      });
+      document.querySelectorAll(".genre-btn").forEach(b => b.classList.remove("active"));
+      [...document.querySelectorAll(".genre-btn")].find(b => b.innerText === genre).classList.add("active");
+    }
+
+    document.getElementById("gameSearch").addEventListener("input", e => showGames(currentGenre, currentGenres, e.target.value));
+
+    loadGames();
+  </script>
+
+
+
+  </main>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script src="/page.js"></script>
+
+</body>
+</html>

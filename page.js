@@ -45,11 +45,20 @@ var greeting = [
   "but they cant cop cars without seeing cop cars",
   "nothing is ever promised tomorrow or today",
   "im so drowesxy",
+  "<a href='/saved.html'>CLICK to be pure!</a>",
+  "be your own best friend!",
+  "whos gonna hold ya bones",
+  "every snitch is a costume",
+  "a picture of a tree",
+  "no two the same, breathing art hibits",
+  "its almost over",
+  "i wishhhh",
+  "give me a hint of love!"
 ];
 
 var randomGreeting = Math.floor(Math.random() * greeting.length);
 
-$('#message').text(greeting[randomGreeting]);
+$('#message').html(greeting[randomGreeting]);
 
 
 

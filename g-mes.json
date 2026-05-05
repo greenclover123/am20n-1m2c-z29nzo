@@ -1225,7 +1225,7 @@
       "icon": "/icons/unicyclehero.png",
       "dir": "/g-mes/unicyclehero",
       "featured": true,
-      "description": "i can't get the stick past 200😭"
+      "description": "i can't get the stick past 200\ud83d\ude2d"
     },
     {
       "title": "Super Liquid Soccer",
@@ -1234,6 +1234,18 @@
       "dir": "/g-mes/superliquidsoccer",
       "featured": true,
       "description": "actually good soccer game"
+    },
+    {
+      "title": "Plague Inc. Evolved",
+      "genre": "simulation",
+      "icon": "/icons/plagueincevolved.png",
+      "dir": "/g-mes/plagueinc.evolved"
+    },
+    {
+      "title": "Fih",
+      "genre": "casual",
+      "icon": "/icons/fihh.png",
+      "dir": "/g-mes/fih"
     }
   ]
 }
