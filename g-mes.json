@@ -1215,17 +1215,7 @@
       "title": "Breaklock",
       "genre": "puzzle",
       "icon": "/icons/breaklock.jpg",
-      "dir": "/g-mes/breaklock",
-      "featured": true,
-      "description": "train your android pattern unlocking skills !"
-    },
-    {
-      "title": "Unicycle Hero",
-      "genre": "strategy",
-      "icon": "/icons/unicyclehero.png",
-      "dir": "/g-mes/unicyclehero",
-      "featured": true,
-      "description": "i can't get the stick past 200\ud83d\ude2d"
+      "dir": "/g-mes/breaklock"
     },
     {
       "title": "Super Liquid Soccer",
@@ -1239,13 +1229,17 @@
       "title": "Plague Inc. Evolved",
       "genre": "simulation",
       "icon": "/icons/plagueincevolved.png",
-      "dir": "/g-mes/plagueinc.evolved"
+      "dir": "/g-mes/plagueinc.evolved",
+      "featured": true,
+      "description": "just end the world !!!"
     },
     {
       "title": "Fih",
       "genre": "casual",
       "icon": "/icons/fihh.png",
-      "dir": "/g-mes/fih"
+      "dir": "/g-mes/fih",
+      "featured": true,
+      "description": "fih fih fishy !"
     }
   ]
 }
