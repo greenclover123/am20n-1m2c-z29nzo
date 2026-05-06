@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>i can't wait to see whats at the top</title>
+</head>
+<body>
+
+  <div id="main-container">
+    <a href="#" data-id="1">CLICK to apologize!</a><br>
+    <a href="#" data-id="2">CLICK to be saved!</a><br>
+    <a href="#" data-id="3">CLICK to forgive!</a><br>
+    <a href="#" data-id="4">CLICK to forget!</a><br>
+    <a href="#" data-id="5">CLICK to be pure!</a><br>
+  </div>
+
+  <script>
+    const links = document.querySelectorAll('a');
+    let clickhistory = [];
+
+    links.forEach(link => {
+      link.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('data-id');
+        clickhistory.push(id);
+        if (clickhistory.length > 5) {
+          clickhistory.shift();
+        }
+        if (clickhistory.length === 5) {
+          const attempt = clickhistory.join(''); 
+
+          try {
+            const res = await fetch(`./${attempt}.json`);
+            if (res.ok) {
+              const data = await res.json();
+              if (data.redirect) {
+                document.getElementById('main-container').innerHTML = "<h1>PURE PURE PURE</h1>";
+                setTimeout(() => {
+                  window.location.href = data.redirect;
+                }, 500);
+              }
+            }
+          } catch (error) {
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -53,7 +53,8 @@ var greeting = [
   "no two the same, breathing art hibits",
   "its almost over",
   "i wishhhh",
-  "give me a hint of love!"
+  "give me a hint of love!",
+  "somewhere something endless"
 ];
 
 var randomGreeting = Math.floor(Math.random() * greeting.length);

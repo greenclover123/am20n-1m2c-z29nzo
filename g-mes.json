@@ -1207,9 +1207,7 @@
       "title": "Big Tower Tiny Square 2",
       "genre": "platformer",
       "icon": "/icons/bigtower.png",
-      "dir": "/g-mes/bigtowertinysquare2",
-      "featured": true,
-      "description": "its so over"
+      "dir": "/g-mes/bigtowertinysquare2"
     },
     {
       "title": "Breaklock",
@@ -1221,9 +1219,7 @@
       "title": "Super Liquid Soccer",
       "genre": "sports",
       "icon": "/icons/superliquidsoccer.png",
-      "dir": "/g-mes/superliquidsoccer",
-      "featured": true,
-      "description": "actually good soccer game"
+      "dir": "/g-mes/superliquidsoccer"
     },
     {
       "title": "Plague Inc. Evolved",
@@ -1240,6 +1236,22 @@
       "dir": "/g-mes/fih",
       "featured": true,
       "description": "fih fih fishy !"
+    },
+    {
+      "title": "Ovo",
+      "genre": "platformer",
+      "icon": "/icons/ovoo.png",
+      "dir": "/g-mes/ovo",
+      "featured": true,
+      "description": "shout out to the person suggesting this !!"
+    },
+    {
+      "title": "Ovo 2",
+      "genre": "platformer",
+      "icon": "/icons/ovoo2.png",
+      "dir": "/g-mes/ovo2",
+      "featured": true,
+      "description": "when the ovo actully ovo"
     }
   ]
 }

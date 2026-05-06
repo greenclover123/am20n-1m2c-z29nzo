@@ -36,14 +36,13 @@
       const res = await fetch("/secretg-mes.json");
       const data = await res.json();
       currentGenres = {};
+      
       data.games.forEach(game => {
         if (!currentGenres[game.genre]) currentGenres[game.genre] = [];
         currentGenres[game.genre].push(game);
       });
 
-
       currentGenres = { "all g-mes": data.games, ...currentGenres };
-
 
       const genreList = document.getElementById("genreList");
       genreList.innerHTML = "";
@@ -66,6 +65,7 @@
       const container = document.getElementById("games");
       container.innerHTML = "";
       const filteredGames = genres[genre].filter(game => game.title.toLowerCase().includes(searchTerm.toLowerCase()));
+      
       filteredGames.forEach(game => {
         const link = document.createElement("a");
         link.href = `/g-metemp.html?dir=${game.dir}&title=${encodeURIComponent(game.title)}&genre=${encodeURIComponent(game.genre)}`;
@@ -75,11 +75,34 @@
         link.appendChild(div);
         container.appendChild(link);
       });
+      
       document.querySelectorAll(".genre-btn").forEach(b => b.classList.remove("active"));
-      [...document.querySelectorAll(".genre-btn")].find(b => b.innerText === genre).classList.add("active");
+      const activeBtn = [...document.querySelectorAll(".genre-btn")].find(b => b.innerText === genre);
+      if (activeBtn) activeBtn.classList.add("active");
     }
 
-    document.getElementById("gameSearch").addEventListener("input", e => showGames(currentGenre, currentGenres, e.target.value));
+    const searchInput = document.getElementById("gameSearch");
+
+    searchInput.addEventListener("input", (e) => {
+      showGames(currentGenre, currentGenres, e.target.value);
+    });
+    searchInput.addEventListener("keydown", async (e) => {
+      if (e.key === "Enter") {
+        const attempt = e.target.value.toLowerCase().replace(/\s+/g, '');
+
+        try {
+          
+          const res = await fetch(`/${attempt}.json`);
+          if (res.ok) {
+            const data = await res.json();
+            if (data.redirect) {
+                window.location.href = data.redirect;
+            }
+          }
+        } catch (error) {
+        }
+      }
+    });
 
     loadGames();
   </script>
