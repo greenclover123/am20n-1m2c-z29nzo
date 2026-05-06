@@ -1,0 +1,43 @@
+<html>
+    <heading>
+        <title>Anothjer WAY to Gooo</title>
+    </heading>
+    <body>
+        <h1>very the time from the tab</h1>
+        <H2>a droplet falling from above</H2>
+        <H3>what emotion do i express?</H3>
+        <H4>if i cant see from a bird eye's view</H4>
+        <br>
+        <div id="content">
+            <div class="line-container">
+              <input type="text" class="box">
+              <span>an expression of
+              <input type="text" class="box">
+            </div>
+          </div>
+
+    </body>
+    <script>
+        const boxes = document.querySelectorAll('.box');
+    
+        boxes.forEach(box => {
+          box.addEventListener('input', async () => {
+            let attempt = "";
+            boxes.forEach(b => attempt += b.value);
+            let rightAttempt = attempt.toLowerCase().replace(/\s+/g, '');
+            if (rightAttempt.length > 3) {
+              try {
+                const res = await fetch(`/${rightAttempt}.json`);
+                if (res.ok) {
+                  const data = await res.json();
+                  if (data.redirect) {
+                    window.location.href = data.redirect;
+                  }
+                }
+              } catch (error) {
+              }
+            }
+          });
+        });
+      </script>
+</html>
