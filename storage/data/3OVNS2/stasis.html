@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>stasis</title>
+</head>
+<body>
+
+  <center style="margin-top: 20%;">
+    <input type="text" id="pass">
+    <button id="btn">enter</button>
+    <br>
+    <br>
+  <span>nighttime shows such a beautiful world behind the light</span>
+  </center>
+  
+
+  <script>
+    const passinput = document.getElementById('pass');
+    const btn = document.getElementById('btn');
+    const pageid = 5;
+
+    async function checkPass() {
+      const attempt = passinput.value.toLowerCase().trim();
+      try {
+        const res = await fetch(`./${attempt}.json`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.id === pageid && data.redirect) {
+            window.location.href = data.redirect;
+          }
+        }
+      } catch (e) {}
+    }
+
+    btn.onclick = checkPass;
+
+    passinput.onkeydown = (e) => {
+      if (e.key === 'Enter') checkPass();
+    };
+  </script>
+
+</body>
+</html>
