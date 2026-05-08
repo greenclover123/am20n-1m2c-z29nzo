@@ -9,7 +9,7 @@ gdjs.evtsExt__SpriteMultitouchJoystick__IsInGameEdition = {};
 gdjs.evtsExt__SpriteMultitouchJoystick__IsInGameEdition.idToCallbackMap = new Map();
 
 
-gdjs.evtsExt__SpriteMultitouchJoystick__IsInGameEdition.userFunc0x9f8740 = function GDJSInlineCode(runtimeScene, eventsFunctionContext) {
+gdjs.evtsExt__SpriteMultitouchJoystick__IsInGameEdition.userFunc0x91ceb8 = function GDJSInlineCode(runtimeScene, eventsFunctionContext) {
 "use strict";
 const game = runtimeScene.getGame();
 eventsFunctionContext.returnValue = game.isInGameEdition && game.isInGameEdition();
@@ -19,7 +19,7 @@ gdjs.evtsExt__SpriteMultitouchJoystick__IsInGameEdition.eventsList0 = function(r
 {
 
 
-gdjs.evtsExt__SpriteMultitouchJoystick__IsInGameEdition.userFunc0x9f8740(runtimeScene, eventsFunctionContext);
+gdjs.evtsExt__SpriteMultitouchJoystick__IsInGameEdition.userFunc0x91ceb8(runtimeScene, eventsFunctionContext);
 
 }
 
@@ -50,21 +50,16 @@ var eventsFunctionContext = {
   createObject: function(objectName) {
     const objectsList = eventsFunctionContext._objectsMap[objectName];
     if (objectsList) {
-      if (parentEventsFunctionContext && !(scopeInstanceContainer &&
-          scopeInstanceContainer.isObjectRegistered(objectName))) {
-        const object = parentEventsFunctionContext.createObject(objectsList.firstKey());
-        if (object) {
-          objectsList.get(objectsList.firstKey()).push(object);
+      const object = parentEventsFunctionContext && !(scopeInstanceContainer && scopeInstanceContainer.isObjectRegistered(objectName)) ?
+        parentEventsFunctionContext.createObject(objectsList.firstKey()) :
+        runtimeScene.createObject(objectsList.firstKey());
+      if (object) {
+        objectsList.get(objectsList.firstKey()).push(object);
+        if (!(scopeInstanceContainer && scopeInstanceContainer.isObjectRegistered(objectName))) {
           eventsFunctionContext._objectArraysMap[objectName].push(object);
         }
-        return object;
-      } else {
-        const object = runtimeScene.createObject(objectsList.firstKey());
-        if (object) {
-          eventsFunctionContext._objectArraysMap[objectName].push(object);
-        }
-        return object;
       }
+      return object;
     }
     return null;
   },
