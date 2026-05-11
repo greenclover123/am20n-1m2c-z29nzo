@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>falling down</title>
+</head>
+<body>
+
+  <center style="margin-top: 5%;">
+    <span>they stare at me</span><br>
+    <br>
+    <span>with those candle scented eyes</span>
+    <span>the whole void goes quiet</span><br>
+    <br>
+    <span>quieter than actual death</span>
+    <br>
+    <br>
+    <span>a blue entryway opens on the floor</span>
+    <br>
+    <span>the angels move closer</span>
+    <br>
+    <span>my breaths get harder and harder</span>
+    <br>
+    <span>i just wanted to be like them</span>
+    <br>
+    <span>be in their own world and live out life</span>
+    <br>  
+    <span>like the books promised</span>
+    <br>
+    <span>one of the angels jump at me</span>
+    <br>
+    <span>i scramble to the floor and drag myself closer to the</span>
+    <br>
+    <br>
+    <span>blue entryway</span>
+    <br>
+    <br>
+    <span>it looks so deep</span>
+    <br>
+    <span>i finally reach the edge</span>
+    <br>
+    <span>i can feel the wind passing through the entryway</span>
+    <br>
+    <span>it feels so familiar</span>
+    <br>
+    <span>i look up</span>
+    <br>
+    <span>and i saw a angel who didn't to even have a soul</span>
+    <br>
+    <span>a spirit without it's soul</span>
+    <br>
+    <span>and i wanted to be one of them</span>
+    <br>
+    <span>instead of escaping the pain and the loneliness</span>
+    <br>
+    <span>i blink</span>
+    <br>
+    <span>and suddenly im falling down the</span>
+    <br>
+    <br>
+    <span>blue entryway</span>
+    <br>
+    <br>
+    <span>the angels look at me fall down like im a deer in the headlights</span>
+    <br>
+    <span>but its them looking at actual freedom</span>
+    <br>
+    <span>instead of being in a predetermined future</span>
+    <br>
+    <br>
+
+    <img src="door.png" alt="the sky" style="display: block; margin: 0 auto; width: 150px; height: auto; image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;">
+    <input type="text" id="pass">
+    <button id="btn">🌟</button>
+    
+  
+  </center>
+  
+
+  <script>
+    const passinput = document.getElementById('pass');
+    const btn = document.getElementById('btn');
+    const pageid = 31;
+
+    async function checkPass() {
+      const attempt = passinput.value.toLowerCase().trim();
+      try {
+        const res = await fetch(`./${attempt}.json`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.id === pageid && data.redirect) {
+            window.location.href = data.redirect;
+          }
+        }
+      } catch (e) {}
+    }
+
+    btn.onclick = checkPass;
+
+    passinput.onkeydown = (e) => {
+      if (e.key === 'Enter') checkPass();
+    };
+  </script>
+
+</body>
+</html>

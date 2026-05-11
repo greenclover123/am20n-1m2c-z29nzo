@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>who was i again?</title>
+  <style>
+    .line-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: monospace;
+      font-size: 18px;
+    }
+    input {
+      align-items: center;
+      width: 50px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <center>
+  <div id="content">
+    <div class="line-container">
+      <input type="text" class="box">
+      <input type="text" class="box">
+      <input type="text" class="box">
+      <input type="text" class="box">
+      <span></span>
+    </div>
+  </div>
+  </center>
+
+  <script>
+    const boxes = document.querySelectorAll('.box');
+
+    boxes.forEach(box => {
+      box.addEventListener('input', async () => {
+        let attempt = "";
+        boxes.forEach(b => attempt += b.value);
+        let rightAttempt = attempt.toLowerCase().replace(/\s+/g, '');
+        if (rightAttempt.length > 10) {
+          try {
+            const res = await fetch(`/${rightAttempt}.json`);
+            if (res.ok) {
+              const data = await res.json();
+              if (data.redirect) {
+                window.location.href = data.redirect;
+              }
+            }
+          } catch (error) {
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
