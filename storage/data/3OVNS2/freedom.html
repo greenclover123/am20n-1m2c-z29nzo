@@ -23,7 +23,8 @@
 
       if (distance < 0) {
         clearInterval(countdown);
-        document.getElementById("timer").innerHTML = "TIME IS UP";
+        const destination = "L3N0b3JhZ2UvZGF0YS8zT1ZOUzIvZGVzZW5k";
+        window.location.href = atob(destination);
       }
     }, 1000);
   </script>
